@@ -13,6 +13,7 @@ dependencies:
     sdk: flutter
   cupertino_icons:
   flutter_cubit:
+  http:
   page_turn:
 
 dev_dependencies:
