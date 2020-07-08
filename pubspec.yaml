@@ -1,0 +1,24 @@
+name: hacker_news
+description: A new Flutter project.
+
+publish_to: 'none'
+
+version: 0.0.1+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons:
+  flutter_cubit:
+  page_turn:
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mockito:
+
+flutter:
+  uses-material-design: true
