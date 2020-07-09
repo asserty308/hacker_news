@@ -8,10 +8,16 @@ class HackernewsApi {
     return await http.get('$_baseUrl/$endpoint.json');
   }
 
-  Future<List<int>> _getTopstories() async {
+  /// The endpoint [topstories] returns an array of ids.
+  Future<List<int>> _getTopstoriesIds() async {
     return await _getEndpoint('topstories');
   }
 
+  Future<int> getLatestStoryId() async {
+    return await _getEndpoint('maxitem');
+  }
+
+  /// The endpoint [item/id] returns a representation of [ItemModel].
   Future<ItemModel> getItem(int id) async {
     final Map<String, dynamic> response = await _getEndpoint('item/$id');
 
@@ -22,8 +28,19 @@ class HackernewsApi {
     return ItemModel.fromJSON(response);
   }
 
+  Future<List<ItemModel>> getLatestStories(int amount) async {
+    final latestId = await getLatestStoryId();
+    final stories = <ItemModel>[];
+
+    for (int i = 0; i < amount; i++) {
+      stories.add(await getItem(latestId));
+    }
+
+    return stories;
+  }
+
   Future<List<ItemModel>> getTopstories() async {
-    final storyIds = await _getTopstories();
+    final storyIds = await _getTopstoriesIds();
 
     final stories = <ItemModel>[];
     for (final id in storyIds) {
