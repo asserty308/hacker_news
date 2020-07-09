@@ -17,7 +17,7 @@ void main() {
 
     when(repository.getTopstories()).thenAnswer((realInvocation) async => stories);
 
-    cubit = TopStoriesCubit(repository: repository);
+    cubit = TopStoriesCubit(repository);
   });
 
   test('Emits stories when repository answers correctly', () async {

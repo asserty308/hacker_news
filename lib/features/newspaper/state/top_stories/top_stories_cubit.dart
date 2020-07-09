@@ -6,7 +6,7 @@ import 'package:meta/meta.dart';
 part 'top_stories_state.dart';
 
 class TopStoriesCubit extends Cubit<TopStoriesState> {
-  TopStoriesCubit({this.repository}) : super(TopStoriesInitial()) {
+  TopStoriesCubit(this.repository) : super(TopStoriesInitial()) {
     loadStories();
   }
 
