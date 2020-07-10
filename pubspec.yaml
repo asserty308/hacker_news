@@ -11,6 +11,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  flutter_core:
+    git:
+      url: git://github.com/asserty308/flutter_core.git
+      
   cupertino_icons:
   flutter_cubit:
   http:

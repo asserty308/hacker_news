@@ -29,7 +29,7 @@ class TopStoriesScreen extends StatelessWidget {
           itemCount: state.stories.length,
           itemBuilder: (context, index) {
             final story = state.stories[index]; 
-            return ListTile(title: Text(story.title),);
+            return ListTile(title: Text(story.title ?? 'Unknown title'),);
           }
         );
       }

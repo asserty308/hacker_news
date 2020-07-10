@@ -41,7 +41,7 @@ class ItemModel {
   final int poll;
 
   /// The ids of the item's comments, in ranked display order.
-  final List<int> kids;
+  final List<dynamic> kids;
 
   /// The URL of the story.
   final String url;
@@ -53,7 +53,7 @@ class ItemModel {
   final String title;
 
   /// A list of related pollopts, in display order.
-  final List<int> parts;
+  final List<dynamic> parts;
 
   /// In the case of stories or polls, the total comment count.
   final int descendants;

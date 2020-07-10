@@ -10,7 +10,7 @@ class HackernewsRepository {
     return _api.getLatestStories(amount);
   }
 
-  Future<List<ItemModel>> getTopstories() async {
-    return _api.getTopstories();
+  Future<List<ItemModel>> getTopstories(int amount) async {
+    return _api.getTopstories(amount);
   }
 }

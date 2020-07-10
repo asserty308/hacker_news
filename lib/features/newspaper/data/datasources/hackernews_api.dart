@@ -1,20 +1,24 @@
-import 'dart:convert';
-
+import 'package:flutter_core/web/base_api.dart';
 import 'package:hacker_news/features/newspaper/data/models/item_model.dart';
-import 'package:http/http.dart' as http;
 
 class HackernewsApi {
-  final String _baseUrl = 'https://hacker-news.firebaseio.com/v0';
+  final _api = BaseApi('https://hacker-news.firebaseio.com/v0/');
 
   Future<dynamic> _getEndpoint(String endpoint) async {
-    final response = await http.get('$_baseUrl/$endpoint.json');
-    final body = jsonDecode(response.body);
-    return body;
+    return await _api.fetchJSON('$endpoint.json');
   }
 
   /// The endpoint [topstories] returns an array of ids.
-  Future<List<int>> _getTopstoriesIds() async {
-    return await _getEndpoint('topstories');
+  Future<List<int>> _getTopstoriesIds(int amount) async {
+    final response = await _getEndpoint('topstories');
+
+    final ids = <int>[];
+
+    for (final id in response) {
+      ids.add(id);
+    }
+
+    return ids.getRange(0, amount).toList();
   }
 
   Future<int> getLatestStoryId() async {
@@ -37,19 +41,22 @@ class HackernewsApi {
     final stories = <ItemModel>[];
 
     for (int i = 0; i < amount; i++) {
-      stories.add(await getItem(latestId));
+      stories.add(await getItem(latestId - i));
     }
 
     return stories;
   }
 
-  Future<List<ItemModel>> getTopstories() async {
-    final storyIds = await _getTopstoriesIds();
+  Future<List<ItemModel>> getTopstories(int amount) async {
+    final storyIds = await _getTopstoriesIds(amount);
 
     final stories = <ItemModel>[];
     for (final id in storyIds) {
       final item = await getItem(id);
-      stories.add(item);
+
+      if (item != null) {
+        stories.add(item);
+      }
     }
 
     return stories;
