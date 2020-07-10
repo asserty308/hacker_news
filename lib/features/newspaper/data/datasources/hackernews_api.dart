@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:hacker_news/features/newspaper/data/models/item_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -5,7 +7,9 @@ class HackernewsApi {
   final String _baseUrl = 'https://hacker-news.firebaseio.com/v0';
 
   Future<dynamic> _getEndpoint(String endpoint) async {
-    return await http.get('$_baseUrl/$endpoint.json');
+    final response = await http.get('$_baseUrl/$endpoint.json');
+    final body = jsonDecode(response.body);
+    return body;
   }
 
   /// The endpoint [topstories] returns an array of ids.
