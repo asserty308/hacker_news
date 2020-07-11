@@ -16,7 +16,7 @@ class TopStoriesCubit extends Cubit<TopStoriesState> {
     emit(TopStoriesLoading());
 
     try {
-      final stories = await repository.getTopstories(10);
+      final stories = await repository.getTopstories(30);
       emit(TopStoriesLoaded(stories));
     } catch (e) {
       emit(TopStoriesError());
