@@ -15,7 +15,7 @@ void main() {
   setUp(() {
     repository = MockHackernewsRepository();
 
-    when(repository.getTopstories()).thenAnswer((realInvocation) async => stories);
+    when(repository.getTopstories(10)).thenAnswer((realInvocation) async => stories);
 
     cubit = TopStoriesCubit(repository);
   });

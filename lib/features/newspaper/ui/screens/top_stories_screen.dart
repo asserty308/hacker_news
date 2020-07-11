@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cubit/flutter_cubit.dart';
+import 'package:hacker_news/features/newspaper/data/models/item_model.dart';
 import 'package:hacker_news/features/newspaper/data/repositories/hackernews_repository.dart';
 import 'package:hacker_news/features/newspaper/state/top_stories/top_stories_cubit.dart';
 
@@ -25,16 +26,18 @@ class TopStoriesScreen extends StatelessWidget {
   Widget get _body => CubitBuilder<TopStoriesCubit, TopStoriesState>(
     builder: (context, state) {
       if (state is TopStoriesLoaded) {
-        return ListView.builder(
-          itemCount: state.stories.length,
-          itemBuilder: (context, index) {
-            final story = state.stories[index]; 
-            return ListTile(title: Text(story.title ?? 'Unknown title'),);
-          }
-        );
+        return _listView(state.stories);
       }
 
       return Container(color: Colors.white,);
     },
+  );
+
+  Widget _listView(List<ItemModel> stories) => ListView.builder(
+    itemCount: stories.length,
+    itemBuilder: (context, index) {
+      final story = stories[index]; 
+      return ListTile(title: Text(story.title ?? 'Unknown title'),);
+    }
   );
 }

@@ -4,6 +4,7 @@ import 'package:hacker_news/features/newspaper/data/models/item_model.dart';
 class HackernewsApi {
   final _api = BaseApi('https://hacker-news.firebaseio.com/v0/');
 
+  /// Calls [endpoint] on the hackernews api
   Future<dynamic> _getEndpoint(String endpoint) async {
     return await _api.fetchJSON('$endpoint.json');
   }
@@ -21,6 +22,8 @@ class HackernewsApi {
     return ids.getRange(0, amount).toList();
   }
 
+  /// The maxitem endpoint contains the latest news id. 
+  /// It can be used to iterate through proevious news.
   Future<int> getLatestStoryId() async {
     return await _getEndpoint('maxitem');
   }
@@ -36,6 +39,8 @@ class HackernewsApi {
     return ItemModel.fromJSON(response);
   }
 
+  /// Builds a list of [amount] [ItemModel] which represent the 
+  /// latest stories published on hackernews. 
   Future<List<ItemModel>> getLatestStories(int amount) async {
     final latestId = await getLatestStoryId();
     final stories = <ItemModel>[];
@@ -47,6 +52,8 @@ class HackernewsApi {
     return stories;
   }
 
+  /// Builds a list of [amount] [ItemModel] which represent the 
+  /// current top stories published on hackernews. 
   Future<List<ItemModel>> getTopstories(int amount) async {
     final storyIds = await _getTopstoriesIds(amount);
 
