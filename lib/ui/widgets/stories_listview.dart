@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cubit/flutter_cubit.dart';
-import 'package:hacker_news/features/stories/data/models/item_model.dart';
-import 'package:hacker_news/features/stories/state/top_stories/top_stories_cubit.dart';
+import 'package:hacker_news/data/models/item_model.dart';
+import 'package:hacker_news/state/app/app_cubit.dart';
 
 class StoriesListView extends StatelessWidget {
   const StoriesListView({Key key, this.stories}) : super(key: key);
@@ -16,7 +16,7 @@ class StoriesListView extends StatelessWidget {
         final story = stories[index]; 
         return ListTile(
           title: Text(story.title ?? 'Unknown title', style: TextStyle(color: Colors.white),),
-          onTap: () => CubitProvider.of<TopStoriesCubit>(context).openStory(story.url),
+          onTap: () => CubitProvider.of<AppCubit>(context).callUrl(story.url),
         );
       }
     );

@@ -20,6 +20,7 @@ dependencies:
   flutter_cubit:
   http:
   url_launcher:
+  hive:
 
 dev_dependencies:
   flutter_test:

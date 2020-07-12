@@ -1,5 +1,6 @@
 class ItemModel {
   ItemModel({
+    this.id,
     this.deleted, 
     this.type, 
     this.by, 
@@ -15,6 +16,9 @@ class ItemModel {
     this.parts, 
     this.descendants
   });
+
+  /// The item's unique id.
+  final int id;
 
   /// true if the item is deleted.
   final bool deleted;
@@ -59,6 +63,7 @@ class ItemModel {
   final int descendants;
 
   static ItemModel fromJSON(Map<String, dynamic> json) => ItemModel(
+    id: json['id'],
     deleted: json['deleted'],
     type: json['type'],
     by: json['by'],
@@ -74,4 +79,22 @@ class ItemModel {
     parts: json['parts'],
     descendants: json['descendants'],
   );
+
+  Map<String, dynamic> toMap() => {
+    'id': id,
+    'deleted': deleted,
+    'type': type,
+    'by': by,
+    'time': time,
+    'text': text,
+    'dead': dead,
+    'parent': parent,
+    'poll': poll,
+    'kids': kids,
+    'url': url,
+    'score': score,
+    'title': title,
+    'parts': parts,
+    'descendants': descendants,
+  };
 }
