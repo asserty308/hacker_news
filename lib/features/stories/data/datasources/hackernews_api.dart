@@ -1,5 +1,5 @@
 import 'package:flutter_core/web/base_api.dart';
-import 'package:hacker_news/features/newspaper/data/models/item_model.dart';
+import 'package:hacker_news/features/stories/data/models/item_model.dart';
 
 class HackernewsApi {
   final _api = BaseApi('https://hacker-news.firebaseio.com/v0/');

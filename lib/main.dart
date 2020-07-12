@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hacker_news/features/newspaper/ui/screens/top_stories_screen.dart';
+import 'package:hacker_news/features/stories/ui/screens/top_stories_screen.dart';
 
 void main() {
   runApp(MyApp());

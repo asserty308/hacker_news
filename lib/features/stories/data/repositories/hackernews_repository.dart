@@ -1,5 +1,5 @@
-import 'package:hacker_news/features/newspaper/data/datasources/hackernews_api.dart';
-import 'package:hacker_news/features/newspaper/data/models/item_model.dart';
+import 'package:hacker_news/features/stories/data/datasources/hackernews_api.dart';
+import 'package:hacker_news/features/stories/data/models/item_model.dart';
 
 final globalHackernewsRepo = HackernewsRepository();
 
