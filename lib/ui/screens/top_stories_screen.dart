@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_core/ui/widgets/center_progress_indicator.dart';
 import 'package:flutter_cubit/flutter_cubit.dart';
-import 'package:hacker_news/state/top_stories/top_stories_cubit.dart';
+import 'package:hacker_news/bloc/top_stories_screen/top_stories_cubit.dart';
 import 'package:hacker_news/ui/widgets/stories_listview.dart';
 
 class TopStoriesScreen extends StatelessWidget {

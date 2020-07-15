@@ -8,6 +8,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.4.1"
+  bloc:
+    dependency: transitive
+    description:
+      name: bloc
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.0.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -83,6 +90,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_bloc:
+    dependency: "direct main"
+    description:
+      name: flutter_bloc
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.0.1"
   flutter_core:
     dependency: "direct main"
     description:
@@ -93,7 +107,7 @@ packages:
     source: git
     version: "0.0.8"
   flutter_cubit:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: flutter_cubit
       url: "https://pub.dartlang.org"

@@ -3,7 +3,7 @@ import 'package:hacker_news/data/models/item_model.dart';
 import 'package:hacker_news/data/repositories/favorites_repository.dart';
 import 'package:meta/meta.dart';
 
-part 'favorites_state.dart';
+part 'favorites_screen_state.dart';
 
 class FavoritesCubit extends Cubit<FavoritesState> {
   FavoritesCubit(this.repository) : super(FavoritesInitial()) {
@@ -12,11 +12,11 @@ class FavoritesCubit extends Cubit<FavoritesState> {
 
   final FavoritesRepository repository;
 
-  void loadStories() {
+  void loadStories() async {
     emit(FavoritesLoading());
 
     try {
-      final stories = repository.getAll();
+      final stories = await repository.getAll();
       emit(FavoritesLoaded(stories));
     } catch (e) {
       emit(FavoritesError());

@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hacker_news/data/models/item_model.dart';
 import 'package:hacker_news/data/repositories/hackernews_repository.dart';
-import 'package:hacker_news/state/top_stories/top_stories_cubit.dart';
+import 'package:hacker_news/bloc/top_stories_screen/top_stories_cubit.dart';
 import 'package:mockito/mockito.dart';
 
 class MockHackernewsRepository extends Mock implements HackernewsRepository {}

@@ -7,14 +7,18 @@ class FavoritesRepository {
   final _datasource = FavoritesDatasource();
 
   void addStory(ItemModel item) {
-    _datasource.addStory(item);
+    _datasource.add(item);
   }
 
   void removeStory(int id) {
-    _datasource.removeStory(id);
+    _datasource.remove(id);
   }
 
-  List<ItemModel> getAll() {
-    return _datasource.getAll();
+  Future<bool> contains(int id) async {
+    return await _datasource.contains(id);
+  }
+
+  Future<List<ItemModel>> getAll() async {
+    return await _datasource.getAll();
   }
 }

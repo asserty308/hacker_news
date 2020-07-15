@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cubit/flutter_cubit.dart';
 import 'package:hacker_news/data/repositories/favorites_repository.dart';
 import 'package:hacker_news/data/repositories/hackernews_repository.dart';
-import 'package:hacker_news/state/app/app_cubit.dart';
-import 'package:hacker_news/state/favorites/favorites_cubit.dart';
-import 'package:hacker_news/state/top_stories/top_stories_cubit.dart';
+import 'package:hacker_news/bloc/app/app_cubit.dart';
+import 'package:hacker_news/bloc/favorites_screen/favorites_screen_cubit.dart';
+import 'package:hacker_news/bloc/top_stories_screen/top_stories_cubit.dart';
 import 'package:hacker_news/ui/screens/top_stories_screen.dart';
 
 void main() {

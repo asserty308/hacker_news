@@ -17,7 +17,7 @@ dependencies:
       url: git://github.com/asserty308/flutter_core.git
       
   cupertino_icons:
-  flutter_cubit:
+  flutter_bloc:
   http:
   url_launcher:
   hive:
