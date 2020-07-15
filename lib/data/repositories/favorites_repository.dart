@@ -14,11 +14,11 @@ class FavoritesRepository {
     _datasource.remove(id);
   }
 
-  Future<bool> contains(int id) async {
-    return await _datasource.contains(id);
+  bool contains(int id) {
+    return _datasource.contains(id);
   }
 
-  Future<List<ItemModel>> getAll() async {
-    return await _datasource.getAll();
+  List<ItemModel> getAll() {
+    return _datasource.getAll();
   }
 }

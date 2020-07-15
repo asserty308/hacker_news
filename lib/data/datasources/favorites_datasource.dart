@@ -7,29 +7,23 @@ import 'package:hive/hive.dart';
 //     - cloud firestore (sync with max 1gb across all projects), 
 //     - isar (hive successor)
 class FavoritesDatasource {
-  Future<Box> initBox() async {
-    return await Hive.openBox('favorites');
-  }
+  final _box = Hive.box('favorites');
 
   /// Adds a story to the favorites box.
-  void add(ItemModel item) async {
-    final _box = await initBox();
+  void add(ItemModel item) {
     _box.put(item.id, item.toMap());
   }
 
   /// Removes the story with the given [id] from the favorites box.
-  void remove(int id) async {
-    final _box = await initBox();
+  void remove(int id) {
     _box.delete(id);
   }
   
-  Future<bool> contains(int id) async {
-    final _box = await initBox();
+  bool contains(int id) {
     return _box.containsKey(id);
   }
 
-  Future<List<ItemModel>> getAll() async {
-    final _box = await initBox();
+  List<ItemModel> getAll() {
     final items = <ItemModel>[];
 
     for (int i = 0; i < _box.length; i++) {
@@ -38,6 +32,4 @@ class FavoritesDatasource {
 
     return items;
   }
-
-  
 }

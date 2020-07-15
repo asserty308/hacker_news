@@ -21,6 +21,7 @@ dependencies:
   http:
   url_launcher:
   hive:
+  path_provider:
 
 dev_dependencies:
   flutter_test:

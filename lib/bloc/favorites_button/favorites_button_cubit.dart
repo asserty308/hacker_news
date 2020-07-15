@@ -13,11 +13,11 @@ class FavoritesButtonCubit extends Cubit<FavoritesButtonState> {
   final FavoritesRepository repository;
   final ItemModel story;
 
-  void init() async {
+  void init() {
     emit(FavoritesButtonLoading());
 
     try {
-      final isFav = await repository.contains(story.id);
+      final isFav = repository.contains(story.id);
       
       if (isFav) {
         emit(FavoritesButtonAdded());
@@ -42,7 +42,7 @@ class FavoritesButtonCubit extends Cubit<FavoritesButtonState> {
   void remove() {
     try {
       repository.removeStory(story.id);
-      emit(FavoritesButtonAdded());
+      emit(FavoritesButtonRemoved());
     } catch (e) {
       emit(FavoritesButtonError());
     }
