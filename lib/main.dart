@@ -6,7 +6,7 @@ import 'package:hacker_news/data/repositories/hackernews_repository.dart';
 import 'package:hacker_news/bloc/app/app_cubit.dart';
 import 'package:hacker_news/bloc/favorites_screen/favorites_screen_cubit.dart';
 import 'package:hacker_news/bloc/top_stories_screen/top_stories_cubit.dart';
-import 'package:hacker_news/ui/screens/top_stories_screen.dart';
+import 'package:hacker_news/ui/screens/app_screen.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
             create: (context) => TopStoriesCubit(globalHackernewsRepo),
           ),
         ],
-        child: TopStoriesScreen(),
+        child: AppScreen(),
       ),
     );
   }

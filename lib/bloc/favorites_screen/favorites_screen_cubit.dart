@@ -5,6 +5,7 @@ import 'package:meta/meta.dart';
 
 part 'favorites_screen_state.dart';
 
+// TODO: Refresh when new entry is added
 class FavoritesCubit extends Cubit<FavoritesState> {
   FavoritesCubit(this.repository) : super(FavoritesInitial()) {
     loadStories();
@@ -12,13 +13,14 @@ class FavoritesCubit extends Cubit<FavoritesState> {
 
   final FavoritesRepository repository;
 
-  void loadStories() async {
+  void loadStories() {
     emit(FavoritesLoading());
 
     try {
-      final stories = await repository.getAll();
+      final stories = repository.getAll();
       emit(FavoritesLoaded(stories));
     } catch (e) {
+      print('FavoritesCubit:loadStories ERROR $e');
       emit(FavoritesError());
     }
   }

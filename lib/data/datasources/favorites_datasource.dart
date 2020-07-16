@@ -27,7 +27,8 @@ class FavoritesDatasource {
     final items = <ItemModel>[];
 
     for (int i = 0; i < _box.length; i++) {
-      items.add(ItemModel.fromJSON(_box.getAt(i)));
+      final entry = Map<String, dynamic>.from(_box.getAt(i));
+      items.add(ItemModel.fromJSON(entry));
     }
 
     return items;
