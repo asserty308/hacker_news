@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Hacker Today',
       theme: ThemeData.dark(),
-      home: AppCubitProvider(
+      home: AppBlocProvider(
         child: AppScreen(),
       ),
     );

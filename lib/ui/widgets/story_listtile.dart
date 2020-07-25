@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_cubit/flutter_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hacker_news/bloc/favorites_button/favorites_button_cubit.dart';
 import 'package:hacker_news/bloc/favorites_screen/favorites_screen_cubit.dart';
 import 'package:hacker_news/data/models/item_model.dart';
@@ -17,7 +17,7 @@ class StoryListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) => _cubitProvider;
 
-  Widget get _cubitProvider => CubitProvider(
+  Widget get _cubitProvider => BlocProvider(
     create: (context) => FavoritesButtonCubit(globalFavoritesRepository, story),
     child: _tile,
   );
@@ -35,7 +35,7 @@ class StoryListTile extends StatelessWidget {
     style: TextStyle(color: Colors.white),
   );
 
-  Widget get _favButton => CubitConsumer<FavoritesButtonCubit, FavoritesButtonState>(
+  Widget get _favButton => BlocConsumer<FavoritesButtonCubit, FavoritesButtonState>(
     builder: (context, state) {
       if (state is FavoritesButtonAdded) {
         return IconButton(
@@ -55,21 +55,21 @@ class StoryListTile extends StatelessWidget {
     },
     listener: (context, state) {
       // on each update, refresh the favorites list
-      CubitProvider.of<FavoritesCubit>(context).loadStories();
+      BlocProvider.of<FavoritesCubit>(context).loadStories();
     },
   );
 
   // UI Events
 
   void _addToFavorites(BuildContext context) {
-    CubitProvider.of<FavoritesButtonCubit>(context).add();
+    BlocProvider.of<FavoritesButtonCubit>(context).add();
   }
 
   void _removeFromFavorites(BuildContext context) {
-    CubitProvider.of<FavoritesButtonCubit>(context).remove();
+    BlocProvider.of<FavoritesButtonCubit>(context).remove();
   }
 
   void _showStory(BuildContext context) {
-    CubitProvider.of<AppCubit>(context).callUrl(story.url);
+    BlocProvider.of<AppCubit>(context).callUrl(story.url);
   }
 }
