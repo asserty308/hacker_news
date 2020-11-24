@@ -12,20 +12,18 @@ class AppBlocProvider extends StatelessWidget {
   const AppBlocProvider({Key key, this.child}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => AppCubit(),
-        ),
-        BlocProvider(
-          create: (context) => FavoritesCubit(globalFavoritesRepository),
-        ),
-        BlocProvider(
-          create: (context) => TopStoriesCubit(globalHackernewsRepo),
-        ),
-      ],
-      child: child,
-    );
-  }
+  Widget build(BuildContext context) => MultiBlocProvider(
+    providers: [
+      BlocProvider(
+        create: (context) => AppCubit(),
+      ),
+      BlocProvider(
+        create: (context) => FavoritesCubit(globalFavoritesRepository),
+      ),
+      BlocProvider(
+        create: (context) => TopStoriesCubit(globalHackernewsRepo),
+      ),
+    ],
+    child: child,
+  );
 }
