@@ -1,12 +1,12 @@
-import 'package:flutter_core/web/base_api.dart';
+import 'package:flutter_web/datasources/base_api.dart';
 import 'package:hacker_news/data/models/item_model.dart';
 
-class HackernewsApi {
-  final _api = BaseApi('https://hacker-news.firebaseio.com/v0/');
+class HackernewsApi extends BaseApi {
+  HackernewsApi() : super('https://hacker-news.firebaseio.com/v0/');
 
   /// Calls [endpoint] on the hackernews api
   Future<dynamic> _getEndpoint(String endpoint) async {
-    return await _api.fetchJSON('$endpoint.json');
+    return await requestJSON('$endpoint.json');
   }
 
   /// The endpoint [topstories] returns an array of ids.
