@@ -1,4 +1,6 @@
-import 'package:bloc/bloc.dart';
+import 'dart:developer';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hacker_news/data/models/item_model.dart';
 import 'package:hacker_news/data/repositories/favorites_repository.dart';
 import 'package:meta/meta.dart';
@@ -25,7 +27,7 @@ class FavoritesButtonCubit extends Cubit<FavoritesButtonState> {
         emit(FavoritesButtonRemoved());
       }
     } catch (e) {
-      print('FavoritesButtonCubit::init ERROR $e');
+      log('FavoritesButtonCubit::init ERROR $e');
       emit(FavoritesButtonError());
     }
   }

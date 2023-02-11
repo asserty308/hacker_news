@@ -1,4 +1,6 @@
-import 'package:bloc/bloc.dart';
+import 'dart:developer';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hacker_news/data/models/item_model.dart';
 import 'package:hacker_news/data/repositories/favorites_repository.dart';
 import 'package:meta/meta.dart';
@@ -19,7 +21,7 @@ class FavoritesCubit extends Cubit<FavoritesState> {
       final stories = repository.getAll();
       emit(FavoritesLoaded(stories));
     } catch (e) {
-      print('FavoritesCubit::loadStories ERROR $e');
+      log('FavoritesCubit::loadStories ERROR $e');
       emit(FavoritesError());
     }
   }

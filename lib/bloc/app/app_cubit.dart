@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -12,9 +12,9 @@ class AppCubit extends Cubit<AppState> {
 
   /// Shows a browser with the url.
   /// Does not emit a new state as the browser is just an overlay.
-  void callUrl(String url) async {
-    if (await canLaunch(url)) {
-      launch(url);
+  void callUrl(Uri url) async {
+    if (await canLaunchUrl(url)) {
+      launchUrl(url);
     }
   }
 }

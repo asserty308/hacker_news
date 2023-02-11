@@ -32,26 +32,26 @@ class StoryListTile extends StatelessWidget {
 
   Widget get _title => Text(
     story.title ?? 'Unknown title', 
-    style: TextStyle(color: Colors.white),
+    style: const TextStyle(color: Colors.white),
   );
 
   Widget get _favButton => BlocConsumer<FavoritesButtonCubit, FavoritesButtonState>(
     builder: (context, state) {
       if (state is FavoritesButtonAdded) {
         return IconButton(
-          icon: Icon(Icons.favorite), 
+          icon: const Icon(Icons.favorite), 
           onPressed: () => _removeFromFavorites(context),
         );
       }
 
       if (state is FavoritesButtonRemoved) {
         return IconButton(
-          icon: Icon(Icons.favorite_border), 
+          icon: const Icon(Icons.favorite_border), 
           onPressed: () => _addToFavorites(context),
         );
       }
 
-      return Container(width: 0, height: 0,);
+      return const SizedBox(width: 0, height: 0,);
     },
     listener: (context, state) {
       // on each update, refresh the favorites list
@@ -70,6 +70,6 @@ class StoryListTile extends StatelessWidget {
   }
 
   void _showStory(BuildContext context) {
-    BlocProvider.of<AppCubit>(context).callUrl(story.url);
+    BlocProvider.of<AppCubit>(context).callUrl(Uri.parse(story.url));
   }
 }

@@ -7,15 +7,15 @@ class FavoritesInitial extends FavoritesState {}
 class FavoritesLoading extends FavoritesState {}
 
 class FavoritesAdd extends FavoritesState {
-  final ItemModel story;
 
   FavoritesAdd(this.story);
+  final ItemModel story;
 }
 
 class FavoritesLoaded extends FavoritesState {
-  final List<ItemModel> stories;
 
   FavoritesLoaded(this.stories);
+  final List<ItemModel> stories;
 }
 
 class FavoritesError extends FavoritesState {}

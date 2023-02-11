@@ -16,17 +16,19 @@ void main() async {
 
   await Hive.openBox('favorites');
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Hacker Today',
       theme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
-      home: AppBlocProvider(
+      home: const AppBlocProvider(
         child: AppScreen(),
       ),
     );

@@ -17,6 +17,24 @@ class ItemModel {
     this.descendants
   });
 
+  factory ItemModel.fromJSON(Map<String, dynamic> json) => ItemModel(
+    id: json['id'],
+    deleted: json['deleted'],
+    type: json['type'],
+    by: json['by'],
+    time: json['time'],
+    text: json['text'],
+    dead: json['dead'],
+    parent: json['parent'],
+    poll: json['poll'],
+    kids: json['kids'],
+    url: json['url'],
+    score: json['score'],
+    title: json['title'],
+    parts: json['parts'],
+    descendants: json['descendants'],
+  );
+
   /// The item's unique id.
   final int id;
 
@@ -61,24 +79,6 @@ class ItemModel {
 
   /// In the case of stories or polls, the total comment count.
   final int descendants;
-
-  static ItemModel fromJSON(Map<String, dynamic> json) => ItemModel(
-    id: json['id'],
-    deleted: json['deleted'],
-    type: json['type'],
-    by: json['by'],
-    time: json['time'],
-    text: json['text'],
-    dead: json['dead'],
-    parent: json['parent'],
-    poll: json['poll'],
-    kids: json['kids'],
-    url: json['url'],
-    score: json['score'],
-    title: json['title'],
-    parts: json['parts'],
-    descendants: json['descendants'],
-  );
 
   Map<String, dynamic> toMap() => {
     'id': id,

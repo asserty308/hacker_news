@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_core/ui/widgets/center_progress_indicator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hacker_news/bloc/app/app_cubit.dart';
 import 'package:hacker_news/bloc/top_stories_screen/top_stories_cubit.dart';
 import 'package:hacker_news/ui/widgets/stories_listview.dart';
 
 class TopStoriesScreen extends StatelessWidget {
+  const TopStoriesScreen({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
-      title: Text('Top Stories'),
+      title: const Text('Top Stories'),
       actions: [
-        IconButton(icon: Icon(Icons.favorite), onPressed: () => BlocProvider.of<AppCubit>(context).showFavorites())
+        IconButton(icon: const Icon(Icons.favorite), onPressed: () => BlocProvider.of<AppCubit>(context).showFavorites())
       ],
     ),
     body: _body,
@@ -23,7 +24,9 @@ class TopStoriesScreen extends StatelessWidget {
         return StoriesListView(stories: state.stories);
       }
 
-      return CenterProgressIndicator();
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
     },
   );
 }
