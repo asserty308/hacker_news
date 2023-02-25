@@ -5,7 +5,7 @@ import 'package:hacker_news/bloc/top_stories_screen/top_stories_cubit.dart';
 import 'package:hacker_news/ui/widgets/stories_listview.dart';
 
 class TopStoriesScreen extends StatelessWidget {
-  const TopStoriesScreen({Key key}) : super(key: key);
+  const TopStoriesScreen({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(

@@ -16,8 +16,8 @@ dependencies:
   hive: ^2.2.3
   http: ^0.13.5
   meta: ^1.8.0
-  path_provider: ^2.0.12
-  url_launcher: ^6.1.9
+  path_provider: ^2.0.13
+  url_launcher: ^6.1.10
 
 dev_dependencies:
   flutter_lints: ^2.0.1

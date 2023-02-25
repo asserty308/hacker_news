@@ -1,11 +1,6 @@
 import 'package:hacker_news/data/models/item_model.dart';
 import 'package:hive/hive.dart';
 
-// TODO: Find a new database as hive becomes unsupported 
-//   - candidates: 
-//     - sembast, 
-//     - cloud firestore (sync with max 1gb across all projects), 
-//     - isar (hive successor)
 class FavoritesDatasource {
   final _box = Hive.box('favorites');
 

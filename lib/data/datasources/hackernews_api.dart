@@ -33,12 +33,7 @@ class HackernewsApi {
 
   /// The endpoint [item/id] returns a representation of [ItemModel].
   Future<ItemModel> getItem(int id) async {
-    final Map<String, dynamic> response = await _getEndpoint('item/$id');
-
-    if (response == null) {
-      return null;
-    }
-
+    final response = await _getEndpoint('item/$id');
     return ItemModel.fromJSON(response);
   }
 
@@ -60,15 +55,10 @@ class HackernewsApi {
   Future<List<ItemModel>> getTopstories(int amount) async {
     final storyIds = await _getTopstoriesIds(amount);
 
-    final stories = <ItemModel>[];
-    for (final id in storyIds) {
-      final item = await getItem(id);
+    final stories = Stream.fromIterable(storyIds)
+      .asyncMap(getItem)
+      .toList();
 
-      if (item != null) {
-        stories.add(item);
-      }
-    }
-
-    return stories;
+  return stories;
   }
 }

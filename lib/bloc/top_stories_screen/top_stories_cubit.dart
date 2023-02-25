@@ -15,7 +15,6 @@ class TopStoriesCubit extends Cubit<TopStoriesState> {
   void loadStories() async {
     emit(TopStoriesLoading());
 
-    // TODO: Try to load stories on a stream - prevents the long loading time (but might be a bad UX)
     try {
       final stories = await repository.getTopstories(30);
       emit(TopStoriesLoaded(stories));

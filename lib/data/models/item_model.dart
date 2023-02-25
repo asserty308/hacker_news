@@ -1,25 +1,24 @@
 class ItemModel {
   ItemModel({
-    this.id,
+    required this.id,
+    required this.type, 
+    required this.by, 
+    required this.time, 
+    required this.url, 
+    required this.score, 
+    required this.title, 
+    this.parts, 
+    this.descendants,
     this.deleted, 
-    this.type, 
-    this.by, 
-    this.time, 
     this.text, 
     this.dead, 
     this.parent,
     this.poll, 
     this.kids, 
-    this.url, 
-    this.score, 
-    this.title, 
-    this.parts, 
-    this.descendants
   });
 
   factory ItemModel.fromJSON(Map<String, dynamic> json) => ItemModel(
     id: json['id'],
-    deleted: json['deleted'],
     type: json['type'],
     by: json['by'],
     time: json['time'],
@@ -33,13 +32,14 @@ class ItemModel {
     title: json['title'],
     parts: json['parts'],
     descendants: json['descendants'],
+    deleted: json['deleted'],
   );
 
   /// The item's unique id.
   final int id;
 
   /// true if the item is deleted.
-  final bool deleted;
+  final bool? deleted;
 
   /// The type of item. One of "job", "story", "comment", "poll", or "pollopt".
   final String type;
@@ -51,19 +51,19 @@ class ItemModel {
   final int time;
 
   /// The comment, story or poll text. HTML.
-  final String text;
+  final String? text;
 
   /// true if the item is dead.
-  final bool dead;
+  final bool? dead;
 
   /// The comment's parent: either another comment or the relevant story.
-  final int parent;
+  final int? parent;
 
   /// The pollopt's associated poll.
-  final int poll;
+  final int? poll;
 
   /// The ids of the item's comments, in ranked display order.
-  final List<dynamic> kids;
+  final List<dynamic>? kids;
 
   /// The URL of the story.
   final String url;
@@ -75,10 +75,10 @@ class ItemModel {
   final String title;
 
   /// A list of related pollopts, in display order.
-  final List<dynamic> parts;
+  final List<dynamic>? parts;
 
   /// In the case of stories or polls, the total comment count.
-  final int descendants;
+  final int? descendants;
 
   Map<String, dynamic> toMap() => {
     'id': id,

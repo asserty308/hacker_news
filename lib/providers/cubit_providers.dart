@@ -8,7 +8,11 @@ import 'package:hacker_news/data/repositories/hackernews_repository.dart';
 
 class AppBlocProvider extends StatelessWidget {
 
-  const AppBlocProvider({Key key, this.child}) : super(key: key);
+  const AppBlocProvider({
+    super.key, 
+    required this.child,
+  });
+  
   final Widget child;
 
   @override

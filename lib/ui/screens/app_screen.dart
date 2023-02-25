@@ -5,7 +5,7 @@ import 'package:hacker_news/ui/screens/favorites_screen.dart';
 import 'package:hacker_news/ui/screens/top_stories_screen.dart';
 
 class AppScreen extends StatelessWidget {
-  const AppScreen({Key key}) : super(key: key);
+  const AppScreen({super.key});
 
   @override
   Widget build(BuildContext context) => _body;

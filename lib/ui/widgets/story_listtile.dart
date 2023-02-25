@@ -8,9 +8,9 @@ import 'package:hacker_news/data/repositories/favorites_repository.dart';
 
 class StoryListTile extends StatelessWidget {
   const StoryListTile({
-    Key key,
-    @required this.story,
-  }) : super(key: key);
+    super.key,
+    required this.story,
+  });
 
   final ItemModel story;
 
@@ -31,7 +31,7 @@ class StoryListTile extends StatelessWidget {
   );
 
   Widget get _title => Text(
-    story.title ?? 'Unknown title', 
+    story.title, 
     style: const TextStyle(color: Colors.white),
   );
 

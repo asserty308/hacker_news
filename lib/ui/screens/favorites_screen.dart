@@ -5,7 +5,7 @@ import 'package:hacker_news/bloc/favorites_screen/favorites_screen_cubit.dart';
 import 'package:hacker_news/ui/widgets/stories_listview.dart';
 
 class FavoritesScreen extends StatelessWidget {
-  const FavoritesScreen({Key key}) : super(key: key);
+  const FavoritesScreen({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(
