@@ -41,24 +41,23 @@ class HackernewsApi {
   /// latest stories published on hackernews. 
   Future<List<ItemModel>> getLatestStories(int amount) async {
     final latestId = await getLatestStoryId();
-    final stories = <ItemModel>[];
+    
+    final futures = List.generate(amount, (index) => getItem(latestId - index));
 
-    for (int i = 0; i < amount; i++) {
-      stories.add(await getItem(latestId - i));
-    }
-
-    return stories;
+    return Future.wait(futures);
   }
 
   /// Builds a list of [amount] [ItemModel] which represent the 
   /// current top stories published on hackernews. 
+  /// Uses Future.wait to fetch all items concurrently. 
+  /// This will reduce the overall time taken to fetch all the items.
   Future<List<ItemModel>> getTopstories(int amount) async {
     final storyIds = await _getTopstoriesIds(amount);
 
-    final stories = Stream.fromIterable(storyIds)
-      .asyncMap(getItem)
+    final futures = storyIds
+      .map(getItem)
       .toList();
 
-  return stories;
+    return Future.wait(futures);
   }
 }
