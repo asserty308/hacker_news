@@ -1,7 +1,7 @@
 import 'package:hacker_news/data/datasources/hackernews_api.dart';
 import 'package:hacker_news/data/models/item_model.dart';
 
-final globalHackernewsRepo = HackernewsRepository();
+final hackernewsRepo = HackernewsRepository();
 
 class HackernewsRepository {
   final _api = HackernewsApi();
