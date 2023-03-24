@@ -14,15 +14,12 @@ class HackernewsApi {
 
   /// The endpoint [topstories] returns an array of ids.
   Future<List<int>> _getTopstoriesIds(int amount) async {
-    final response = await _getEndpoint('topstories');
+    final response = await _getEndpoint('topstories') as List;
 
-    final ids = <int>[];
-
-    for (final id in response) {
-      ids.add(id);
-    }
-
-    return ids.getRange(0, amount).toList();
+    return response
+      .map((id) => id as int)
+      .take(amount)
+      .toList();
   }
 
   /// The maxitem endpoint contains the latest news id. 
@@ -41,9 +38,7 @@ class HackernewsApi {
   /// latest stories published on hackernews. 
   Future<List<ItemModel>> getLatestStories(int amount) async {
     final latestId = await getLatestStoryId();
-    
     final futures = List.generate(amount, (index) => getItem(latestId - index));
-
     return Future.wait(futures);
   }
 
