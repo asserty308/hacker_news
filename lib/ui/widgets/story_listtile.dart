@@ -70,6 +70,10 @@ class StoryListTile extends StatelessWidget {
   }
 
   void _showStory(BuildContext context) {
-    BlocProvider.of<AppCubit>(context).callUrl(Uri.parse(story.url));
+    if (story.url == null) {
+      return;
+    }
+
+    BlocProvider.of<AppCubit>(context).callUrl(Uri.parse(story.url!));
   }
 }
