@@ -66,7 +66,7 @@ class ItemModel {
   final List<dynamic>? kids;
 
   /// The URL of the story.
-  final String url;
+  final String? url;
 
   /// The story's score, or the votes for a pollopt.
   final int score;
