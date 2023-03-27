@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hacker_news/bloc/favorites_button/favorites_button_cubit.dart';
@@ -64,6 +66,7 @@ class StoryListTile extends StatelessWidget {
 
   void _showStory(BuildContext context) {
     if (story.url == null) {
+      log('Story has no url: ${story.id}');
       return;
     }
 
