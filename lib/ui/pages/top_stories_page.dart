@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hacker_news/bloc/favorites_screen/favorites_screen_cubit.dart';
-import 'package:hacker_news/data/repositories/favorites_repository.dart';
+import 'package:hacker_news/bloc/top_stories_screen/top_stories_cubit.dart';
+import 'package:hacker_news/data/repositories/hackernews_repository.dart';
 import 'package:hacker_news/services/router.dart';
 import 'package:hacker_news/ui/widgets/stories_listview.dart';
 
-class FavoritesScreen extends StatelessWidget {
-  FavoritesScreen({super.key});
+class TopStoriesPage extends StatelessWidget {
+  TopStoriesPage({super.key});
 
-  final _bloc = FavoritesCubit(favoritesRepository);
+  final _bloc = TopstoriesCubit(hackernewsRepo);
 
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
-      title: const Text('Favories'),
+      title: const Text('Top Stories'),
       actions: [
-        IconButton(icon: const Icon(Icons.list), onPressed: () => appRouter.go('/')),
+        IconButton(icon: const Icon(Icons.favorite), onPressed: () => appRouter.go('/favorites')),
       ],
     ),
     body: _body,
@@ -24,7 +24,7 @@ class FavoritesScreen extends StatelessWidget {
   Widget get _body => BlocBuilder(
     bloc: _bloc,
     builder: (context, state) {
-      if (state is FavoritesLoaded) {
+      if (state is TopStoriesLoaded) {
         return StoriesListView(stories: state.stories);
       }
 
@@ -34,3 +34,4 @@ class FavoritesScreen extends StatelessWidget {
     },
   );
 }
+
