@@ -54,8 +54,6 @@ class StoryListTile extends StatelessWidget {
     },
   );
 
-  // UI Events
-
   void _addToFavorites(BuildContext context) {
     BlocProvider.of<FavoritesButtonCubit>(context).add();
   }
