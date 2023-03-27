@@ -19,13 +19,8 @@ class FavoritesDatasource {
   }
 
   List<ItemModel> getAll() {
-    final items = <ItemModel>[];
-
-    for (int i = 0; i < _box.length; i++) {
-      final entry = Map<String, dynamic>.from(_box.getAt(i));
-      items.add(ItemModel.fromJSON(entry));
-    }
-
-    return items;
+    return _box.values
+      .map((e) => ItemModel.fromJSON(Map<String, dynamic>.from(e)))
+      .toList();
   }
 }
