@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hacker_news/bloc/favorites_button/favorites_button_cubit.dart';
-import 'package:hacker_news/bloc/favorites_screen/favorites_screen_cubit.dart';
 import 'package:hacker_news/data/models/item_model.dart';
 import 'package:hacker_news/data/repositories/favorites_repository.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -33,7 +32,7 @@ class StoryListTile extends StatelessWidget {
     style: const TextStyle(color: Colors.white),
   );
 
-  Widget get _favButton => BlocConsumer<FavoritesButtonCubit, FavoritesButtonState>(
+  Widget get _favButton => BlocBuilder<FavoritesButtonCubit, FavoritesButtonState>(
     builder: (context, state) {
       if (state is FavoritesButtonAdded) {
         return IconButton(
@@ -50,10 +49,6 @@ class StoryListTile extends StatelessWidget {
       }
 
       return const SizedBox(width: 0, height: 0,);
-    },
-    listener: (context, state) {
-      // on each update, refresh the favorites list
-      BlocProvider.of<FavoritesCubit>(context).loadStories();
     },
   );
 

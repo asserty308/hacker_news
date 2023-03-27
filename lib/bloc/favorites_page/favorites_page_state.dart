@@ -1,4 +1,4 @@
-part of 'favorites_screen_cubit.dart';
+part of 'favorites_page_cubit.dart';
 
 @immutable
 abstract class FavoritesState {}

@@ -1,4 +1,4 @@
-part of 'top_stories_cubit.dart';
+part of 'top_page_cubit.dart';
 
 @immutable
 abstract class TopStoriesState {}

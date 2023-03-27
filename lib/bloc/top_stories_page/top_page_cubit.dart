@@ -5,7 +5,7 @@ import 'package:hacker_news/data/models/item_model.dart';
 import 'package:hacker_news/data/repositories/hackernews_repository.dart';
 import 'package:meta/meta.dart';
 
-part 'top_stories_state.dart';
+part 'top_page_state.dart';
 
 class TopstoriesCubit extends Cubit<TopStoriesState> {
   TopstoriesCubit(this.repository) : super(TopStoriesInitial()) {
