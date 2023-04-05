@@ -13,9 +13,10 @@ class FavoritesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
-      title: const Text('Favories'),
+      title: const Text('Favorites'),
       actions: [
         IconButton(icon: const Icon(Icons.list), onPressed: () => appRouter.go('/')),
+        IconButton(icon: const Icon(Icons.settings_outlined), onPressed: () => appRouter.go('/settings')),
       ],
     ),
     body: _body,

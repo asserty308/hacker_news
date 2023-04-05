@@ -11,8 +11,12 @@ void main() async {
 Future<void> _setupApp() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  await Hive.initFlutter();
+  await _initStorages();
+}
 
+Future<void> _initStorages() async {
+  await Hive.initFlutter();
+  
   await Future.wait([
     Hive.openBox('favorites'),
   ]);

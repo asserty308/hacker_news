@@ -16,6 +16,7 @@ class TopStoriesPage extends StatelessWidget {
       title: const Text('Top Stories'),
       actions: [
         IconButton(icon: const Icon(Icons.favorite), onPressed: () => appRouter.go('/favorites')),
+        IconButton(icon: const Icon(Icons.settings_outlined), onPressed: () => appRouter.go('/settings')),
       ],
     ),
     body: _body,
