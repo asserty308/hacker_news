@@ -8,13 +8,11 @@ import 'package:meta/meta.dart';
 part 'top_page_state.dart';
 
 class TopstoriesCubit extends Cubit<TopStoriesState> {
-  TopstoriesCubit(this.repository) : super(TopStoriesInitial()) {
-    loadStories();
-  }
+  TopstoriesCubit(this.repository) : super(TopStoriesInitial());
 
   final HackernewsRepository repository;
 
-  void loadStories() async {
+  Future<void> loadStories() async {
     emit(TopStoriesLoading());
 
     try {

@@ -6,7 +6,9 @@ import 'package:hacker_news/router/router.dart';
 import 'package:hacker_news/ui/widgets/stories_listview.dart';
 
 class TopStoriesPage extends StatelessWidget {
-  TopStoriesPage({super.key});
+  TopStoriesPage({super.key}) {
+    _bloc.loadStories();
+  }
 
   final _bloc = TopstoriesCubit(hackernewsRepo);
 
@@ -26,7 +28,10 @@ class TopStoriesPage extends StatelessWidget {
     bloc: _bloc,
     builder: (context, state) {
       if (state is TopStoriesLoaded) {
-        return StoriesListView(stories: state.stories);
+        return RefreshIndicator(
+          onRefresh: _bloc.loadStories,
+          child: StoriesListView(stories: state.stories)
+        );
       }
 
       return const Center(
