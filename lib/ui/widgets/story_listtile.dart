@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hacker_news/bloc/favorites_button/favorites_button_cubit.dart';
+import 'package:hacker_news/bloc/like_button/like_button_cubit.dart';
 import 'package:hacker_news/data/models/item_model.dart';
 import 'package:hacker_news/data/repositories/favorites_repository.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -17,16 +17,14 @@ class StoryListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocProvider(
-    create: (context) => FavoritesButtonCubit(favoritesRepository, story),
-    child: _tile,
+    create: (context) => LikeButtonCubit(favoritesRepository, story),
+    child: _tile(context),
   );
 
-  Widget get _tile => Builder(
-    builder: (context) => ListTile(
-      title: _title,
-      trailing: _favButton,
-      onTap: () => _showStory(context),
-    ),
+  Widget _tile(BuildContext context) => ListTile(
+    title: _title,
+    trailing: _favButton,
+    onTap: () => _showStory(context),
   );
 
   Widget get _title => Text(
@@ -34,16 +32,16 @@ class StoryListTile extends StatelessWidget {
     style: const TextStyle(color: Colors.white),
   );
 
-  Widget get _favButton => BlocBuilder<FavoritesButtonCubit, FavoritesButtonState>(
+  Widget get _favButton => BlocBuilder<LikeButtonCubit, LikeButtonState>(
     builder: (context, state) {
-      if (state is FavoritesButtonAdded) {
+      if (state is LikeButtonAdded) {
         return IconButton(
           icon: const Icon(Icons.favorite), 
           onPressed: () => _removeFromFavorites(context),
         );
       }
 
-      if (state is FavoritesButtonRemoved) {
+      if (state is LikeButtonRemoved) {
         return IconButton(
           icon: const Icon(Icons.favorite_border), 
           onPressed: () => _addToFavorites(context),
@@ -55,11 +53,11 @@ class StoryListTile extends StatelessWidget {
   );
 
   void _addToFavorites(BuildContext context) {
-    BlocProvider.of<FavoritesButtonCubit>(context).add();
+    BlocProvider.of<LikeButtonCubit>(context).add();
   }
 
   void _removeFromFavorites(BuildContext context) {
-    BlocProvider.of<FavoritesButtonCubit>(context).remove();
+    BlocProvider.of<LikeButtonCubit>(context).remove();
   }
 
   void _showStory(BuildContext context) {

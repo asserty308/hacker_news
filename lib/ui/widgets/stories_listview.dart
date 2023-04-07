@@ -8,17 +8,11 @@ class StoriesListView extends StatelessWidget {
   final List<ItemModel> stories;
 
   @override
-  Widget build(BuildContext context) {
-    if (stories.isEmpty) {
-      return Container();
+  Widget build(BuildContext context) => ListView.builder(
+    itemCount: stories.length,
+    itemBuilder: (context, index) {
+      final story = stories[index]; 
+      return StoryListTile(story: story);
     }
-
-    return ListView.builder(
-      itemCount: stories.length,
-      itemBuilder: (context, index) {
-        final story = stories[index]; 
-        return StoryListTile(story: story);
-      }
-    );
-  }
+  );
 }

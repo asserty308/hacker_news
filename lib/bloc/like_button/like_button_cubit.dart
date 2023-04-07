@@ -5,10 +5,10 @@ import 'package:hacker_news/data/models/item_model.dart';
 import 'package:hacker_news/data/repositories/favorites_repository.dart';
 import 'package:meta/meta.dart';
 
-part 'favorites_button_state.dart';
+part 'like_button_state.dart';
 
-class FavoritesButtonCubit extends Cubit<FavoritesButtonState> {
-  FavoritesButtonCubit(this.repository, this.story) : super(FavoritesButtonInitial()) {
+class LikeButtonCubit extends Cubit<LikeButtonState> {
+  LikeButtonCubit(this.repository, this.story) : super(LikeButtonInitial()) {
     init();
   }
 
@@ -16,37 +16,37 @@ class FavoritesButtonCubit extends Cubit<FavoritesButtonState> {
   final ItemModel story;
 
   void init() {
-    emit(FavoritesButtonLoading());
+    emit(LikeButtonLoading());
 
     try {
       final isFav = repository.contains(story.id);
       
       if (isFav) {
-        emit(FavoritesButtonAdded());
+        emit(LikeButtonAdded());
       } else {
-        emit(FavoritesButtonRemoved());
+        emit(LikeButtonRemoved());
       }
     } catch (e) {
       log('FavoritesButtonCubit::init ERROR $e');
-      emit(FavoritesButtonError());
+      emit(LikeButtonError());
     }
   }
 
   void add() {
     try {
       repository.addStory(story);
-      emit(FavoritesButtonAdded());
+      emit(LikeButtonAdded());
     } catch (e) {
-      emit(FavoritesButtonError());
+      emit(LikeButtonError());
     }
   }
 
   void remove() {
     try {
       repository.removeStory(story.id);
-      emit(FavoritesButtonRemoved());
+      emit(LikeButtonRemoved());
     } catch (e) {
-      emit(FavoritesButtonError());
+      emit(LikeButtonError());
     }
   }
 }

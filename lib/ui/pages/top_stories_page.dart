@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hacker_news/bloc/top_stories_page/top_page_cubit.dart';
+import 'package:hacker_news/bloc/top_stories/top_stories_cubit.dart';
 import 'package:hacker_news/data/repositories/hackernews_repository.dart';
 import 'package:hacker_news/router/router.dart';
 import 'package:hacker_news/ui/widgets/stories_listview.dart';
@@ -10,7 +10,7 @@ class TopStoriesPage extends StatelessWidget {
     _bloc.loadStories();
   }
 
-  final _bloc = TopstoriesCubit(hackernewsRepo);
+  final _bloc = TopStoriesCubit(hackernewsRepo);
 
   @override
   Widget build(BuildContext context) => Scaffold(
