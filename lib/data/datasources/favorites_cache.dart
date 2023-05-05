@@ -1,7 +1,7 @@
 import 'package:hacker_news/data/models/item_model.dart';
 import 'package:hive/hive.dart';
 
-class FavoritesDatasource {
+class FavoritesCache {
   final _box = Hive.box('favorites');
 
   /// Adds a story to the favorites box.

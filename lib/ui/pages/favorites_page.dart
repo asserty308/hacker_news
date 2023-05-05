@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hacker_news/bloc/favorites/favorites_cubit.dart';
-import 'package:hacker_news/data/repositories/favorites_repository.dart';
+import 'package:hacker_news/data/repositories/favorites_repo.dart';
 import 'package:hacker_news/router/router.dart';
 import 'package:hacker_news/ui/widgets/stories_listview.dart';
 
