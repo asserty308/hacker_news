@@ -212,10 +212,10 @@ packages:
     dependency: "direct main"
     description:
       name: go_router
-      sha256: "80e37516b8d452d982fc32bd7bb22adbd20e422612ef2b3e1df8b8350cbf199b"
+      sha256: d687b6129476c92bd75244b8dfc1bb56f9a287ab3d51cdf0baf570afeb923c51
       url: "https://pub.dev"
     source: hosted
-    version: "7.0.1"
+    version: "8.0.3"
   hive:
     dependency: "direct main"
     description:
