@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hacker_news/data/services/app_session.dart';
 import 'package:hacker_news/router/router.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -26,21 +26,11 @@ class SettingsPage extends StatelessWidget {
     title: const Text('Open Source Licenses'),
     onTap: () => showLicensePage(
       context: context,
+      applicationVersion: appPackageInfo?.version,
     ),
   );
 
-  Widget get _versionTileBuilder => FutureBuilder(
-    future: PackageInfo.fromPlatform(),
-    builder: (context, snapshot) {
-      final data = snapshot.data;
-
-      if (data == null) {
-        return const SizedBox();
-      }
-
-      return ListTile(
-        subtitle: Text('Version ${data.version}'),
-      );
-    },
+  Widget get _versionTileBuilder => ListTile(
+    subtitle: Text('Version ${appPackageInfo?.version ?? 'n.A.'}'),
   );
 }
