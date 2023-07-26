@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hacker_news/data/services/app_session.dart';
-import 'package:hacker_news/router/router.dart';
+import 'package:hacker_news/ui/widgets/action_buttons.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -9,17 +9,19 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
       title: const Text('Settings'),
-      actions: [
-        IconButton(icon: const Icon(Icons.list), onPressed: () => appRouter.go('/')),
-        IconButton(icon: const Icon(Icons.favorite), onPressed: () => appRouter.go('/favorites')),
+      actions: const [
+        HomeAction(),
+        FavoritesAction(),
       ],
     ),
-    body: ListView(
-      children: [
-        _licensesTile(context),
-        _versionTileBuilder,
-      ],
-    ),
+    body: _body(context),
+  );
+
+  Widget _body(BuildContext context) => ListView(
+    children: [
+      _licensesTile(context),
+      _versionTileBuilder,
+    ],
   );
 
   Widget _licensesTile(BuildContext context) => ListTile(

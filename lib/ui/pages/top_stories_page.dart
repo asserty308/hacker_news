@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hacker_news/bloc/top_stories/top_stories_cubit.dart';
 import 'package:hacker_news/data/repositories/hackernews_repo.dart';
-import 'package:hacker_news/router/router.dart';
+import 'package:hacker_news/ui/widgets/action_buttons.dart';
 import 'package:hacker_news/ui/widgets/stories_listview.dart';
 
 class TopStoriesPage extends StatelessWidget {
@@ -16,9 +16,9 @@ class TopStoriesPage extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
       title: const Text('Top Stories'),
-      actions: [
-        IconButton(icon: const Icon(Icons.favorite), onPressed: () => appRouter.go('/favorites')),
-        IconButton(icon: const Icon(Icons.settings_outlined), onPressed: () => appRouter.go('/settings')),
+      actions: const [
+        FavoritesAction(),
+        SettingsAction(),
       ],
     ),
     body: _body,
