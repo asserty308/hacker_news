@@ -1,6 +1,6 @@
 flutter clean
 flutter pub get
-flutter build macos --obfuscate --split-debug-info=build/app/outputs/symbols
+# flutter build macos --obfuscate --split-debug-info=build/app/outputs/symbols
 flutter build web --base-href "/hacker_news/"
 # flutter build ipa --obfuscate --split-debug-info=build/app/outputs/symbols
 # cd ios
