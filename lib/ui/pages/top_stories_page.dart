@@ -5,12 +5,14 @@ import 'package:hacker_news/data/repositories/hackernews_repo.dart';
 import 'package:hacker_news/ui/widgets/action_buttons.dart';
 import 'package:hacker_news/ui/widgets/stories_listview.dart';
 
+final _bloc = TopStoriesCubit(hackernewsRepo);
+
 class TopStoriesPage extends StatelessWidget {
   TopStoriesPage({super.key}) {
-    _bloc.loadStories();
+    if (_bloc.state is TopStoriesInitial) {
+      _bloc.loadStories();
+    }
   }
-
-  final _bloc = TopStoriesCubit(hackernewsRepo);
 
   @override
   Widget build(BuildContext context) => Scaffold(

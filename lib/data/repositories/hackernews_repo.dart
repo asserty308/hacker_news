@@ -6,6 +6,14 @@ final hackernewsRepo = HackernewsRepo();
 class HackernewsRepo {
   final _api = HackernewsApi();
 
+  Future<List<int>> getTopstoriesIds(int amount, {int start = 0}) async {
+    return _api.getTopstoriesIds(amount, start: start);
+  }
+
+  Future<ItemModel> getItem(int id) async {
+    return _api.getItem(id);
+  }
+
   Future<List<ItemModel>> getLatestStories(int amount) async {
     return _api.getLatestStories(amount);
   }

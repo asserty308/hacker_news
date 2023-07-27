@@ -16,11 +16,33 @@ class TopStoriesCubit extends Cubit<TopStoriesState> {
     emit(TopStoriesLoading());
 
     try {
-      final stories = await repo.getTopstories(30);
-      emit(TopStoriesLoaded(stories));
+      final stories = <ItemModel>[];
+      final ids = await repo.getTopstoriesIds(500);
+      
+      for (var i = 0; i < ids.length; i += 10) {
+        final currentIds = ids
+          .skip(i)
+          .take(10)
+          .toList();
+
+        final futures = currentIds
+          .map(repo.getItem)
+          .toList();
+
+        final currentStories = await Future.wait(futures);
+        stories.addAll(currentStories);
+
+        emit(TopStoriesLoaded(stories));
+      }
+
+      
     } catch (e, stackTrace) {
       log('Error fetching topstories', error: e, stackTrace: stackTrace);
       emit(TopStoriesError());
     }
+  }
+
+  Future<void> loadMore() async {
+
   }
 }
