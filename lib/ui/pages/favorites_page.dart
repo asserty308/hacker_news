@@ -26,7 +26,7 @@ class FavoritesPage extends StatelessWidget {
     bloc: _bloc,
     builder: (context, state) {
       if (state is FavoritesLoaded) {
-        return StoriesListView(stories: state.stories);
+        return StoriesListView(stories: state.stories, storageKey: 1,);
       }
 
       return const Center(

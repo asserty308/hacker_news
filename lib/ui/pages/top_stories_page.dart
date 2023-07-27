@@ -7,13 +7,18 @@ import 'package:hacker_news/ui/widgets/stories_listview.dart';
 
 final _bloc = TopStoriesCubit(hackernewsRepo);
 
-class TopStoriesPage extends StatelessWidget {
+class TopStoriesPage extends StatefulWidget {
   TopStoriesPage({super.key}) {
     if (_bloc.state is TopStoriesInitial) {
       _bloc.loadStories();
     }
   }
 
+  @override
+  State<TopStoriesPage> createState() => _TopStoriesPageState();
+}
+
+class _TopStoriesPageState extends State<TopStoriesPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
@@ -32,7 +37,7 @@ class TopStoriesPage extends StatelessWidget {
       if (state is TopStoriesLoaded) {
         return RefreshIndicator(
           onRefresh: _bloc.loadStories,
-          child: StoriesListView(stories: state.stories)
+          child: StoriesListView(stories: state.stories, storageKey: 0,),
         );
       }
 
