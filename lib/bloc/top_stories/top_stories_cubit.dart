@@ -12,6 +12,8 @@ class TopStoriesCubit extends Cubit<TopStoriesState> {
 
   final HackernewsRepo repo;
 
+  final _loadAmount = 30;
+
   Future<void> loadStories() async {
     emit(TopStoriesLoading());
 
@@ -19,10 +21,10 @@ class TopStoriesCubit extends Cubit<TopStoriesState> {
       final stories = <ItemModel>[];
       final ids = await repo.getTopstoriesIds(500);
       
-      for (var i = 0; i < ids.length; i += 10) {
+      for (var i = 0; i < ids.length; i += _loadAmount) {
         final currentIds = ids
           .skip(i)
-          .take(10)
+          .take(_loadAmount)
           .toList();
 
         final futures = currentIds
