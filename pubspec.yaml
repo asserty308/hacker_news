@@ -20,6 +20,7 @@ dependencies:
   url_launcher: ^6.1.12
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.13.1
   flutter_lints: ^2.0.2
   flutter_test:
     sdk: flutter
@@ -27,3 +28,14 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+# dart run flutter_launcher_icons
+flutter_launcher_icons:
+  android: true
+  ios: true
+  web: 
+    generate: true
+  macos:
+    generate: true
+  remove_alpha_ios: true
+  image_path: 'assets/app_icon.jpg'
