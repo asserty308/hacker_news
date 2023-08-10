@@ -30,11 +30,11 @@ class StoryListTile extends StatelessWidget {
 
   Widget get _title => Text(
     story.title, 
-    style: const TextStyle(color: Colors.white),
   );
 
   Widget get _subtitle {
     final authority = Uri.tryParse(story.url!)?.authority ?? '';
+    
     return Text(
       authority,
     );
