@@ -23,6 +23,7 @@ class StoryListTile extends StatelessWidget {
 
   Widget _tile(BuildContext context) => ListTile(
     title: _title,
+    subtitle: story.url?.isEmpty ?? true ? null : _subtitle,
     trailing: _favButton,
     onTap: () => _showStory(context),
   );
@@ -31,6 +32,13 @@ class StoryListTile extends StatelessWidget {
     story.title, 
     style: const TextStyle(color: Colors.white),
   );
+
+  Widget get _subtitle {
+    final authority = Uri.tryParse(story.url!)?.authority ?? '';
+    return Text(
+      authority,
+    );
+  }
 
   Widget get _favButton => BlocBuilder<LikeButtonCubit, LikeButtonState>(
     builder: (context, state) {
