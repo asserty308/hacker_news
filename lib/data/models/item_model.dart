@@ -97,4 +97,24 @@ class ItemModel {
     'parts': parts,
     'descendants': descendants,
   };
+
+  /// Converts the unix [time] to a [DateTime] object.
+  DateTime get dateTime => DateTime.fromMillisecondsSinceEpoch(time * 1000);
+
+  /// Representes the [dateTime] object as a human readable difference until now.
+  /// 
+  /// Example: "1 hour ago" or "2 days ago"
+  String get formattedDifference {
+    final diff = DateTime.now().difference(dateTime);
+
+    if (diff.inSeconds < 60) {
+      return "Less than 1 minute ago";
+    } else if (diff.inMinutes < 60) {
+      return "${diff.inMinutes} minutes ago";
+    } else if (diff.inHours < 24) {
+      return "${diff.inHours} hours ago";
+    }
+    
+    return "${diff.inDays} days ago";
+  }
 }
