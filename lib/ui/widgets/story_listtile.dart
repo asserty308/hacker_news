@@ -22,15 +22,21 @@ class StoryListTile extends StatelessWidget {
   );
 
   Widget _tile(BuildContext context) => ListTile(
-    title: _title(context),
-    subtitle: Text('${story.formattedDifference} ${story.url?.isEmpty ?? true ? '' : ' - ${Uri.tryParse(story.url!)?.authority ?? ''}'}'),
+    title: _title,
+    subtitle: _subtitle,
     trailing: _favButton,
     onTap: () => _showStory(context),
   );
 
-  Widget _title(BuildContext context) => Text(
+  Widget get _title => Text(
     story.title,
   );
+
+  Widget get _subtitle {
+    final diff = story.formattedDifference;
+    final authority = Uri.tryParse(story.url ?? '')?.authority ?? '';
+    return Text('$diff ${authority.isEmpty ? '' : ' - $authority'}');
+  }
 
   Widget get _favButton => BlocBuilder<LikeButtonCubit, LikeButtonState>(
     builder: (context, state) {
