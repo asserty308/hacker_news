@@ -67,8 +67,9 @@ class StoryListTile extends StatelessWidget {
   }
 
   void _showStory(BuildContext context) {
-    if (story.url == null) {
-      log('Story has no url: ${story.id}');
+    if (story.url?.isEmpty ?? true) {
+      final url = Uri.https('news.ycombinator.com', '/item', {'id':'${story.id}'});
+      launchUrl(url);
       return;
     }
 
