@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hacker_news/router/router.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -11,5 +12,7 @@ class MyApp extends StatelessWidget {
     darkTheme: ThemeData.dark(),
     debugShowCheckedModeBanner: false,
     routerConfig: appRouter,
+    localizationsDelegates: AppLocalizations.localizationsDelegates,
+    supportedLocales: AppLocalizations.supportedLocales,
   );
 }

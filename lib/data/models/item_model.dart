@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:hacker_news/l10n/l10n.dart';
+
 class ItemModel {
   ItemModel({
     required this.id,
@@ -104,17 +107,17 @@ class ItemModel {
   /// Representes the [dateTime] object as a human readable difference until now.
   /// 
   /// Example: "1 hour ago" or "2 days ago"
-  String get formattedDifference {
+  String formattedDifference(BuildContext context) {
     final diff = DateTime.now().difference(dateTime);
 
     if (diff.inSeconds < 60) {
-      return "Less than 1 minute ago";
+      return getL10n(context).nSecondsAgo(diff.inSeconds);
     } else if (diff.inMinutes < 60) {
-      return "${diff.inMinutes} minutes ago";
+      return getL10n(context).nMinutesAgo(diff.inMinutes);
     } else if (diff.inHours < 24) {
-      return "${diff.inHours} hours ago";
+      return getL10n(context).nHoursAgo(diff.inHours);
     }
     
-    return "${diff.inDays} days ago";
+    return getL10n(context).nDaysAgo(diff.inDays);
   }
 }

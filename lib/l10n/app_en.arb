@@ -1,0 +1,51 @@
+{
+    "nSecondsAgo": "{count, plural, =1{1 second ago} other{{count} seconds ago}}",
+    "@nSecondsAgo": {
+        "placeholders": {
+            "count": {
+                "type": "num",
+                "format": "compact"
+            }
+        }
+    },
+    "nMinutesAgo": "{count, plural, =1{1 minute ago} other{{count} minutes ago}}",
+    "@nMinutesAgo": {
+        "placeholders": {
+            "count": {
+                "type": "num",
+                "format": "compact"
+            }
+        }
+    },
+    "nHoursAgo": "{count, plural, =1{1 hour ago} other{{count} hours ago}}",
+    "@nHoursAgo": {
+        "placeholders": {
+            "count": {
+                "type": "num",
+                "format": "compact"
+            }
+        }
+    },
+    "nDaysAgo": "{count, plural, =1{1 day ago} other{{count} days ago}}",
+    "@nDaysAgo": {
+        "placeholders": {
+            "count": {
+                "type": "num",
+                "format": "compact"
+            }
+        }
+    },
+    "topStories": "Top Stories",
+    "favorites": "Favorites",
+    "settings": "Settings",
+    "osl": "Open Source Licenses",
+    "appVersion": "Version {version}",
+    "@appVersion": {
+        "placeholders": {
+            "version": {
+                "type": "String",
+                "example": "1.0.0"
+            }
+        }
+    }
+}

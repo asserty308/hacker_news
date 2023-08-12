@@ -21,7 +21,7 @@ class StoryListTile extends StatelessWidget {
 
   Widget _tile(BuildContext context) => ListTile(
     title: _title,
-    subtitle: _subtitle,
+    subtitle: _subtitle(context),
     trailing: _favButton,
     onTap: () => _showStory(context),
   );
@@ -30,8 +30,8 @@ class StoryListTile extends StatelessWidget {
     story.title,
   );
 
-  Widget get _subtitle {
-    final diff = story.formattedDifference;
+  Widget _subtitle(context) {
+    final diff = story.formattedDifference(context);
     final authority = Uri.tryParse(story.url ?? '')?.authority ?? '';
     return Text('$diff ${authority.isEmpty ? '' : ' - $authority'}');
   }

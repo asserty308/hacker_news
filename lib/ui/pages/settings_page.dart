@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hacker_news/data/services/app_session.dart';
+import 'package:hacker_news/l10n/l10n.dart';
 import 'package:hacker_news/ui/widgets/action_buttons.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -8,7 +9,7 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
-      title: const Text('Settings'),
+      title: Text(getL10n(context).settings),
       actions: const [
         HomeAction(),
         FavoritesAction(),
@@ -20,19 +21,19 @@ class SettingsPage extends StatelessWidget {
   Widget _body(BuildContext context) => ListView(
     children: [
       _licensesTile(context),
-      _versionTileBuilder,
+      _versionTileBuilder(context),
     ],
   );
 
   Widget _licensesTile(BuildContext context) => ListTile(
-    title: const Text('Open Source Licenses'),
+    title: Text(getL10n(context).osl),
     onTap: () => showLicensePage(
       context: context,
       applicationVersion: appPackageInfo?.version,
     ),
   );
 
-  Widget get _versionTileBuilder => ListTile(
-    subtitle: Text('Version ${appPackageInfo?.version ?? 'n.A.'}'),
+  Widget _versionTileBuilder(BuildContext context) => ListTile(
+    subtitle: Text(getL10n(context).appVersion(appPackageInfo?.version ?? 'n.A.')),
   );
 }
