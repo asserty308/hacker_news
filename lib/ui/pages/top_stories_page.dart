@@ -22,28 +22,36 @@ class TopStoriesPage extends StatefulWidget {
 class _TopStoriesPageState extends State<TopStoriesPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(
-      title: Text(getL10n(context).topStories),
-      actions: const [
-        FavoritesAction(),
-        SettingsAction(),
+    body: CustomScrollView(
+      physics: const ClampingScrollPhysics(),
+      slivers: [
+        SliverAppBar(
+          title: Text(getL10n(context).topStories),
+          floating: true,
+          actions: const [
+            FavoritesAction(),
+            SettingsAction(),
+          ],
+        ),
+        _body,
       ],
-    ),
-    body: _body,
+    )
   );
 
   Widget get _body => BlocBuilder(
     bloc: _bloc,
     builder: (context, state) {
       if (state is TopStoriesLoaded) {
-        return RefreshIndicator(
-          onRefresh: _bloc.loadStories,
-          child: StoriesListView(stories: state.stories, storageKey: 0,),
+        return SliverStoriesListView(
+          stories: state.stories, 
+          storageKey: 0,
         );
       }
 
-      return const Center(
-        child: CircularProgressIndicator(),
+      return const SliverFillRemaining(
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
       );
     },
   );

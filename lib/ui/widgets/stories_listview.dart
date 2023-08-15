@@ -22,3 +22,24 @@ class StoriesListView extends StatelessWidget {
     }
   );
 }
+
+class SliverStoriesListView extends StatelessWidget {
+  const SliverStoriesListView({
+    super.key, 
+    required this.stories,
+    required this.storageKey,
+  });
+
+  final List<ItemModel> stories;
+  final int storageKey;
+
+  @override
+  Widget build(BuildContext context) => SliverList.builder(
+    key: PageStorageKey(storageKey),
+    itemCount: stories.length,
+    itemBuilder: (context, index) {
+      final story = stories[index]; 
+      return StoryListTile(story: story);
+    }
+  );
+}

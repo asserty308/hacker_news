@@ -8,17 +8,23 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(
-      title: Text(getL10n(context).settings),
-      actions: const [
-        HomeAction(),
-        FavoritesAction(),
+    body: CustomScrollView(
+      physics: const ClampingScrollPhysics(),
+      slivers: [
+        SliverAppBar(
+          title: Text(getL10n(context).settings),
+          floating: true,
+          actions: const [
+            HomeAction(),
+            FavoritesAction(),
+          ],
+        ),
+        _body(context),
       ],
     ),
-    body: _body(context),
   );
 
-  Widget _body(BuildContext context) => ListView(
+  Widget _body(BuildContext context) => SliverList.list(
     children: [
       _licensesTile(context),
       _versionTileBuilder(context),

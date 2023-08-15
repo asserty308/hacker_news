@@ -13,25 +13,36 @@ class FavoritesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(
-      title: Text(getL10n(context).favorites),
-      actions: const [
-        HomeAction(),
-        SettingsAction(),
+    body: CustomScrollView(
+      physics: const ClampingScrollPhysics(),
+      slivers: [
+        SliverAppBar(
+          title: Text(getL10n(context).favorites),
+          floating: true,
+          actions: const [
+            HomeAction(),
+            SettingsAction(),
+          ],
+        ),
+        _body,
       ],
     ),
-    body: _body,
   );
 
   Widget get _body => BlocBuilder(
     bloc: _bloc,
     builder: (context, state) {
       if (state is FavoritesLoaded) {
-        return StoriesListView(stories: state.stories, storageKey: 1,);
+        return SliverStoriesListView(
+          stories: state.stories, 
+          storageKey: 1,
+        );
       }
 
-      return const Center(
-        child: CircularProgressIndicator(),
+      return const SliverFillRemaining(
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
       );
     },
   );
