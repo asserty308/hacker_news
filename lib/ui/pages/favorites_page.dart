@@ -33,6 +33,10 @@ class FavoritesPage extends StatelessWidget {
     bloc: _bloc,
     builder: (context, state) {
       if (state is FavoritesLoaded) {
+        if (state.stories.isEmpty) {
+          return _emptyListHint(context);
+        }
+        
         return SliverStoriesListView(
           stories: state.stories, 
           storageKey: 1,
@@ -45,5 +49,11 @@ class FavoritesPage extends StatelessWidget {
         ),
       );
     },
+  );
+
+  Widget _emptyListHint(BuildContext context) => const SliverFillRemaining(
+    child: Center(
+      child: Text('Keine Favoriten gespeichert.'),
+    ),
   );
 }
