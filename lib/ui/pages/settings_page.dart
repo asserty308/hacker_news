@@ -12,7 +12,7 @@ class SettingsPage extends StatelessWidget {
       physics: const ClampingScrollPhysics(),
       slivers: [
         SliverAppBar(
-          title: Text(getL10n(context).settings),
+          title: Text(context.l10n.settings),
           floating: true,
           actions: const [
             HomeAction(),
@@ -32,7 +32,7 @@ class SettingsPage extends StatelessWidget {
   );
 
   Widget _licensesTile(BuildContext context) => ListTile(
-    title: Text(getL10n(context).osl),
+    title: Text(context.l10n.osl),
     onTap: () => showLicensePage(
       context: context,
       applicationVersion: appPackageInfo?.version,
@@ -40,6 +40,6 @@ class SettingsPage extends StatelessWidget {
   );
 
   Widget _versionTileBuilder(BuildContext context) => ListTile(
-    subtitle: Text(getL10n(context).appVersion(appPackageInfo?.version ?? 'n.A.')),
+    subtitle: Text(context.l10n.appVersion(appPackageInfo?.version ?? 'n.A.')),
   );
 }

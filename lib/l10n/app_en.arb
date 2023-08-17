@@ -47,5 +47,6 @@
                 "example": "1.0.0"
             }
         }
-    }
+    },
+    "emptyFavoritesHint": "No favorites saved"
 }

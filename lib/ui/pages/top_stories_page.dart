@@ -26,7 +26,7 @@ class _TopStoriesPageState extends State<TopStoriesPage> {
       physics: const ClampingScrollPhysics(),
       slivers: [
         SliverAppBar(
-          title: Text(getL10n(context).topStories),
+          title: Text(context.l10n.topStories),
           floating: true,
           actions: const [
             FavoritesAction(),

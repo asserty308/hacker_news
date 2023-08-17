@@ -111,13 +111,13 @@ class ItemModel {
     final diff = DateTime.now().difference(dateTime);
 
     if (diff.inSeconds < 60) {
-      return getL10n(context).nSecondsAgo(diff.inSeconds);
+      return context.l10n.nSecondsAgo(diff.inSeconds);
     } else if (diff.inMinutes < 60) {
-      return getL10n(context).nMinutesAgo(diff.inMinutes);
+      return context.l10n.nMinutesAgo(diff.inMinutes);
     } else if (diff.inHours < 24) {
-      return getL10n(context).nHoursAgo(diff.inHours);
+      return context.l10n.nHoursAgo(diff.inHours);
     }
     
-    return getL10n(context).nDaysAgo(diff.inDays);
+    return context.l10n.nDaysAgo(diff.inDays);
   }
 }

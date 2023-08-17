@@ -17,7 +17,7 @@ class FavoritesPage extends StatelessWidget {
       physics: const ClampingScrollPhysics(),
       slivers: [
         SliverAppBar(
-          title: Text(getL10n(context).favorites),
+          title: Text(context.l10n.favorites),
           floating: true,
           actions: const [
             HomeAction(),
@@ -51,9 +51,9 @@ class FavoritesPage extends StatelessWidget {
     },
   );
 
-  Widget _emptyListHint(BuildContext context) => const SliverFillRemaining(
+  Widget _emptyListHint(BuildContext context) => SliverFillRemaining(
     child: Center(
-      child: Text('Keine Favoriten gespeichert.'),
+      child: Text(context.l10n.emptyFavoritesHint),
     ),
   );
 }
