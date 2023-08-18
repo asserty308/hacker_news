@@ -50,5 +50,6 @@
     },
     "emptyFavoritesHint": "No favorites saved",
     "setToRemoveFromFavorites": "Story will be removed in 4 seconds",
-    "undo": "Undo"
+    "undo": "Undo",
+    "sourceCode": "Source Code"
 }

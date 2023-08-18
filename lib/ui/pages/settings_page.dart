@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hacker_news/config/app_config.dart';
 import 'package:hacker_news/data/services/app_session.dart';
 import 'package:hacker_news/l10n/l10n.dart';
 import 'package:hacker_news/ui/widgets/action_buttons.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -27,6 +29,7 @@ class SettingsPage extends StatelessWidget {
   Widget _body(BuildContext context) => SliverList.list(
     children: [
       _licensesTile(context),
+      _showGitHubRepoTile(context),
       _versionTileBuilder(context),
     ],
   );
@@ -37,6 +40,11 @@ class SettingsPage extends StatelessWidget {
       context: context,
       applicationVersion: appPackageInfo?.version,
     ),
+  );
+
+  Widget _showGitHubRepoTile(BuildContext context) => ListTile(
+    title: Text(context.l10n.sourceCode),
+    onTap: () => launchUrl(Uri.parse(gitHubRepoUrl))
   );
 
   Widget _versionTileBuilder(BuildContext context) => ListTile(
