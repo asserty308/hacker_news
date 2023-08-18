@@ -9,9 +9,11 @@ class StoryListTile extends StatelessWidget {
   const StoryListTile({
     super.key,
     required this.story,
+    this.onFavoriteRemoved,
   });
 
   final ItemModel story;
+  final VoidCallback? onFavoriteRemoved;
 
   @override
   Widget build(BuildContext context) => BlocProvider(
@@ -62,6 +64,7 @@ class StoryListTile extends StatelessWidget {
 
   void _removeFromFavorites(BuildContext context) {
     BlocProvider.of<LikeButtonCubit>(context).remove();
+    onFavoriteRemoved?.call();
   }
 
   void _showStory(BuildContext context) {

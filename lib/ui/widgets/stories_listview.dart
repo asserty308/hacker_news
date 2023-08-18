@@ -7,10 +7,12 @@ class StoriesListView extends StatelessWidget {
     super.key, 
     required this.stories,
     required this.storageKey,
+    this.onFavoriteRemoved,
   });
 
   final List<ItemModel> stories;
   final int storageKey;
+  final VoidCallback? onFavoriteRemoved;
 
   @override
   Widget build(BuildContext context) => ListView.builder(
@@ -18,7 +20,10 @@ class StoriesListView extends StatelessWidget {
     itemCount: stories.length,
     itemBuilder: (context, index) {
       final story = stories[index]; 
-      return StoryListTile(story: story);
+      return StoryListTile(
+        story: story,
+        onFavoriteRemoved: onFavoriteRemoved,
+      );
     }
   );
 }
@@ -28,10 +33,12 @@ class SliverStoriesListView extends StatelessWidget {
     super.key, 
     required this.stories,
     required this.storageKey,
+    this.onFavoriteRemoved,
   });
 
   final List<ItemModel> stories;
   final int storageKey;
+  final VoidCallback? onFavoriteRemoved;
 
   @override
   Widget build(BuildContext context) => SliverList.builder(
@@ -39,7 +46,10 @@ class SliverStoriesListView extends StatelessWidget {
     itemCount: stories.length,
     itemBuilder: (context, index) {
       final story = stories[index]; 
-      return StoryListTile(story: story);
+      return StoryListTile(
+        story: story,
+        onFavoriteRemoved: onFavoriteRemoved,
+      );
     }
   );
 }

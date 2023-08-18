@@ -40,6 +40,7 @@ class FavoritesPage extends StatelessWidget {
         return SliverStoriesListView(
           stories: state.stories, 
           storageKey: 1,
+          onFavoriteRemoved: _bloc.loadStories,
         );
       }
 
