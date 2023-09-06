@@ -8,6 +8,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp.router(
+    restorationScopeId: 'app',
     title: 'Hacker News',
     theme: lightTheme,
     darkTheme: darkTheme,

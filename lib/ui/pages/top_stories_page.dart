@@ -24,6 +24,7 @@ class _TopStoriesPageState extends State<TopStoriesPage> {
   Widget build(BuildContext context) => Scaffold(
     body: CustomScrollView(
       physics: const ClampingScrollPhysics(),
+      restorationId: 'top_stories_list',
       slivers: [
         SliverAppBar(
           title: Text(context.l10n.topStories),

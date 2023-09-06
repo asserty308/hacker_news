@@ -15,6 +15,7 @@ class FavoritesPage extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
     body: CustomScrollView(
       physics: const ClampingScrollPhysics(),
+      restorationId: 'favorites_list',
       slivers: [
         SliverAppBar(
           title: Text(context.l10n.favorites),

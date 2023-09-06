@@ -12,6 +12,7 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
     body: CustomScrollView(
       physics: const ClampingScrollPhysics(),
+      restorationId: 'settings_list',
       slivers: [
         SliverAppBar(
           title: Text(context.l10n.settings),
