@@ -1,4 +1,5 @@
 {
+    "appTitle": "Hacker News",
     "nSecondsAgo": "{count, plural, =1{1 second ago} other{{count} seconds ago}}",
     "@nSecondsAgo": {
         "placeholders": {
