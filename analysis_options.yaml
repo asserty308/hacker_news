@@ -7,4 +7,3 @@ linter:
     - sort_constructors_first
     - sort_unnamed_constructors_first
     - unnecessary_lambdas
-    - use_super_parameters
