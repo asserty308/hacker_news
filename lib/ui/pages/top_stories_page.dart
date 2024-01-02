@@ -6,20 +6,24 @@ import 'package:hacker_news/l10n/l10n.dart';
 import 'package:hacker_news/ui/widgets/action_buttons.dart';
 import 'package:hacker_news/ui/widgets/stories_listview.dart';
 
-final _bloc = TopStoriesCubit(hackernewsRepo);
-
 class TopStoriesPage extends StatefulWidget {
-  TopStoriesPage({super.key}) {
-    if (_bloc.state is TopStoriesInitial) {
-      _bloc.loadStories();
-    }
-  }
+  const TopStoriesPage({super.key});
 
   @override
   State<TopStoriesPage> createState() => _TopStoriesPageState();
 }
 
 class _TopStoriesPageState extends State<TopStoriesPage> {
+  final _bloc = TopStoriesCubit(hackernewsRepo);
+
+  @override
+  void initState() {
+    if (_bloc.state is TopStoriesInitial) {
+      _bloc.loadStories();
+    }
+
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) => Scaffold(
     body: CustomScrollView(
@@ -57,4 +61,3 @@ class _TopStoriesPageState extends State<TopStoriesPage> {
     },
   );
 }
-
