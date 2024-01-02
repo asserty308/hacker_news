@@ -4,6 +4,9 @@ import 'package:hacker_news/bloc/like_button/like_button_cubit.dart';
 import 'package:hacker_news/data/models/item_model.dart';
 import 'package:hacker_news/data/repositories/favorites_repo.dart';
 import 'package:hacker_news/l10n/l10n.dart';
+import 'package:hacker_news/ui/widgets/add_favorite_button.dart';
+import 'package:hacker_news/ui/widgets/remove_favorite_button.dart';
+import 'package:lottie/lottie.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class StoryListTile extends StatelessWidget {
@@ -42,17 +45,11 @@ class StoryListTile extends StatelessWidget {
   Widget get _favButton => BlocBuilder<LikeButtonCubit, LikeButtonState>(
     builder: (context, state) {
       if (state is LikeButtonAdded) {
-        return IconButton(
-          icon: const Icon(Icons.favorite), 
-          onPressed: () => _removeFromFavorites(context),
-        );
+        return AddFavoriteButton(onTap: () => _removeFromFavorites(context));
       }
 
       if (state is LikeButtonRemoved) {
-        return IconButton(
-          icon: const Icon(Icons.favorite_border), 
-          onPressed: () => _addToFavorites(context),
-        );
+        return RemoveFavoriteButton(onTap: () => _addToFavorites(context));
       }
 
       return const SizedBox(width: 0, height: 0,);
