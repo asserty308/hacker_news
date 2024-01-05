@@ -6,6 +6,8 @@ abstract class LikeButtonState {}
 class LikeButtonInitial extends LikeButtonState {}
 
 class LikeButtonLoading extends LikeButtonState {}
+class LikeButtonIsFavorite extends LikeButtonState {}
+class LikeButtonIsNotFavorite extends LikeButtonState {}
 class LikeButtonAdded extends LikeButtonState {}
 class LikeButtonRemoved extends LikeButtonState {}
 class LikeButtonError extends LikeButtonState {}

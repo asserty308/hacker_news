@@ -5,9 +5,11 @@ class AddFavoriteButton extends StatefulWidget {
   const AddFavoriteButton({
     super.key,
     required this.onTap,
+    this.playAnimation = true,
   });
 
   final VoidCallback onTap;
+  final bool playAnimation;
 
   @override
   State<AddFavoriteButton> createState() => _AddFavoriteButtonState();
@@ -24,10 +26,13 @@ class _AddFavoriteButtonState extends State<AddFavoriteButton> with TickerProvid
       vsync: this,
       lowerBound: 0.38,
       upperBound: 0.9,
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 750),
+      value: widget.playAnimation ? 0.38 : 0.9
     );
 
-    _controller.forward();
+    if (widget.playAnimation) {
+      _controller.forward();
+    }
   }
 
   @override

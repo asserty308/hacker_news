@@ -43,6 +43,20 @@ class StoryListTile extends StatelessWidget {
 
   Widget get _favButton => BlocBuilder<LikeButtonCubit, LikeButtonState>(
     builder: (context, state) {
+      if (state is LikeButtonIsFavorite) {
+        return AddFavoriteButton(
+          onTap: () => _removeFromFavorites(context), 
+          playAnimation: false,
+        );
+      }
+
+      if (state is LikeButtonIsNotFavorite) {
+        return RemoveFavoriteButton(
+          onTap: () => _addToFavorites(context), 
+          playAnimation: false,
+        );
+      }
+
       if (state is LikeButtonAdded) {
         return AddFavoriteButton(onTap: () => _removeFromFavorites(context));
       }

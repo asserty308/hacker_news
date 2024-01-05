@@ -5,9 +5,11 @@ class RemoveFavoriteButton extends StatefulWidget {
   const RemoveFavoriteButton({
     super.key,
     required this.onTap,
+    this.playAnimation = true,
   });
 
   final VoidCallback onTap;
+  final bool playAnimation;
 
   @override
   State<RemoveFavoriteButton> createState() => _RemoveFavoriteButtonState();
@@ -24,9 +26,12 @@ class _RemoveFavoriteButtonState extends State<RemoveFavoriteButton> with Ticker
       vsync: this,
       lowerBound: 0.9,
       duration: const Duration(milliseconds: 250),
+      value: widget.playAnimation ? 0.9 : 1.0,
     );
 
-    _controller.forward();
+    if (widget.playAnimation) {
+      _controller.forward();
+    }
   }
 
   @override

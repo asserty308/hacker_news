@@ -22,9 +22,9 @@ class LikeButtonCubit extends Cubit<LikeButtonState> {
       final isFav = repository.contains(story.id);
       
       if (isFav) {
-        emit(LikeButtonAdded());
+        emit(LikeButtonIsFavorite());
       } else {
-        emit(LikeButtonRemoved());
+        emit(LikeButtonIsNotFavorite());
       }
     } catch (e) {
       log('FavoritesButtonCubit::init ERROR $e');
