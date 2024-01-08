@@ -1,11 +1,11 @@
 {
-    "name": "hacker_news",
-    "short_name": "hacker_news",
+    "name": "Hacker News",
+    "short_name": "Hacker news",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#263846",
+    "theme_color": "#263846",
+    "description": "A hacker news app made with Flutter.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
