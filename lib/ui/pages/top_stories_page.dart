@@ -18,12 +18,10 @@ class _TopStoriesPageState extends State<TopStoriesPage> {
 
   @override
   void initState() {
-    if (_bloc.state is TopStoriesInitial) {
-      _bloc.loadStories();
-    }
-
     super.initState();
+    _bloc.loadStories();
   }
+  
   @override
   Widget build(BuildContext context) => Scaffold(
     body: CustomScrollView(
