@@ -18,7 +18,7 @@ dependencies:
   hive_flutter: ^1.1.0
   http: ^1.1.2
   intl: ^0.18.0
-  lottie: ^2.7.0
+  lottie: ^3.0.0
   meta: ^1.10.0
   package_info_plus: ^5.0.1
   url_launcher: ^6.2.3
