@@ -83,7 +83,7 @@ class ItemModel {
   /// In the case of stories or polls, the total comment count.
   final int? descendants;
 
-  Map<String, dynamic> toMap() => {
+  Map<String, dynamic> toJSON() => {
     'id': id,
     'deleted': deleted,
     'type': type,

@@ -2,25 +2,21 @@ import 'package:hacker_news/data/models/item_model.dart';
 import 'package:hive/hive.dart';
 
 class FavoritesCache {
-  final _box = Hive.box('favorites');
+  static const boxName = 'favorites';
+
+  final _box = Hive.box(boxName);
 
   /// Adds a story to the favorites box.
-  void add(ItemModel item) {
-    _box.put(item.id, item.toMap());
-  }
+  Future<void> add(ItemModel item) => _box.put(item.id, item.toJSON());
 
   /// Removes the story with the given [id] from the favorites box.
-  void remove(int id) {
-    _box.delete(id);
-  }
+  Future<void> remove(int id) => _box.delete(id);
   
-  bool contains(int id) {
-    return _box.containsKey(id);
-  }
+  /// Check whether the story with the given [id] is inside the favorites box.
+  bool contains(int id) => _box.containsKey(id);
 
-  List<ItemModel> getAll() {
-    return _box.values
-      .map((e) => ItemModel.fromJSON(Map<String, dynamic>.from(e)))
-      .toList();
-  }
+  /// Returns all entries inside the favorites box.
+  List<ItemModel> getAll() => _box.values
+    .map((e) => ItemModel.fromJSON(Map<String, dynamic>.from(e)))
+    .toList();
 }

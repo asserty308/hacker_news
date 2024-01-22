@@ -1,3 +1,4 @@
+import 'package:hacker_news/data/datasources/favorites_cache.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -11,5 +12,5 @@ Future<void> setupSession() async {
 
 Future<void> _initStorages() async {
   await Hive.initFlutter();
-  await Hive.openBox('favorites');
+  await Hive.openBox(FavoritesCache.boxName);
 }
