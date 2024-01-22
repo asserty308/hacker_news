@@ -1,6 +1,7 @@
 import 'package:hacker_news/data/models/item_model.dart';
 import 'package:hive/hive.dart';
 
+/// The local datasource for stories marked as favorites
 class FavoritesCache {
   static const boxName = 'favorites';
 
