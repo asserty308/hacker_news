@@ -42,6 +42,7 @@ class _RemoveFavoriteButtonState extends State<RemoveFavoriteButton> with Ticker
       child: Lottie.asset(
         'assets/favorite_white.json',
         controller: _controller,
+        renderCache: RenderCache.raster,
       ),
     ),
   );

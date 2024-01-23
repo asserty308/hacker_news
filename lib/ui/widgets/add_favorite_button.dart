@@ -43,6 +43,7 @@ class _AddFavoriteButtonState extends State<AddFavoriteButton> with TickerProvid
       child: Lottie.asset(
         'assets/favorite_white.json',
         controller: _controller,
+        renderCache: RenderCache.raster,
       ),
     ),
   );
