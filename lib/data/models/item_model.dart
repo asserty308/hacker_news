@@ -83,6 +83,7 @@ class ItemModel {
   /// In the case of stories or polls, the total comment count.
   final int? descendants;
 
+  /// Creates a JSON Object of the [ItemModel].
   Map<String, dynamic> toJSON() => {
     'id': id,
     'deleted': deleted,
