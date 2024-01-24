@@ -35,6 +35,12 @@ class _RemoveFavoriteButtonState extends State<RemoveFavoriteButton> with Ticker
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) => IconButton(
     onPressed: () => widget.onTap(),
     icon: Transform.scale(

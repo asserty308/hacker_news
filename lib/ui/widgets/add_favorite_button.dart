@@ -36,6 +36,12 @@ class _AddFavoriteButtonState extends State<AddFavoriteButton> with TickerProvid
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) => IconButton(
     onPressed: () => widget.onTap(),
     icon: Transform.scale(

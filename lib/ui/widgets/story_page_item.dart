@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hacker_news/bloc/like_button/like_button_cubit.dart';
 import 'package:hacker_news/data/models/item_model.dart';
 import 'package:hacker_news/data/repositories/favorites_repo.dart';
-import 'package:hacker_news/l10n/l10n.dart';
 import 'package:hacker_news/ui/widgets/add_favorite_button.dart';
 import 'package:hacker_news/ui/widgets/remove_favorite_button.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -94,8 +93,6 @@ class StoryPageItem extends StatelessWidget {
 
   void _removeFromFavorites(BuildContext context) {
     BlocProvider.of<LikeButtonCubit>(context).remove();
-
-    _showUndoSnackbar(context);
   }
 
   void _showStory(BuildContext context) {
@@ -107,14 +104,4 @@ class StoryPageItem extends StatelessWidget {
 
     launchUrl(Uri.parse(story.url!));
   }
-
-  void _showUndoSnackbar(BuildContext context) => ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      content: Text(context.l10n.setToRemoveFromFavorites), 
-      action: SnackBarAction(
-        label: context.l10n.undo, 
-        onPressed: () => _addToFavorites(context),
-      ),
-    ),
-  ).closed.then((value) => onFavoriteRemoved?.call());
 }
