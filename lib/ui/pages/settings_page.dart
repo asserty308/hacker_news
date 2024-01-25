@@ -45,7 +45,7 @@ class SettingsPage extends StatelessWidget {
 
   Widget _showGitHubRepoTile(BuildContext context) => ListTile(
     title: Text(context.l10n.sourceCode),
-    onTap: () => launchUrl(Uri.parse(gitHubRepoUrl))
+    onTap: () => launchUrl(Uri.parse(kGitHubRepoUrl))
   );
 
   Widget _versionTileBuilder(BuildContext context) => ListTile(
