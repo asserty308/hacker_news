@@ -16,6 +16,6 @@ class StoryHistoryItem {
 
   Map<String, dynamic> toJSON() => {
     'story_id': storyId,
-    'date_added': dateAdded.format(),
+    'date_added': dateAdded.format('yyyy-MM-dd HH:mm'),
   };
 }

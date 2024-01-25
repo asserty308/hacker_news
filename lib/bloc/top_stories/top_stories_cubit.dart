@@ -23,6 +23,8 @@ class TopStoriesCubit extends Cubit<TopStoriesState> {
     emit(TopStoriesLoading());
 
     try {
+      await historyRepo.cleanup();
+      
       final stories = <ItemModel>[];
 
       /// Get top stories from hacker news and filter out all that the user has already seen

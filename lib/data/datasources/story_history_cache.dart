@@ -14,15 +14,11 @@ class StoryHistoryCache {
   Future<void> add(int storyId) => _box.put(storyId, StoryHistoryItem(storyId: storyId, dateAdded: DateTime.now()).toJSON());
 
   /// Delete all entries older than [_maxAge]
-  void cleanup() {
-    for (final item in all) {
-      final diff = DateTime.now().difference(item.dateAdded);
-
-      if (diff > _maxAge) {
-        _delete(item.storyId);
-      }
-    }
-  }
+  Future<void> cleanup() => Future.wait(
+    all
+      .where((item) => DateTime.now().difference(item.dateAdded) > _maxAge)
+      .map((item) => _delete(item.storyId))
+  );
 
   /// Returns all entries inside the favorites box.
   List<StoryHistoryItem> get all => _box.values
