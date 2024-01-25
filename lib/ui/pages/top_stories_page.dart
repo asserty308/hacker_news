@@ -55,15 +55,30 @@ class _TopStoriesPageState extends State<TopStoriesPage> {
       children: [
         _pageView,
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(32),
           child: Align(
-            alignment: Alignment.bottomCenter,
-            child: TextButton(
-              onPressed: () => appRouter.go('/favorites'), 
-              style: TextButton.styleFrom(
-                backgroundColor: Theme.of(context).colorScheme.background
-              ),
-              child: const Text('Show Favorites'),
+            alignment: Alignment.bottomRight,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                TextButton(
+                  onPressed: () => appRouter.go('/favorites'), 
+                  style: TextButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.background,
+                    fixedSize: const Size(50, 50)
+                  ),
+                  child: const Icon(Icons.favorite_outline, color: Colors.white,),
+                ),
+                TextButton(
+                  onPressed: () => appRouter.go('/settings'), 
+                  style: TextButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.background,
+                    fixedSize: const Size(50, 50)
+                  ),
+                  child: const Icon(Icons.info_outline, color: Colors.white,),
+                ),
+              ],
             ),
           ),
         )
