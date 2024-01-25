@@ -41,9 +41,12 @@ class _RemoveFavoriteButtonState extends State<RemoveFavoriteButton> with Ticker
   }
 
   @override
-  Widget build(BuildContext context) => IconButton(
+  Widget build(BuildContext context) => TextButton(
     onPressed: () => widget.onTap(),
-    icon: Transform.scale(
+    style: TextButton.styleFrom(
+      fixedSize: const Size(80, 80)
+    ),
+    child: Transform.scale(
       scale: 3,
       child: Lottie.asset(
         'assets/favorite_white.json',
