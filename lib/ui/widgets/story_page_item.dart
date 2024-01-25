@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hacker_news/bloc/like_button/like_button_cubit.dart';
@@ -35,12 +36,8 @@ class StoryPageItem extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              width: 80,
-              height: 80,
-              child: _favButton
-            ),
-            TextButton(onPressed: () => _showStory(context), child: const Text('Show'))
+            _favButton,
+            _shareButton(context),
           ],
         )
       ],
@@ -85,6 +82,14 @@ class StoryPageItem extends StatelessWidget {
 
       return const SizedBox(width: 0, height: 0,);
     },
+  );
+
+  Widget _shareButton(BuildContext context) => TextButton(
+    onPressed: () => _showStory(context), 
+    style: TextButton.styleFrom(
+      fixedSize: const Size(80, 80)
+    ),
+    child: const Icon(CupertinoIcons.share, color: Colors.white,)
   );
 
   void _addToFavorites(BuildContext context) {
