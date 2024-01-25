@@ -1,7 +1,5 @@
 import 'package:hacker_news/data/datasources/story_history_cache.dart';
 
-final historyRepo = StoryHistoryRepo();
-
 class StoryHistoryRepo {
   final _cache = StoryHistoryCache();
 

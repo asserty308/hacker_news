@@ -17,7 +17,8 @@ class TopStoriesPage extends StatefulWidget {
 }
 
 class _TopStoriesPageState extends State<TopStoriesPage> {
-  final _bloc = TopStoriesCubit(hackernewsRepo);
+  late TopStoriesCubit _bloc;
+
   final _pageController = PageController();
   final _focusNode = FocusNode();
 
@@ -29,7 +30,11 @@ class _TopStoriesPageState extends State<TopStoriesPage> {
   void initState() {
     super.initState();
     _pageController.addListener(_pageListener);
-    _bloc.loadStories();
+
+    _bloc = TopStoriesCubit(
+      newsRepo: RepositoryProvider.of<HackernewsRepo>(context), 
+      historyRepo: RepositoryProvider.of<StoryHistoryRepo>(context)
+    )..loadStories();
   }
 
   @override
@@ -71,7 +76,7 @@ class _TopStoriesPageState extends State<TopStoriesPage> {
     listener: (context, state) {
       if (state is TopStoriesLoaded && state.stories.isNotEmpty) {
         // add first story to history cache
-        historyRepo.add(state.stories.first.id);
+        _bloc.addToHistory(state.stories.first.id);
       }
     },
     builder: (context, state) {
@@ -134,7 +139,7 @@ class _TopStoriesPageState extends State<TopStoriesPage> {
     });
 
     if (_bloc.state is TopStoriesLoaded) {
-      historyRepo.add((_bloc.state as TopStoriesLoaded).stories[page].id);
+      _bloc.addToHistory((_bloc.state as TopStoriesLoaded).stories[page].id);
     }
   }
 }

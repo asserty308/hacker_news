@@ -3,23 +3,32 @@ import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hacker_news/data/models/item_model.dart';
 import 'package:hacker_news/data/repositories/hackernews_repo.dart';
+import 'package:hacker_news/data/repositories/story_history_repo.dart';
 import 'package:meta/meta.dart';
 
 part 'top_stories_state.dart';
 
 class TopStoriesCubit extends Cubit<TopStoriesState> {
-  TopStoriesCubit(this.repo) : super(TopStoriesInitial());
+  TopStoriesCubit({
+    required this.newsRepo,
+    required this.historyRepo,
+  }) : super(TopStoriesInitial());
 
-  final HackernewsRepo repo;
+  final HackernewsRepo newsRepo;
+  final StoryHistoryRepo historyRepo;
 
-  final _loadAmount = 30;
+  final _loadAmount = 5;
 
   Future<void> loadStories() async {
     emit(TopStoriesLoading());
 
     try {
       final stories = <ItemModel>[];
-      final ids = await repo.getTopstoriesIds(500);
+
+      /// Get top stories from hacker news and filter out all that the user has already seen
+      final ids = (await newsRepo.getTopstoriesIds(500))
+        .where((e) => !historyRepo.allIds.contains(e))
+        .toList();
       
       for (var i = 0; i < ids.length; i += _loadAmount) {
         final currentIds = ids
@@ -28,7 +37,7 @@ class TopStoriesCubit extends Cubit<TopStoriesState> {
           .toList();
 
         final futures = currentIds
-          .map(repo.getItem)
+          .map(newsRepo.getItem)
           .toList();
 
         final currentStories = await Future.wait(futures);
@@ -36,8 +45,6 @@ class TopStoriesCubit extends Cubit<TopStoriesState> {
 
         emit(TopStoriesLoaded(stories));
       }
-
-      
     } catch (e, stackTrace) {
       log('Error fetching topstories', error: e, stackTrace: stackTrace);
       emit(TopStoriesError());
@@ -47,4 +54,6 @@ class TopStoriesCubit extends Cubit<TopStoriesState> {
   Future<void> loadMore() async {
 
   }
+
+  void addToHistory(int storyId) => historyRepo.add(storyId);
 }
