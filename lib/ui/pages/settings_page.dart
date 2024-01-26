@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hacker_news/config/app_config.dart';
 import 'package:hacker_news/data/repositories/story_history_repo.dart';
 import 'package:hacker_news/data/services/app_session.dart';
@@ -7,9 +8,14 @@ import 'package:hacker_news/l10n/l10n.dart';
 import 'package:hacker_news/router/router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class SettingsPage extends StatelessWidget {
+class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
 
+  @override
+  State<SettingsPage> createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
     body: CustomScrollView(
@@ -30,7 +36,7 @@ class SettingsPage extends StatelessWidget {
       _favoritesTile(context),
       _licensesTile(context),
       _showGitHubRepoTile(context),
-      //_clearHistoryCacheTile(context),
+      _clearHistoryCacheTile(context),
       _versionTileBuilder(context),
     ],
   );
@@ -53,11 +59,33 @@ class SettingsPage extends StatelessWidget {
     onTap: () => launchUrl(Uri.parse(kGitHubRepoUrl))
   );
 
-  // Widget _clearHistoryCacheTile(BuildContext context) => ListTile(
-  //   title: const Text('Clear History Cache'),
-  //   subtitle: const Text('This will make already seen stories appear again'),
-  //   onTap: () => RepositoryProvider.of<StoryHistoryRepo>(context).clear(),
-  // );
+  Widget _clearHistoryCacheTile(BuildContext context) => ListTile(
+    title: const Text('Clear History Cache'),
+    subtitle: const Text('This will make already seen stories appear again'),
+    onTap: () async {
+      final clearCache = await showDialog<bool?>(
+        context: context, 
+        builder: (context) => AlertDialog(
+          title: const Text('Clear history cache'),
+          content: const Text('Do you really want to clear the history cache? Doing this you will get all stories you\'ve already seen again.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => context.pop(false), 
+              child: const Text('No'),
+            ),
+            TextButton(
+              onPressed: () => context.pop(true), 
+              child: const Text('Yes'),
+            ),
+          ],
+        )
+      );
+
+      if (mounted && clearCache == true) {
+        await RepositoryProvider.of<StoryHistoryRepo>(context).clear();
+      }
+    },
+  );
 
   Widget _versionTileBuilder(BuildContext context) => ListTile(
     subtitle: Text(context.l10n.appVersion(appPackageInfo?.version ?? 'n.A.')),
