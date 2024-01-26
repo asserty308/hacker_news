@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hacker_news/config/app_config.dart';
+import 'package:hacker_news/data/repositories/story_history_repo.dart';
 import 'package:hacker_news/data/services/app_session.dart';
 import 'package:hacker_news/l10n/l10n.dart';
-import 'package:hacker_news/ui/widgets/action_buttons.dart';
+import 'package:hacker_news/router/router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -17,10 +19,6 @@ class SettingsPage extends StatelessWidget {
         SliverAppBar(
           title: Text(context.l10n.settings),
           floating: true,
-          actions: const [
-            HomeAction(),
-            FavoritesAction(),
-          ],
         ),
         _body(context),
       ],
@@ -29,10 +27,17 @@ class SettingsPage extends StatelessWidget {
 
   Widget _body(BuildContext context) => SliverList.list(
     children: [
+      _favoritesTile(context),
       _licensesTile(context),
       _showGitHubRepoTile(context),
+      //_clearHistoryCacheTile(context),
       _versionTileBuilder(context),
     ],
+  );
+
+  Widget _favoritesTile(BuildContext context) => ListTile(
+    title: const Text('My Favorites'),
+    onTap: () => appRouter.push('/favorites'),
   );
 
   Widget _licensesTile(BuildContext context) => ListTile(
@@ -47,6 +52,12 @@ class SettingsPage extends StatelessWidget {
     title: Text(context.l10n.sourceCode),
     onTap: () => launchUrl(Uri.parse(kGitHubRepoUrl))
   );
+
+  // Widget _clearHistoryCacheTile(BuildContext context) => ListTile(
+  //   title: const Text('Clear History Cache'),
+  //   subtitle: const Text('This will make already seen stories appear again'),
+  //   onTap: () => RepositoryProvider.of<StoryHistoryRepo>(context).clear(),
+  // );
 
   Widget _versionTileBuilder(BuildContext context) => ListTile(
     subtitle: Text(context.l10n.appVersion(appPackageInfo?.version ?? 'n.A.')),

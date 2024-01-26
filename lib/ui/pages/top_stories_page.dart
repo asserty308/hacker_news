@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -55,30 +56,16 @@ class _TopStoriesPageState extends State<TopStoriesPage> {
       children: [
         _pageView,
         Padding(
-          padding: const EdgeInsets.all(32),
+          padding: const EdgeInsets.all(8),
           child: Align(
-            alignment: Alignment.bottomRight,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                TextButton(
-                  onPressed: () => appRouter.go('/favorites'), 
-                  style: TextButton.styleFrom(
-                    backgroundColor: Theme.of(context).colorScheme.background,
-                    fixedSize: const Size(50, 50)
-                  ),
-                  child: const Icon(Icons.favorite_outline, color: Colors.white,),
-                ),
-                TextButton(
-                  onPressed: () => appRouter.go('/settings'), 
-                  style: TextButton.styleFrom(
-                    backgroundColor: Theme.of(context).colorScheme.background,
-                    fixedSize: const Size(50, 50)
-                  ),
-                  child: const Icon(Icons.info_outline, color: Colors.white,),
-                ),
-              ],
+            alignment: Alignment.topRight,
+            child: TextButton(
+              onPressed: () => appRouter.push('/settings'), 
+              style: TextButton.styleFrom(
+                backgroundColor: Theme.of(context).colorScheme.background,
+                fixedSize: const Size(50, 50)
+              ),
+              child: const Icon(Icons.info_outline, color: Colors.white,),
             ),
           ),
         )
@@ -92,6 +79,10 @@ class _TopStoriesPageState extends State<TopStoriesPage> {
       if (state is TopStoriesLoaded && state.stories.isNotEmpty) {
         // add first story to history cache
         _bloc.addToHistory(state.stories.first.id);
+
+        if (state.stories.length == 1) {
+          _bloc.loadStories();
+        }
       }
     },
     builder: (context, state) {
@@ -104,7 +95,7 @@ class _TopStoriesPageState extends State<TopStoriesPage> {
           itemBuilder: (context, index) {
             final story = state.stories[index];
             return Padding(
-              padding: const EdgeInsets.all(32),
+              padding: const EdgeInsets.all(64),
               child: StoryPageItem(story: story),
             );
           }
@@ -155,6 +146,11 @@ class _TopStoriesPageState extends State<TopStoriesPage> {
 
     if (_bloc.state is TopStoriesLoaded) {
       _bloc.addToHistory((_bloc.state as TopStoriesLoaded).stories[page].id);
+    }
+
+    if (page == _bloc.storyCount - 1) {
+      log('Loading next bunch of stories');
+      Timer.run(_bloc.loadStories);
     }
   }
 }

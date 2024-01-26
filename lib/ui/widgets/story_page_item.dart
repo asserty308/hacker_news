@@ -24,29 +24,28 @@ class StoryPageItem extends StatelessWidget {
     child: _tile(context),
   );
 
-  Widget _tile(BuildContext context) => Center(
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        _title(context),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 32),
-          child: _subtitle(context),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _favButton,
-            _shareButton(context),
-          ],
-        )
-      ],
-    ),
+  Widget _tile(BuildContext context) => Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    mainAxisSize: MainAxisSize.max,
+    children: [
+      _title(context),
+      Padding(
+        padding: const EdgeInsets.symmetric(vertical: 32),
+        child: _subtitle(context),
+      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _favButton,
+          _shareButton(context),
+        ],
+      )
+    ],
   );
 
   Widget _title(BuildContext context) => Text(
     story.title,
-    style: Theme.of(context).textTheme.titleLarge,
+    style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w900),
     textAlign: TextAlign.center
   );
 

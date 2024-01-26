@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hacker_news/bloc/favorites/favorites_cubit.dart';
 import 'package:hacker_news/data/repositories/favorites_repo.dart';
 import 'package:hacker_news/l10n/l10n.dart';
-import 'package:hacker_news/ui/widgets/action_buttons.dart';
 import 'package:hacker_news/ui/widgets/stories_listview.dart';
 
 class FavoritesPage extends StatelessWidget {
@@ -20,10 +19,6 @@ class FavoritesPage extends StatelessWidget {
         SliverAppBar(
           title: Text(context.l10n.favorites),
           floating: true,
-          actions: const [
-            HomeAction(),
-            SettingsAction(),
-          ],
         ),
         _body,
       ],

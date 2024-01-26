@@ -26,4 +26,6 @@ class StoryHistoryCache {
     .toList();
 
   Future<void> _delete(int storyId) => _box.delete(storyId);
+
+  Future<void> clear() => _box.clear();
 }

@@ -17,45 +17,41 @@ class TopStoriesCubit extends Cubit<TopStoriesState> {
   final HackernewsRepo newsRepo;
   final StoryHistoryRepo historyRepo;
 
+  final _stories = <ItemModel>[];
   final _loadAmount = 5;
+  
+  var _currentIndex = 0;
 
+  /// Get top stories from hacker news and filter out all that the user has already seen
   Future<void> loadStories() async {
-    emit(TopStoriesLoading());
+    if (_currentIndex == 0) {
+      emit(TopStoriesLoading());
+    }
 
     try {
       await historyRepo.cleanup();
       
-      final stories = <ItemModel>[];
-
-      /// Get top stories from hacker news and filter out all that the user has already seen
-      final ids = (await newsRepo.getTopstoriesIds(500))
+      final futures = (await newsRepo.getTopstoriesIds(_loadAmount, start: _currentIndex))
         .where((e) => !historyRepo.allIds.contains(e))
-        .toList();
-      
-      for (var i = 0; i < ids.length; i += _loadAmount) {
-        final currentIds = ids
-          .skip(i)
-          .take(_loadAmount)
-          .toList();
+        .map(newsRepo.getItem);
 
-        final futures = currentIds
-          .map(newsRepo.getItem)
-          .toList();
+      _currentIndex += _loadAmount;
 
-        final currentStories = await Future.wait(futures);
-        stories.addAll(currentStories);
-
-        emit(TopStoriesLoaded(stories));
+      if (futures.isEmpty) {
+        log('Skip to $_currentIndex as all stories before have been read');
+        return loadStories();
       }
+
+      final stories = await Future.wait(futures);
+      _stories.addAll(stories);
+
+      emit(TopStoriesLoaded(_stories));
     } catch (e, stackTrace) {
       log('Error fetching topstories', error: e, stackTrace: stackTrace);
-      emit(TopStoriesError());
     }
   }
 
-  Future<void> loadMore() async {
-
-  }
-
   void addToHistory(int storyId) => historyRepo.add(storyId);
+
+  int get storyCount => _stories.length;
 }

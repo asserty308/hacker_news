@@ -8,4 +8,6 @@ class StoryHistoryRepo {
   Future<void> cleanup() => _cache.cleanup();
 
   List<int> get allIds => _cache.all.map((e) => e.storyId).toList();
+
+  Future<void> clear() => _cache.clear();
 }
