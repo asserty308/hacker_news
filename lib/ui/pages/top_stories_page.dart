@@ -63,7 +63,7 @@ class _TopStoriesPageState extends State<TopStoriesPage> {
               onPressed: () => appRouter.push('/settings'), 
               style: TextButton.styleFrom(
                 backgroundColor: Theme.of(context).colorScheme.background,
-                fixedSize: const Size(50, 50)
+                fixedSize: const Size(48, 48),
               ),
               child: const Icon(Icons.info_outline, color: Colors.white,),
             ),
@@ -114,8 +114,8 @@ class _TopStoriesPageState extends State<TopStoriesPage> {
       return KeyEventResult.ignored;
     }
 
-    final isArrowUp = event.physicalKey == PhysicalKeyboardKey.arrowUp;
-    final isArrowDown = event.physicalKey == PhysicalKeyboardKey.arrowDown;
+    final isArrowUp = event.logicalKey == LogicalKeyboardKey.arrowUp;
+    final isArrowDown = event.logicalKey == LogicalKeyboardKey.arrowDown;
 
     if (isArrowUp) {
       _pageController.previousPage(duration: _animationDuration, curve: Curves.decelerate);

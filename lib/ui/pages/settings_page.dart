@@ -34,9 +34,9 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget _body(BuildContext context) => SliverList.list(
     children: [
       _favoritesTile(context),
+      _clearHistoryCacheTile(context),
       _licensesTile(context),
       _showGitHubRepoTile(context),
-      _clearHistoryCacheTile(context),
       _versionTileBuilder(context),
     ],
   );
