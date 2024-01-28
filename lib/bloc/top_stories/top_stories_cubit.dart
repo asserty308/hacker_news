@@ -24,7 +24,7 @@ class TopStoriesCubit extends Cubit<TopStoriesState> {
 
   /// Get top stories from hacker news and filter out all that the user has already seen
   Future<void> loadStories() async {
-    if (_currentIndex == 0) {
+    if (_stories.isEmpty) {
       emit(TopStoriesLoading());
     }
 

@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hacker_news/bloc/top_stories/top_stories_cubit.dart';
-import 'package:hacker_news/data/repositories/hackernews_repo.dart';
-import 'package:hacker_news/data/repositories/story_history_repo.dart';
 import 'package:hacker_news/router/router.dart';
 import 'package:hacker_news/ui/widgets/story_page_item.dart';
 
@@ -18,8 +16,6 @@ class TopStoriesPage extends StatefulWidget {
 }
 
 class _TopStoriesPageState extends State<TopStoriesPage> {
-  late TopStoriesCubit _bloc;
-
   final _pageController = PageController();
   final _focusNode = FocusNode();
 
@@ -31,11 +27,7 @@ class _TopStoriesPageState extends State<TopStoriesPage> {
   void initState() {
     super.initState();
     _pageController.addListener(_pageListener);
-
-    _bloc = TopStoriesCubit(
-      newsRepo: RepositoryProvider.of<HackernewsRepo>(context), 
-      historyRepo: RepositoryProvider.of<StoryHistoryRepo>(context)
-    )..loadStories();
+    _bloc.loadStories();
   }
 
   @override
@@ -52,29 +44,19 @@ class _TopStoriesPageState extends State<TopStoriesPage> {
   Widget get _keyboardListener => Focus(
     focusNode: _focusNode,
     onKey: _handleKeyEvent,
+    child: _body
+  );
+
+  Widget get _body => SafeArea(
     child: Stack(
       children: [
         _pageView,
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: Align(
-            alignment: Alignment.topRight,
-            child: TextButton(
-              onPressed: () => appRouter.push('/settings'), 
-              style: TextButton.styleFrom(
-                backgroundColor: Theme.of(context).colorScheme.background,
-                fixedSize: const Size(48, 48),
-              ),
-              child: const Icon(Icons.info_outline, color: Colors.white,),
-            ),
-          ),
-        )
+        _infoButton,
       ],
     ),
   );
 
-  Widget get _pageView => BlocConsumer(
-    bloc: _bloc,
+  Widget get _pageView => BlocConsumer<TopStoriesCubit, TopStoriesState>(
     listener: (context, state) {
       if (state is TopStoriesLoaded && state.stories.isNotEmpty) {
         // add first story to history cache
@@ -106,6 +88,21 @@ class _TopStoriesPageState extends State<TopStoriesPage> {
         child: CircularProgressIndicator.adaptive(),
       );
     }
+  );
+
+  Widget get _infoButton => Padding(
+    padding: const EdgeInsets.all(8),
+    child: Align(
+      alignment: Alignment.topRight,
+      child: TextButton(
+        onPressed: () => appRouter.push('/settings'), 
+        style: TextButton.styleFrom(
+          backgroundColor: Theme.of(context).colorScheme.background,
+          fixedSize: const Size(48, 48),
+        ),
+        child: const Icon(Icons.info_outline, color: Colors.white,),
+      ),
+    ),
   );
 
   KeyEventResult _handleKeyEvent(FocusNode node, RawKeyEvent event) {
@@ -153,4 +150,6 @@ class _TopStoriesPageState extends State<TopStoriesPage> {
       Timer.run(_bloc.loadStories);
     }
   }
+
+  TopStoriesCubit get _bloc => BlocProvider.of<TopStoriesCubit>(context);
 }

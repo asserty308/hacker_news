@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hacker_news/bloc/top_stories/top_stories_cubit.dart';
 import 'package:hacker_news/data/repositories/hackernews_repo.dart';
 import 'package:hacker_news/data/repositories/story_history_repo.dart';
 import 'package:hacker_news/l10n/l10n.dart';
@@ -16,15 +17,21 @@ class MyApp extends StatelessWidget {
       RepositoryProvider(create: (context) => HackernewsRepo()),
       RepositoryProvider(create: (context) => StoryHistoryRepo()),
     ],
-    child: MaterialApp.router(
-      restorationScopeId: 'app',
-      onGenerateTitle: (context) => context.l10n.appTitle,
-      theme: lightTheme,
-      darkTheme: darkTheme,
-      debugShowCheckedModeBanner: false,
-      routerConfig: appRouter,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
+    child: BlocProvider(
+      create: (context) => TopStoriesCubit(
+        newsRepo: RepositoryProvider.of<HackernewsRepo>(context), 
+        historyRepo: RepositoryProvider.of<StoryHistoryRepo>(context)
+      ),
+      child: MaterialApp.router(
+        restorationScopeId: 'app',
+        onGenerateTitle: (context) => context.l10n.appTitle,
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        debugShowCheckedModeBanner: false,
+        routerConfig: appRouter,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+      ),
     ),
   );
 }
