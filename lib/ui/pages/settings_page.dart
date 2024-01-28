@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hacker_news/bloc/top_stories/top_stories_cubit.dart';
 import 'package:hacker_news/config/app_config.dart';
 import 'package:hacker_news/data/repositories/story_history_repo.dart';
 import 'package:hacker_news/data/services/app_session.dart';
@@ -83,6 +84,12 @@ class _SettingsPageState extends State<SettingsPage> {
 
       if (mounted && clearCache == true) {
         await RepositoryProvider.of<StoryHistoryRepo>(context).clear();
+
+        if (!mounted) {
+          return;
+        }
+
+        BlocProvider.of<TopStoriesCubit>(context).refresh(true);
       }
     },
   );

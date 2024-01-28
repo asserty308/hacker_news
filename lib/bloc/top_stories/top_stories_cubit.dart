@@ -51,6 +51,15 @@ class TopStoriesCubit extends Cubit<TopStoriesState> {
     }
   }
 
+  Future<void> refresh([bool clearStories = false]) async {
+    if (clearStories) {
+      _stories.clear();
+    }
+    
+    _currentIndex = 0;
+    loadStories();
+  }
+
   void addToHistory(int storyId) => historyRepo.add(storyId);
 
   int get storyCount => _stories.length;
