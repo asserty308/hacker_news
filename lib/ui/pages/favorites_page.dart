@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hacker_news/bloc/favorites/favorites_cubit.dart';
-import 'package:hacker_news/data/repositories/favorites_repo.dart';
 import 'package:hacker_news/l10n/l10n.dart';
 import 'package:hacker_news/ui/widgets/stories_listview.dart';
 
 class FavoritesPage extends StatelessWidget {
-  FavoritesPage({super.key});
-
-  final _bloc = FavoritesCubit(favoritesRepository);
+  const FavoritesPage({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -25,8 +22,7 @@ class FavoritesPage extends StatelessWidget {
     ),
   );
 
-  Widget get _body => BlocBuilder(
-    bloc: _bloc,
+  Widget get _body => BlocBuilder<FavoritesCubit, FavoritesState>(
     builder: (context, state) {
       if (state is FavoritesLoaded) {
         if (state.stories.isEmpty) {
@@ -36,7 +32,7 @@ class FavoritesPage extends StatelessWidget {
         return SliverStoriesListView(
           stories: state.stories, 
           storageKey: 1,
-          onFavoriteRemoved: _bloc.loadStories,
+          onFavoriteRemoved: BlocProvider.of<FavoritesCubit>(context).loadStories,
         );
       }
 

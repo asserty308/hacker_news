@@ -1,8 +1,6 @@
 import 'package:hacker_news/data/datasources/favorites_cache.dart';
 import 'package:hacker_news/data/models/item_model.dart';
 
-final favoritesRepository = FavoritesRepository();
-
 class FavoritesRepository {
   final _datasource = FavoritesCache();
 

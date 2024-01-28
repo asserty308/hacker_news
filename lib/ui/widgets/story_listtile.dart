@@ -20,7 +20,10 @@ class StoryListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocProvider(
-    create: (context) => LikeButtonCubit(favoritesRepository, story),
+    create: (context) => LikeButtonCubit(
+      RepositoryProvider.of<FavoritesRepository>(context), 
+      story
+    ),
     child: _tile(context),
   );
 

@@ -11,7 +11,7 @@ final appRouter = GoRouter(
     ),
     GoRoute(
       path: '/favorites',
-      pageBuilder: (context, state) => NoTransitionPage(child: FavoritesPage()),
+      pageBuilder: (context, state) => const NoTransitionPage(child: FavoritesPage()),
     ),
     GoRoute(
       path: '/settings',
