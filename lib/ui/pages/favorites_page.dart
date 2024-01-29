@@ -4,9 +4,21 @@ import 'package:hacker_news/bloc/favorites/favorites_cubit.dart';
 import 'package:hacker_news/l10n/l10n.dart';
 import 'package:hacker_news/ui/widgets/stories_listview.dart';
 
-class FavoritesPage extends StatelessWidget {
+class FavoritesPage extends StatefulWidget {
   const FavoritesPage({super.key});
 
+  @override
+  State<FavoritesPage> createState() => _FavoritesPageState();
+}
+
+class _FavoritesPageState extends State<FavoritesPage> {
+  @override
+  void initState() {
+    super.initState();
+
+    BlocProvider.of<FavoritesCubit>(context).loadStories();
+  }
+  
   @override
   Widget build(BuildContext context) => Scaffold(
     body: CustomScrollView(
