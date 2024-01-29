@@ -43,7 +43,7 @@ class _SettingsPageState extends State<SettingsPage> {
   );
 
   Widget _favoritesTile(BuildContext context) => ListTile(
-    title: const Text('My Favorites'),
+    title: Text(context.l10n.myFavoritesTileTitle),
     onTap: () => appRouter.push('/favorites'),
   );
 
@@ -61,40 +61,42 @@ class _SettingsPageState extends State<SettingsPage> {
   );
 
   Widget _clearHistoryCacheTile(BuildContext context) => ListTile(
-    title: const Text('Clear History Cache'),
-    subtitle: const Text('This will make already seen stories appear again'),
-    onTap: () async {
-      final clearCache = await showDialog<bool?>(
-        context: context, 
-        builder: (context) => AlertDialog(
-          title: const Text('Clear history cache'),
-          content: const Text('Do you really want to clear the history cache? Doing this you will get all stories you\'ve already seen again.'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () => context.pop(false), 
-              child: const Text('No'),
-            ),
-            TextButton(
-              onPressed: () => context.pop(true), 
-              child: const Text('Yes'),
-            ),
-          ],
-        )
-      );
-
-      if (mounted && clearCache == true) {
-        await RepositoryProvider.of<StoryHistoryRepo>(context).clear();
-
-        if (!mounted) {
-          return;
-        }
-
-        BlocProvider.of<TopStoriesCubit>(context).refresh(true);
-      }
-    },
+    title: Text(context.l10n.clearHistoryCacheTileTitle),
+    subtitle: Text(context.l10n.clearHistoryCacheTileSubtitle),
+    onTap: _onClearCachePressed,
   );
 
   Widget _versionTileBuilder(BuildContext context) => ListTile(
     subtitle: Text(context.l10n.appVersion(appPackageInfo?.version ?? 'n.A.')),
   );
+
+  Future<void> _onClearCachePressed() async {
+    final clearCache = await showDialog<bool?>(
+      context: context, 
+      builder: (context) => AlertDialog(
+        title: Text(context.l10n.clearHistoryCacheDialogTitle),
+        content: Text(context.l10n.clearHistoryCacheDialogBody),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => context.pop(false), 
+            child: Text(context.l10n.no),
+          ),
+          TextButton(
+            onPressed: () => context.pop(true), 
+            child: Text(context.l10n.yes),
+          ),
+        ],
+      )
+    );
+
+    if (mounted && clearCache == true) {
+      await RepositoryProvider.of<StoryHistoryRepo>(context).clear();
+
+      if (!mounted) {
+        return;
+      }
+
+      BlocProvider.of<TopStoriesCubit>(context).refresh(true);
+    }
+  }
 }

@@ -53,5 +53,12 @@
     "emptyFavoritesHint": "No favorites saved",
     "setToRemoveFromFavorites": "Story will be removed in 4 seconds",
     "undo": "Undo",
-    "sourceCode": "Source Code"
+    "sourceCode": "Source Code",
+    "clearHistoryCacheTileTitle": "Clear History Cache",
+    "clearHistoryCacheTileSubtitle": "This will make already seen stories appear again",
+    "clearHistoryCacheDialogTitle": "Clear history cache",
+    "clearHistoryCacheDialogBody": "Do you really want to clear the history cache? Doing this you will get all stories you've already seen again.",
+    "yes": "Yes",
+    "no": "No",
+    "myFavoritesTileTitle": "My favorites"
 }

@@ -1,5 +1,5 @@
 import 'package:hacker_news/data/models/item_model.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 /// The local datasource for stories marked as favorites
 class FavoritesCache {

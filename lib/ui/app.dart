@@ -37,8 +37,8 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) => MaterialApp.router(
     restorationScopeId: 'app',
     onGenerateTitle: (context) => context.l10n.appTitle,
-    theme: lightTheme,
-    darkTheme: darkTheme,
+    theme: appTheme(false),
+    darkTheme: appTheme(true),
     debugShowCheckedModeBanner: false,
     routerConfig: appRouter,
     localizationsDelegates: AppLocalizations.localizationsDelegates,
