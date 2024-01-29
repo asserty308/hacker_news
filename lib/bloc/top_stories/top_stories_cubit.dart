@@ -22,7 +22,7 @@ class TopStoriesCubit extends Cubit<TopStoriesState> {
   
   var _currentIndex = 0;
 
-  /// Get top stories from hacker news and filter out all that the user has already seen
+  /// Loads top stories from hacker news and filter out all that the user has already seen
   Future<void> loadStories() async {
     if (_stories.isEmpty) {
       emit(TopStoriesLoading());
@@ -38,7 +38,7 @@ class TopStoriesCubit extends Cubit<TopStoriesState> {
       _currentIndex += _loadAmount;
 
       if (futures.isEmpty) {
-        log('Skip to $_currentIndex as all stories before have been read');
+        log('Jump to $_currentIndex as all stories before have been read');
         return loadStories();
       }
 
@@ -51,6 +51,8 @@ class TopStoriesCubit extends Cubit<TopStoriesState> {
     }
   }
 
+  /// Loads new stories and appends them to the [_stories] list.
+  /// When [clearStories] is true, the list is cleared before reload.
   Future<void> refresh([bool clearStories = false]) async {
     if (clearStories) {
       _stories.clear();

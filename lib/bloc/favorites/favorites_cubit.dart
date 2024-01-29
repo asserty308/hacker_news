@@ -8,17 +8,17 @@ import 'package:meta/meta.dart';
 part 'favorites_state.dart';
 
 class FavoritesCubit extends Cubit<FavoritesState> {
-  FavoritesCubit(this.repository) : super(FavoritesInitial()) {
+  FavoritesCubit({required this.repo}) : super(FavoritesInitial()) {
     loadStories();
   }
 
-  final FavoritesRepository repository;
+  final FavoritesRepository repo;
 
   void loadStories() {
     emit(FavoritesLoading());
 
     try {
-      final stories = repository.getAll();
+      final stories = repo.getAll();
       emit(FavoritesLoaded(stories));
     } catch (e) {
       log('FavoritesCubit::loadStories ERROR $e');
