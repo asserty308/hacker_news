@@ -51,8 +51,7 @@ class HackernewsApi {
     final storyIds = await getTopstoriesIds(amount, start: start);
 
     final futures = storyIds
-      .map(getItem)
-      .toList();
+      .map(getItem);
 
     return Future.wait(futures);
   }
