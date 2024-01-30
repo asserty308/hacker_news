@@ -17,7 +17,6 @@ class TopStoriesPage extends StatefulWidget {
 
 class _TopStoriesPageState extends State<TopStoriesPage> {
   final _pageController = PageController();
-  final _focusNode = FocusNode();
 
   final _animationDuration = const Duration(milliseconds: 250);
 
@@ -29,22 +28,21 @@ class _TopStoriesPageState extends State<TopStoriesPage> {
     _pageController.addListener(_pageListener);
     _bloc.loadStories();
   }
-
-  @override
-  void dispose() {
-    _focusNode.dispose();
-    super.dispose();
-  }
   
   @override
   Widget build(BuildContext context) => Scaffold(
     body: _keyboardListener,
   );
 
-  Widget get _keyboardListener => Focus(
-    focusNode: _focusNode,
-    onKey: _handleKeyEvent,
-    child: _body
+  Widget get _keyboardListener => CallbackShortcuts(
+    bindings: {
+      const SingleActivator(LogicalKeyboardKey.arrowUp) : () => _handleArrowEvents(true),
+      const SingleActivator(LogicalKeyboardKey.arrowDown) : () => _handleArrowEvents(false),
+    },
+    child: Focus(
+      autofocus: true,
+      child: _body,
+    ),
   );
 
   Widget get _body => SafeArea(
@@ -105,22 +103,17 @@ class _TopStoriesPageState extends State<TopStoriesPage> {
     ),
   );
 
-  KeyEventResult _handleKeyEvent(FocusNode node, RawKeyEvent event) {
+  void _handleArrowEvents(bool isArrowUp) {
     if (_isAnimating) {
       log('Do not scroll when animating');
-      return KeyEventResult.ignored;
+      return;
     }
-
-    final isArrowUp = event.logicalKey == LogicalKeyboardKey.arrowUp;
-    final isArrowDown = event.logicalKey == LogicalKeyboardKey.arrowDown;
 
     if (isArrowUp) {
       _pageController.previousPage(duration: _animationDuration, curve: Curves.decelerate);
-    } else if (isArrowDown) {
+    } else {
       _pageController.nextPage(duration: _animationDuration, curve: Curves.decelerate);
     }
-
-    return isArrowUp || isArrowDown ? KeyEventResult.handled : KeyEventResult.ignored;
   }
 
   /// Called multiple times during an page animation.
