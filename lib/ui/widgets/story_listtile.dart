@@ -21,7 +21,7 @@ class StoryListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) => BlocProvider(
     create: (context) => LikeButtonCubit(
-      RepositoryProvider.of<FavoritesRepository>(context), 
+      context.read<FavoritesRepository>(), 
       story
     ),
     child: _tile(context),
@@ -73,11 +73,11 @@ class StoryListTile extends StatelessWidget {
   );
 
   void _addToFavorites(BuildContext context) {
-    BlocProvider.of<LikeButtonCubit>(context).add();
+    context.read<LikeButtonCubit>().add();
   }
 
   void _removeFromFavorites(BuildContext context) {
-    BlocProvider.of<LikeButtonCubit>(context).remove();
+    context.read<LikeButtonCubit>().remove();
 
     _showUndoSnackbar(context);
   }

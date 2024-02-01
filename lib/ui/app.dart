@@ -45,5 +45,5 @@ class _MyAppState extends State<MyApp> {
     supportedLocales: AppLocalizations.supportedLocales,
   );
 
-  void _onResume() => BlocProvider.of<TopStoriesCubit>(context).refresh();
+  void _onResume() => context.read<TopStoriesCubit>().refresh();
 }

@@ -90,13 +90,13 @@ class _SettingsPageState extends State<SettingsPage> {
     );
 
     if (mounted && clearCache == true) {
-      await RepositoryProvider.of<StoryHistoryRepo>(context).clear();
+      await context.read<StoryHistoryRepo>().clear();
 
       if (!mounted) {
         return;
       }
 
-      BlocProvider.of<TopStoriesCubit>(context).refresh(true);
+      context.read<TopStoriesCubit>().refresh(true);
     }
   }
 }

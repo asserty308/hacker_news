@@ -24,13 +24,13 @@ void main() async {
         providers: [
           BlocProvider(
             create: (context) => TopStoriesCubit(
-              newsRepo: RepositoryProvider.of<HackernewsRepo>(context), 
-              historyRepo: RepositoryProvider.of<StoryHistoryRepo>(context)
+              newsRepo: context.read<HackernewsRepo>(), 
+              historyRepo: context.read<StoryHistoryRepo>()
             ),
           ),
           BlocProvider(
             create: (context) => FavoritesCubit(
-              repo: RepositoryProvider.of<FavoritesRepository>(context),
+              repo: context.read<FavoritesRepository>(),
             ),
           )
         ],

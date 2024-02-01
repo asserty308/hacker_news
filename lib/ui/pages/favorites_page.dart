@@ -16,7 +16,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
   void initState() {
     super.initState();
 
-    BlocProvider.of<FavoritesCubit>(context).loadStories();
+    context.read<FavoritesCubit>().loadStories();
   }
   
   @override
@@ -44,7 +44,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
         return SliverStoriesListView(
           stories: state.stories, 
           storageKey: 1,
-          onFavoriteRemoved: BlocProvider.of<FavoritesCubit>(context).loadStories,
+          onFavoriteRemoved: context.read<FavoritesCubit>().loadStories,
         );
       }
 

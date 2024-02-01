@@ -17,7 +17,6 @@ class TopStoriesPage extends StatefulWidget {
 
 class _TopStoriesPageState extends State<TopStoriesPage> {
   final _pageController = PageController();
-
   final _animationDuration = const Duration(milliseconds: 250);
 
   var _isAnimating = false;
@@ -144,5 +143,5 @@ class _TopStoriesPageState extends State<TopStoriesPage> {
     }
   }
 
-  TopStoriesCubit get _bloc => BlocProvider.of<TopStoriesCubit>(context);
+  TopStoriesCubit get _bloc => context.read<TopStoriesCubit>();
 }
