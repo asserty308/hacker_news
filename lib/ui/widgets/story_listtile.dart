@@ -40,7 +40,7 @@ class StoryListTile extends StatelessWidget {
 
   Widget _subtitle(context) {
     final diff = story.formattedDifference(context);
-    final authority = Uri.tryParse(story.url ?? '')?.authority ?? '';
+    final authority = story.urlAuthority;
     return Text('$diff ${authority.isEmpty ? '' : ' - $authority'}');
   }
 

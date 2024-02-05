@@ -54,7 +54,7 @@ class StoryPageItem extends StatelessWidget {
 
   Widget _subtitle(BuildContext context) {
     final diff = story.formattedDifference(context);
-    final authority = Uri.tryParse(story.url ?? '')?.authority ?? '';
+    final authority = story.urlAuthority;
     return Text('$diff ${authority.isEmpty ? '' : ' - $authority'}', textAlign: TextAlign.center,);
   }
 
@@ -89,9 +89,9 @@ class StoryPageItem extends StatelessWidget {
   Widget _shareButton(BuildContext context) => TextButton(
     onPressed: () => _showStory(context), 
     style: TextButton.styleFrom(
-      fixedSize: const Size(80, 80)
+      fixedSize: const Size(80, 80),
     ),
-    child: const Icon(CupertinoIcons.share, color: Colors.white,)
+    child: const Icon(CupertinoIcons.share, color: Colors.white,),
   );
 
   void _addToFavorites(BuildContext context) {

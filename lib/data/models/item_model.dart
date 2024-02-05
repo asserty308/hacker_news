@@ -121,4 +121,6 @@ class ItemModel {
     
     return context.l10n.nDaysAgo(diff.inDays);
   }
+
+  String get urlAuthority => Uri.tryParse(url ?? '')?.authority ?? '';
 }
