@@ -25,14 +25,14 @@ void main() async {
           BlocProvider(
             create: (context) => TopStoriesCubit(
               newsRepo: context.read<HackernewsRepo>(), 
-              historyRepo: context.read<StoryHistoryRepo>()
+              historyRepo: context.read<StoryHistoryRepo>(),
             ),
           ),
           BlocProvider(
             create: (context) => FavoritesCubit(
               repo: context.read<FavoritesRepository>(),
             ),
-          )
+          ),
         ],
         child: const MyApp(),
       ),
