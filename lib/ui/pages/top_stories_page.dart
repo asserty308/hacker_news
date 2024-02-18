@@ -88,16 +88,12 @@ class _TopStoriesPageState extends State<TopStoriesPage> {
   );
 
   Widget get _infoButton => Padding(
-    padding: const EdgeInsets.all(8),
+    padding: const EdgeInsets.all(16),
     child: Align(
       alignment: Alignment.topRight,
-      child: TextButton(
-        onPressed: () => appRouter.push('/settings'), 
-        style: TextButton.styleFrom(
-          backgroundColor: Theme.of(context).colorScheme.background,
-          fixedSize: const Size(48, 48),
-        ),
-        child: const Icon(Icons.info_outline, color: Colors.white,),
+      child: InkWell(
+        onTap: () => appRouter.push('/settings'),
+        child: const Icon(Icons.info_outline, color: Colors.white, size: 32,),
       ),
     ),
   );

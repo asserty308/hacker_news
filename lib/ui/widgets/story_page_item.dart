@@ -36,8 +36,9 @@ class StoryPageItem extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 32),
         child: _subtitle(context),
       ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      Wrap(
+        spacing: 32,
+        runSpacing: 32,
         children: [
           _favButton,
           _shareButton(context),
@@ -48,14 +49,21 @@ class StoryPageItem extends StatelessWidget {
 
   Widget _title(BuildContext context) => Text(
     story.title,
+    maxLines: 5,
     style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w900),
-    textAlign: TextAlign.center
+    textAlign: TextAlign.center,
+    overflow: TextOverflow.ellipsis,
   );
 
   Widget _subtitle(BuildContext context) {
     final diff = story.formattedDifference(context);
     final authority = story.urlAuthority;
-    return Text('$diff ${authority.isEmpty ? '' : ' - $authority'}', textAlign: TextAlign.center,);
+    return Text(
+      '$diff ${authority.isEmpty ? '' : ' - $authority'}', 
+      maxLines: 3,
+      textAlign: TextAlign.center,
+      overflow: TextOverflow.ellipsis,
+    );
   }
 
   Widget get _favButton => BlocBuilder<LikeButtonCubit, LikeButtonState>(
@@ -86,12 +94,9 @@ class StoryPageItem extends StatelessWidget {
     },
   );
 
-  Widget _shareButton(BuildContext context) => TextButton(
-    onPressed: () => _showStory(context), 
-    style: TextButton.styleFrom(
-      fixedSize: const Size(80, 80),
-    ),
-    child: const Icon(CupertinoIcons.share, color: Colors.white,),
+  Widget _shareButton(BuildContext context) => InkWell(
+    onTap: () => _showStory(context), 
+    child: const Icon(CupertinoIcons.share, color: Colors.white, size: 36,),
   );
 
   void _addToFavorites(BuildContext context) {

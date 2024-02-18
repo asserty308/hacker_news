@@ -42,17 +42,17 @@ class _AddFavoriteButtonState extends State<AddFavoriteButton> with TickerProvid
   }
 
   @override
-  Widget build(BuildContext context) => TextButton(
-    onPressed: () => widget.onTap(),
-    style: TextButton.styleFrom(
-      fixedSize: const Size(80, 80)
-    ),
-    child: Transform.scale(
-      scale: 3,
-      child: Lottie.asset(
-        'assets/favorite_white.json',
-        controller: _controller,
-        renderCache: RenderCache.raster,
+  Widget build(BuildContext context) => InkWell(
+    onTap: () => widget.onTap(),
+    child: SizedBox.fromSize(
+      size: const Size(40, 40),
+      child: Transform.scale(
+        scale: 5,
+        child: Lottie.asset(
+          'assets/favorite_white.json',
+          controller: _controller,
+          renderCache: RenderCache.raster,
+        ),
       ),
     ),
   );
