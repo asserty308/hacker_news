@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hacker_news/bloc/like_button/like_button_cubit.dart';
+import 'package:hacker_news/domain/blocs/like_button/like_button_cubit.dart';
 import 'package:hacker_news/data/models/item_model.dart';
 import 'package:hacker_news/data/repositories/favorites_repo.dart';
 import 'package:hacker_news/l10n/l10n.dart';
