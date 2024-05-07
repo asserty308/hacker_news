@@ -90,7 +90,7 @@ class _TopStoriesPageState extends State<TopStoriesPage> {
   Widget get _infoButton => Padding(
     padding: const EdgeInsets.all(16),
     child: Align(
-      alignment: Alignment.topRight,
+      alignment: Alignment.bottomRight,
       child: InkWell(
         onTap: () => appRouter.push('/settings'),
         child: const Icon(Icons.info_outline, color: Colors.white, size: 32,),
