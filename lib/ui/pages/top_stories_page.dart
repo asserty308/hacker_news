@@ -4,7 +4,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hacker_news/domain/blocs/top_stories/top_stories_cubit.dart';
+import 'package:hacker_news/ui/blocs/top_stories/top_stories_cubit.dart';
 import 'package:hacker_news/router/router.dart';
 import 'package:hacker_news/ui/widgets/story_page_item.dart';
 

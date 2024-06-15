@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hacker_news/domain/blocs/top_stories/top_stories_cubit.dart';
+import 'package:hacker_news/ui/blocs/top_stories/top_stories_cubit.dart';
 import 'package:hacker_news/l10n/l10n.dart';
 import 'package:hacker_news/router/router.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

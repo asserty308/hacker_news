@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hacker_news/domain/blocs/favorites/favorites_cubit.dart';
+import 'package:hacker_news/ui/blocs/favorites/favorites_cubit.dart';
 import 'package:hacker_news/l10n/l10n.dart';
 import 'package:hacker_news/ui/widgets/stories_listview.dart';
 

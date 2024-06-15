@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hacker_news/domain/blocs/top_stories/top_stories_cubit.dart';
+import 'package:hacker_news/ui/blocs/top_stories/top_stories_cubit.dart';
 import 'package:hacker_news/config/app_config.dart';
 import 'package:hacker_news/data/repositories/story_history_repo.dart';
 import 'package:hacker_news/domain/services/app_session.dart';
