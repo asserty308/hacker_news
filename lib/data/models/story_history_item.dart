@@ -1,4 +1,4 @@
-import 'package:hacker_news/domain/services/date_format.dart';
+import 'package:hacker_news/domain/extensions/date_format.dart';
 
 class StoryHistoryItem {
   StoryHistoryItem({

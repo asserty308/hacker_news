@@ -5,7 +5,7 @@ import 'package:hacker_news/ui/blocs/top_stories/top_stories_cubit.dart';
 import 'package:hacker_news/data/repositories/favorites_repo.dart';
 import 'package:hacker_news/data/repositories/hackernews_repo.dart';
 import 'package:hacker_news/data/repositories/story_history_repo.dart';
-import 'package:hacker_news/domain/services/app_session.dart';
+import 'package:hacker_news/domain/app_session.dart';
 import 'package:hacker_news/ui/app.dart';
 
 void main() async {
