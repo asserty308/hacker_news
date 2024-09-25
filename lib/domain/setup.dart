@@ -5,7 +5,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 
 PackageInfo? appPackageInfo;
 
-Future<void> setupSession() async {
+Future<void> setupApp() async {
   appPackageInfo = await PackageInfo.fromPlatform();
 
   await _initStorages();

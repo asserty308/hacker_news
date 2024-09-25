@@ -20,10 +20,11 @@ dependencies:
   lottie: ^3.1.2
   meta: ^1.15.0
   package_info_plus: ^8.0.2
+  share_plus: ^10.0.2
   url_launcher: ^6.3.0
 
 dev_dependencies:
-  flutter_launcher_icons: ^0.13.1
+  flutter_launcher_icons: ^0.14.1
   flutter_lints: ^4.0.0
   flutter_test:
     sdk: flutter

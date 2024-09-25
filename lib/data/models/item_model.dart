@@ -123,4 +123,12 @@ class ItemModel {
   }
 
   String get urlAuthority => Uri.tryParse(url ?? '')?.authority ?? '';
+
+  Uri get realUrl {
+    if (url?.isEmpty ?? true) {
+      return Uri.https('news.ycombinator.com', '/item', {'id':'$id'});
+    }
+
+    return Uri.parse(url!);
+  }
 }

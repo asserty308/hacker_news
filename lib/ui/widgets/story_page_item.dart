@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hacker_news/domain/use_cases/show_story_use_case.dart';
 import 'package:hacker_news/ui/blocs/like_button/like_button_cubit.dart';
 import 'package:hacker_news/data/models/item_model.dart';
 import 'package:hacker_news/data/repositories/favorites_repo.dart';
 import 'package:hacker_news/ui/widgets/add_favorite_button.dart';
 import 'package:hacker_news/ui/widgets/remove_favorite_button.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:share_plus/share_plus.dart';
 
 class StoryPageItem extends StatelessWidget {
   const StoryPageItem({
@@ -47,12 +48,19 @@ class StoryPageItem extends StatelessWidget {
     ],
   );
 
-  Widget _title(BuildContext context) => Text(
-    story.title,
-    maxLines: 5,
-    style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w900),
-    textAlign: TextAlign.center,
-    overflow: TextOverflow.ellipsis,
+  Widget _title(BuildContext context) => TextButton(
+    onPressed: () => _showStory(context),
+    style: TextButton.styleFrom(
+      splashFactory: NoSplash.splashFactory,
+      overlayColor: Colors.transparent,
+    ),
+    child: Text(
+      story.title,
+      maxLines: 5,
+      style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w900),
+      textAlign: TextAlign.center,
+      overflow: TextOverflow.ellipsis,
+    ),
   );
 
   Widget _subtitle(BuildContext context) {
@@ -95,7 +103,7 @@ class StoryPageItem extends StatelessWidget {
   );
 
   Widget _shareButton(BuildContext context) => InkWell(
-    onTap: () => _showStory(context), 
+    onTap: () => _shareStory(context), 
     child: const Icon(CupertinoIcons.share, color: Colors.white, size: 36,),
   );
 
@@ -108,12 +116,11 @@ class StoryPageItem extends StatelessWidget {
   }
 
   void _showStory(BuildContext context) {
-    if (story.url?.isEmpty ?? true) {
-      final url = Uri.https('news.ycombinator.com', '/item', {'id':'${story.id}'});
-      launchUrl(url);
-      return;
-    }
+    final showStoryUseCase = ShowStoryUseCase();
+    showStoryUseCase.execute(story);
+  }
 
-    launchUrl(Uri.parse(story.url!));
+  void _shareStory(BuildContext context) {
+    Share.share(story.realUrl.toString());
   }
 }

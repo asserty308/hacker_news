@@ -4,9 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:hacker_news/ui/blocs/top_stories/top_stories_cubit.dart';
 import 'package:hacker_news/config/app_config.dart';
 import 'package:hacker_news/data/repositories/story_history_repo.dart';
-import 'package:hacker_news/domain/app_session.dart';
+import 'package:hacker_news/domain/setup.dart';
 import 'package:hacker_news/l10n/l10n.dart';
-import 'package:hacker_news/router/router.dart';
+import 'package:hacker_news/config/router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingsPage extends StatefulWidget {
