@@ -1,15 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hacker_news/data/providers/providers.dart';
 import 'package:hacker_news/domain/use_cases/show_story_use_case.dart';
 import 'package:hacker_news/ui/blocs/like_button/like_button_cubit.dart';
 import 'package:hacker_news/data/models/item_model.dart';
-import 'package:hacker_news/data/repositories/favorites_repo.dart';
 import 'package:hacker_news/ui/widgets/add_favorite_button.dart';
 import 'package:hacker_news/ui/widgets/remove_favorite_button.dart';
 import 'package:share_plus/share_plus.dart';
 
-class StoryPageItem extends StatelessWidget {
+class StoryPageItem extends ConsumerWidget {
   const StoryPageItem({
     super.key,
     required this.story,
@@ -20,9 +21,9 @@ class StoryPageItem extends StatelessWidget {
   final VoidCallback? onFavoriteRemoved;
 
   @override
-  Widget build(BuildContext context) => BlocProvider(
+  Widget build(BuildContext context, WidgetRef ref) => BlocProvider(
     create: (context) => LikeButtonCubit(
-      context.read<FavoritesRepository>(), 
+      ref.read(favoritesRepoProvider), 
       story,
     ),
     child: _tile(context),

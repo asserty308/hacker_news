@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hacker_news/ui/blocs/favorites/favorites_cubit.dart';
-import 'package:hacker_news/ui/blocs/top_stories/top_stories_cubit.dart';
-import 'package:hacker_news/data/repositories/favorites_repo.dart';
-import 'package:hacker_news/data/repositories/hackernews_repo.dart';
-import 'package:hacker_news/data/repositories/story_history_repo.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hacker_news/domain/setup.dart';
 import 'package:hacker_news/ui/app.dart';
 
@@ -14,28 +9,6 @@ void main() async {
   await setupApp();
 
   runApp(
-    MultiRepositoryProvider(
-      providers: [
-        RepositoryProvider(create: (context) => HackernewsRepo()),
-        RepositoryProvider(create: (context) => StoryHistoryRepo()),
-        RepositoryProvider(create: (context) => FavoritesRepository()),
-      ],
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => TopStoriesCubit(
-              newsRepo: context.read<HackernewsRepo>(), 
-              historyRepo: context.read<StoryHistoryRepo>(),
-            ),
-          ),
-          BlocProvider(
-            create: (context) => FavoritesCubit(
-              repo: context.read<FavoritesRepository>(),
-            ),
-          ),
-        ],
-        child: const MyApp(),
-      ),
-    ),
+    const ProviderScope(child: MyApp()),
   );
 }

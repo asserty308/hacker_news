@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hacker_news/data/providers/providers.dart';
 import 'package:hacker_news/ui/blocs/favorites/favorites_cubit.dart';
 import 'package:hacker_news/l10n/l10n.dart';
 import 'package:hacker_news/ui/widgets/stories_listview.dart';
 
-class FavoritesPage extends StatefulWidget {
+class FavoritesPage extends ConsumerStatefulWidget {
   const FavoritesPage({super.key});
 
   @override
-  State<FavoritesPage> createState() => _FavoritesPageState();
+  ConsumerState<FavoritesPage> createState() => _FavoritesPageState();
 }
 
-class _FavoritesPageState extends State<FavoritesPage> {
+class _FavoritesPageState extends ConsumerState<FavoritesPage> {
   @override
   void initState() {
     super.initState();
 
-    context.read<FavoritesCubit>().loadStories();
+    ref.read(favoritesCubitProvider).loadStories();
   }
   
   @override
@@ -44,7 +46,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
         return SliverStoriesListView(
           stories: state.stories, 
           storageKey: 1,
-          onFavoriteRemoved: context.read<FavoritesCubit>().loadStories,
+          onFavoriteRemoved: ref.read(favoritesCubitProvider).loadStories,
         );
       }
 

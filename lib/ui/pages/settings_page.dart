@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hacker_news/ui/blocs/top_stories/top_stories_cubit.dart';
+import 'package:hacker_news/data/providers/providers.dart';
 import 'package:hacker_news/config/app_config.dart';
-import 'package:hacker_news/data/repositories/story_history_repo.dart';
 import 'package:hacker_news/domain/setup.dart';
 import 'package:hacker_news/l10n/l10n.dart';
 import 'package:hacker_news/config/router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class SettingsPage extends StatefulWidget {
+class SettingsPage extends ConsumerStatefulWidget {
   const SettingsPage({super.key});
 
   @override
-  State<SettingsPage> createState() => _SettingsPageState();
+  ConsumerState<SettingsPage> createState() => _SettingsPageState();
 }
 
-class _SettingsPageState extends State<SettingsPage> {
+class _SettingsPageState extends ConsumerState<SettingsPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
     body: CustomScrollView(
@@ -90,13 +89,13 @@ class _SettingsPageState extends State<SettingsPage> {
     );
 
     if (mounted && clearCache == true) {
-      await context.read<StoryHistoryRepo>().clear();
+      await ref.read(storyHistoryRepoProvider).clear();
 
       if (!mounted) {
         return;
       }
 
-      context.read<TopStoriesCubit>().refresh(true);
+      ref.read(topStoriesCubitProvider).refresh(true);
     }
   }
 }

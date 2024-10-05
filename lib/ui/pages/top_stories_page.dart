@@ -4,18 +4,20 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hacker_news/data/providers/providers.dart';
 import 'package:hacker_news/ui/blocs/top_stories/top_stories_cubit.dart';
 import 'package:hacker_news/config/router.dart';
 import 'package:hacker_news/ui/widgets/story_page_item.dart';
 
-class TopStoriesPage extends StatefulWidget {
+class TopStoriesPage extends ConsumerStatefulWidget {
   const TopStoriesPage({super.key});
 
   @override
-  State<TopStoriesPage> createState() => _TopStoriesPageState();
+  ConsumerState<TopStoriesPage> createState() => _TopStoriesPageState();
 }
 
-class _TopStoriesPageState extends State<TopStoriesPage> {
+class _TopStoriesPageState extends ConsumerState<TopStoriesPage> {
   final _pageController = PageController();
   final _animationDuration = const Duration(milliseconds: 250);
 
@@ -54,6 +56,7 @@ class _TopStoriesPageState extends State<TopStoriesPage> {
   );
 
   Widget get _pageView => BlocConsumer<TopStoriesCubit, TopStoriesState>(
+    bloc: ref.read(topStoriesCubitProvider),
     listener: (context, state) {
       if (state is TopStoriesLoaded && state.stories.isNotEmpty) {
         // add first story to history cache
@@ -139,5 +142,5 @@ class _TopStoriesPageState extends State<TopStoriesPage> {
     }
   }
 
-  TopStoriesCubit get _bloc => context.read<TopStoriesCubit>();
+  TopStoriesCubit get _bloc => ref.read(topStoriesCubitProvider);
 }
