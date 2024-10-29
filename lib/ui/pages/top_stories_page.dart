@@ -56,7 +56,7 @@ class _TopStoriesPageState extends ConsumerState<TopStoriesPage> {
   );
 
   Widget get _pageView => BlocConsumer<TopStoriesCubit, TopStoriesState>(
-    bloc: ref.read(topStoriesCubitProvider),
+    bloc: _bloc,
     listener: (context, state) {
       if (state is TopStoriesLoaded && state.stories.isNotEmpty) {
         // add first story to history cache
