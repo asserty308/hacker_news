@@ -5,6 +5,12 @@ ThemeData appTheme(bool isDark) => ThemeData(
   colorScheme: isDark ? _darkColorScheme : _lightColorScheme,
 );
 
-const _lightColorScheme = ColorScheme.light();
+final _lightColorScheme = ColorScheme.fromSeed(
+  seedColor: Colors.blue,
+  brightness: Brightness.light,
+);
 
-const _darkColorScheme = ColorScheme.dark();
+final _darkColorScheme = ColorScheme.fromSeed(
+  seedColor: Colors.blue,
+  brightness: Brightness.dark,
+);

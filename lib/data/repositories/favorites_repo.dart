@@ -1,14 +1,26 @@
+import 'package:hacker_news/data/datasources/favorites_api.dart';
 import 'package:hacker_news/data/datasources/favorites_cache.dart';
 import 'package:hacker_news/data/models/item_model.dart';
 
 class FavoritesRepository {
-  final _cache = FavoritesCache();
+  FavoritesRepository({
+    required this.cache, 
+    required this.api,
+  });
 
-  Future<void> addStory(ItemModel item) => _cache.add(item);
+  final FavoritesCache cache;
+  final FavoritesApi api;
 
-  Future<void> removeStory(int id) => _cache.remove(id);
+  Future<void> addStory(ItemModel item) async {
+    await Future.wait([
+      cache.add(item),
+      api.createEntry(userId: 'test-user', itemId: item.id),
+    ]);
+  }
 
-  bool contains(int id) => _cache.contains(id);
+  Future<void> removeStory(int id) => cache.remove(id);
 
-  List<ItemModel> getAll() => _cache.getAll();
+  bool contains(int id) => cache.contains(id);
+
+  List<ItemModel> getAll() => cache.getAll();
 }

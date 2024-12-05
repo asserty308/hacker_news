@@ -45,5 +45,7 @@ class _MyAppState extends ConsumerState<MyApp> {
     supportedLocales: AppLocalizations.supportedLocales,
   );
 
-  void _onResume() => ref.read(topStoriesCubitProvider).refresh();
+  void _onResume() {
+    ref.read(topStoriesCubitProvider).refresh();
+  }
 }

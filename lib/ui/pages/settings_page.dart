@@ -1,3 +1,4 @@
+import 'package:appwrite/models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -18,17 +19,28 @@ class SettingsPage extends ConsumerStatefulWidget {
 class _SettingsPageState extends ConsumerState<SettingsPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
-    body: CustomScrollView(
-      physics: const ClampingScrollPhysics(),
-      restorationId: 'settings_list',
-      slivers: [
-        SliverAppBar(
-          title: Text(context.l10n.settings),
-          floating: true,
+    body: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(child: _scrollView),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.0),
+          child: _footer(context),
         ),
-        _body(context),
       ],
     ),
+  );
+
+  Widget get _scrollView => CustomScrollView(
+    physics: const AlwaysScrollableScrollPhysics(),
+    restorationId: 'settings_list',
+    slivers: [
+      SliverAppBar(
+        title: Text(context.l10n.settings),
+        floating: true,
+      ),
+      _body(context),
+    ],
   );
 
   Widget _body(BuildContext context) => SliverList.list(
@@ -37,7 +49,6 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
       _clearHistoryCacheTile(context),
       _licensesTile(context),
       _showGitHubRepoTile(context),
-      _versionTileBuilder(context),
     ],
   );
 
@@ -65,8 +76,40 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
     onTap: _onClearCachePressed,
   );
 
-  Widget _versionTileBuilder(BuildContext context) => ListTile(
-    subtitle: Text(context.l10n.appVersion(appPackageInfo?.version ?? 'n.A.')),
+  Widget _footer(BuildContext context) => SafeArea(
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        _versionText,
+        _loginButton,
+      ],
+    ),
+  );
+
+  Widget get _versionText => Text(
+    context.l10n.appVersion(appPackageInfo?.version ?? 'n.A.'), 
+    style: Theme.of(context).textTheme.bodySmall,
+  );
+
+  Widget get _loginButton => FutureBuilder<User>(
+    future: ref.read(appwriteAccountProvider).get(),
+    builder: (context, snapshot) {
+      if (snapshot.connectionState != ConnectionState.done) {
+        return SizedBox();
+      }
+
+      if (snapshot.data == null) {
+        return TextButton(
+          onPressed: _onLoginPressed, 
+          child: Text(context.l10n.loginButton),
+        );
+      }
+
+      return TextButton(
+        onPressed: _onLogoutPressed, 
+        child: Text(context.l10n.logoutButton),
+      );
+    }
   );
 
   Future<void> _onClearCachePressed() async {
@@ -88,14 +131,19 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
       )
     );
 
-    if (mounted && clearCache == true) {
-      await ref.read(storyHistoryRepoProvider).clear();
-
-      if (!mounted) {
-        return;
-      }
-
-      ref.read(topStoriesCubitProvider).refresh(true);
+    if (clearCache != true) {
+      return;
     }
+
+    await ref.read(clearHistoryUseCaseProvider).execute();
+  }
+
+  Future<void> _onLoginPressed() async {
+    appRouter.push('/login');
+  }
+
+  Future<void> _onLogoutPressed() async {
+    await ref.read(appwriteAccountProvider).deleteSession(sessionId: 'current');
+    setState(() {});
   }
 }

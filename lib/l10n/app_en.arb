@@ -60,5 +60,7 @@
     "clearHistoryCacheDialogBody": "Do you really want to clear the history cache? Doing this you will get all stories you've already seen again.",
     "yes": "Yes",
     "no": "No",
-    "myFavoritesTileTitle": "My favorites"
+    "myFavoritesTileTitle": "My favorites",
+    "loginButton": "Login",
+    "logoutButton": "Logout"
 }

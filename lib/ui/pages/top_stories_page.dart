@@ -96,7 +96,7 @@ class _TopStoriesPageState extends ConsumerState<TopStoriesPage> {
       alignment: Alignment.bottomRight,
       child: InkWell(
         onTap: () => appRouter.push('/settings'),
-        child: const Icon(Icons.info_outline, color: Colors.white, size: 32,),
+        child: Icon(Icons.info_outline, size: 32,),
       ),
     ),
   );

@@ -105,7 +105,7 @@ class StoryPageItem extends ConsumerWidget {
 
   Widget _shareButton(BuildContext context) => InkWell(
     onTap: () => _shareStory(context), 
-    child: const Icon(CupertinoIcons.share, color: Colors.white, size: 36,),
+    child: const Icon(CupertinoIcons.share, size: 36,),
   );
 
   void _addToFavorites(BuildContext context) {

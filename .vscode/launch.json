@@ -5,24 +5,31 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Flutter",
-            "type": "dart",
+            "name": "Debug",
             "request": "launch",
-            "program": "lib/main.dart"
+            "type": "dart",
+            "flutterMode": "debug",
+            "toolArgs": [
+                "--dart-define-from-file", ".config/config.json"
+            ]
         },
         {
-            "name": "Flutter (Profile)",
-            "type": "dart",
+            "name": "Profile",
             "request": "launch",
-            "program": "lib/main.dart",
-            "flutterMode": "profile"
+            "type": "dart",
+            "flutterMode": "profile",
+            "toolArgs": [
+                "--dart-define-from-file", ".config/config.json"
+            ]
         },
         {
-            "name": "Flutter (Release)",
-            "type": "dart",
+            "name": "Release",
             "request": "launch",
-            "program": "lib/main.dart",
-            "flutterMode": "release"
+            "type": "dart",
+            "flutterMode": "release",
+            "toolArgs": [
+                "--dart-define-from-file", ".config/config.json"
+            ]
         },
     ]
 }

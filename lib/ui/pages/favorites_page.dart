@@ -14,11 +14,13 @@ class FavoritesPage extends ConsumerStatefulWidget {
 }
 
 class _FavoritesPageState extends ConsumerState<FavoritesPage> {
+  late final _bloc = ref.read(favoritesCubitProvider);
+
   @override
   void initState() {
     super.initState();
 
-    ref.read(favoritesCubitProvider).loadStories();
+    _bloc.loadStories();
   }
   
   @override
@@ -37,6 +39,7 @@ class _FavoritesPageState extends ConsumerState<FavoritesPage> {
   );
 
   Widget get _body => BlocBuilder<FavoritesCubit, FavoritesState>(
+    bloc: _bloc,
     builder: (context, state) {
       if (state is FavoritesLoaded) {
         if (state.stories.isEmpty) {
@@ -46,7 +49,7 @@ class _FavoritesPageState extends ConsumerState<FavoritesPage> {
         return SliverStoriesListView(
           stories: state.stories, 
           storageKey: 1,
-          onFavoriteRemoved: ref.read(favoritesCubitProvider).loadStories,
+          onFavoriteRemoved: _bloc.loadStories,
         );
       }
 

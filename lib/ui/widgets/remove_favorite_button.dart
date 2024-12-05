@@ -48,7 +48,7 @@ class _RemoveFavoriteButtonState extends State<RemoveFavoriteButton> with Ticker
       child: Transform.scale(
         scale: 5,
         child: Lottie.asset(
-          'assets/favorite_white.json',
+          'assets/favorite${Theme.of(context).colorScheme.brightness == Brightness.dark ? '_white' : ''}.json',
           controller: _controller,
           renderCache: RenderCache.raster,
         ),
