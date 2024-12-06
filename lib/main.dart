@@ -9,6 +9,8 @@ void main() async {
   await setupApp();
 
   runApp(
-    const ProviderScope(child: MyApp()),
+    const ProviderScope(
+      child: MyApp(),
+    ),
   );
 }

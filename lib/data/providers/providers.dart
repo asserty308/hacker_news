@@ -24,6 +24,7 @@ final storyHistoryRepoProvider = Provider((ref) => StoryHistoryRepo());
 final favoritesRepoProvider = Provider((ref) => FavoritesRepository(
   cache: ref.watch(_favoritesCacheProvider),
   api: ref.watch(_favoritesApiProvider),
+  account: ref.watch(appwriteAccountProvider),
 ));
 
 // Use cases
