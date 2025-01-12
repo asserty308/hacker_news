@@ -1,6 +1,6 @@
 {
     "name": "Hacker News",
-    "short_name": "Hacker news",
+    "short_name": "Hacker News",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#263846",
