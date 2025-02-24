@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hacker_news/data/providers/providers.dart';
+import 'package:hacker_news/l10n/generated/app_localizations.dart';
 import 'package:hacker_news/l10n/l10n.dart';
 import 'package:hacker_news/config/router.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hacker_news/config/theme.dart';
 
 class MyApp extends ConsumerStatefulWidget {
