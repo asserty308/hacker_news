@@ -11,21 +11,15 @@ import 'package:hacker_news/ui/widgets/remove_favorite_button.dart';
 import 'package:share_plus/share_plus.dart';
 
 class StoryPageItem extends ConsumerWidget {
-  const StoryPageItem({
-    super.key,
-    required this.story,
-    this.onFavoriteRemoved,
-  });
+  const StoryPageItem({super.key, required this.story, this.onFavoriteRemoved});
 
   final ItemModel story;
   final VoidCallback? onFavoriteRemoved;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) => BlocProvider(
-    create: (context) => LikeButtonCubit(
-      ref.read(favoritesRepoProvider), 
-      story,
-    ),
+    create:
+        (context) => LikeButtonCubit(ref.read(favoritesRepoProvider), story),
     child: _tile(context),
   );
 
@@ -41,11 +35,8 @@ class StoryPageItem extends ConsumerWidget {
       Wrap(
         spacing: 32,
         runSpacing: 32,
-        children: [
-          _favButton,
-          _shareButton(context),
-        ],
-      )
+        children: [_favButton, _shareButton(context)],
+      ),
     ],
   );
 
@@ -58,7 +49,9 @@ class StoryPageItem extends ConsumerWidget {
     child: Text(
       story.title,
       maxLines: 5,
-      style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w900),
+      style: Theme.of(
+        context,
+      ).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w900),
       textAlign: TextAlign.center,
       overflow: TextOverflow.ellipsis,
     ),
@@ -68,7 +61,7 @@ class StoryPageItem extends ConsumerWidget {
     final diff = story.formattedDifference(context);
     final authority = story.urlAuthority;
     return Text(
-      '$diff ${authority.isEmpty ? '' : ' - $authority'}', 
+      '$diff ${authority.isEmpty ? '' : ' - $authority'}',
       maxLines: 3,
       textAlign: TextAlign.center,
       overflow: TextOverflow.ellipsis,
@@ -79,14 +72,14 @@ class StoryPageItem extends ConsumerWidget {
     builder: (context, state) {
       if (state is LikeButtonIsFavorite) {
         return AddFavoriteButton(
-          onTap: () => _removeFromFavorites(context), 
+          onTap: () => _removeFromFavorites(context),
           playAnimation: false,
         );
       }
 
       if (state is LikeButtonIsNotFavorite) {
         return RemoveFavoriteButton(
-          onTap: () => _addToFavorites(context), 
+          onTap: () => _addToFavorites(context),
           playAnimation: false,
         );
       }
@@ -99,13 +92,13 @@ class StoryPageItem extends ConsumerWidget {
         return RemoveFavoriteButton(onTap: () => _addToFavorites(context));
       }
 
-      return const SizedBox(width: 0, height: 0,);
+      return const SizedBox(width: 0, height: 0);
     },
   );
 
   Widget _shareButton(BuildContext context) => InkWell(
-    onTap: () => _shareStory(context), 
-    child: const Icon(CupertinoIcons.share, size: 36,),
+    onTap: () => _shareStory(context),
+    child: const Icon(CupertinoIcons.share, size: 36),
   );
 
   void _addToFavorites(BuildContext context) {

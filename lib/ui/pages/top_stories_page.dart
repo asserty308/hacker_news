@@ -29,31 +29,22 @@ class _TopStoriesPageState extends ConsumerState<TopStoriesPage> {
     _pageController.addListener(_pageListener);
     _bloc.loadStories();
   }
-  
+
   @override
-  Widget build(BuildContext context) => Scaffold(
-    body: _keyboardListener,
-  );
+  Widget build(BuildContext context) => Scaffold(body: _keyboardListener);
 
   Widget get _keyboardListener => CallbackShortcuts(
     bindings: {
-      const SingleActivator(LogicalKeyboardKey.arrowUp) : () => _handleArrowEvents(true),
-      const SingleActivator(LogicalKeyboardKey.arrowDown) : () => _handleArrowEvents(false),
+      const SingleActivator(LogicalKeyboardKey.arrowUp):
+          () => _handleArrowEvents(true),
+      const SingleActivator(LogicalKeyboardKey.arrowDown):
+          () => _handleArrowEvents(false),
     },
-    child: Focus(
-      autofocus: true,
-      child: _body,
-    ),
+    child: Focus(autofocus: true, child: _body),
   );
 
-  Widget get _body => SafeArea(
-    child: Stack(
-      children: [
-        _pageView,
-        _infoButton,
-      ],
-    ),
-  );
+  Widget get _body =>
+      SafeArea(child: Stack(children: [_pageView, _infoButton]));
 
   Widget get _pageView => BlocConsumer<TopStoriesCubit, TopStoriesState>(
     bloc: _bloc,
@@ -80,14 +71,12 @@ class _TopStoriesPageState extends ConsumerState<TopStoriesPage> {
               padding: const EdgeInsets.all(64),
               child: StoryPageItem(story: story),
             );
-          }
+          },
         );
       }
 
-      return const Center(
-        child: CircularProgressIndicator.adaptive(),
-      );
-    }
+      return const Center(child: CircularProgressIndicator.adaptive());
+    },
   );
 
   Widget get _infoButton => Padding(
@@ -96,7 +85,7 @@ class _TopStoriesPageState extends ConsumerState<TopStoriesPage> {
       alignment: Alignment.bottomRight,
       child: InkWell(
         onTap: () => appRouter.push('/settings'),
-        child: Icon(Icons.info_outline, size: 32,),
+        child: Icon(Icons.info_outline, size: 32),
       ),
     ),
   );
@@ -108,9 +97,15 @@ class _TopStoriesPageState extends ConsumerState<TopStoriesPage> {
     }
 
     if (isArrowUp) {
-      _pageController.previousPage(duration: _animationDuration, curve: Curves.decelerate);
+      _pageController.previousPage(
+        duration: _animationDuration,
+        curve: Curves.decelerate,
+      );
     } else {
-      _pageController.nextPage(duration: _animationDuration, curve: Curves.decelerate);
+      _pageController.nextPage(
+        duration: _animationDuration,
+        curve: Curves.decelerate,
+      );
     }
   }
 

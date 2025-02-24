@@ -16,14 +16,10 @@ class HackernewsApi {
   Future<List<int>> getTopstoriesIds(int amount, {int start = 0}) async {
     final response = await _getEndpoint('topstories') as List;
 
-    return response
-      .map((id) => id as int)
-      .skip(start)
-      .take(amount)
-      .toList();
+    return response.map((id) => id as int).skip(start).take(amount).toList();
   }
 
-  /// The maxitem endpoint contains the latest news id. 
+  /// The maxitem endpoint contains the latest news id.
   /// It can be used to iterate through proevious news.
   Future<int> getLatestStoryId() async {
     return await _getEndpoint('maxitem');
@@ -35,23 +31,22 @@ class HackernewsApi {
     return ItemModel.fromJSON(response);
   }
 
-  /// Builds a list of [amount] [ItemModel] which represent the 
-  /// latest stories published on hackernews. 
+  /// Builds a list of [amount] [ItemModel] which represent the
+  /// latest stories published on hackernews.
   Future<List<ItemModel>> getLatestStories(int amount) async {
     final latestId = await getLatestStoryId();
     final futures = List.generate(amount, (index) => getItem(latestId - index));
     return Future.wait(futures);
   }
 
-  /// Builds a list of [amount] [ItemModel] which represent the 
-  /// current top stories published on hackernews. 
-  /// Uses Future.wait to fetch all items concurrently. 
+  /// Builds a list of [amount] [ItemModel] which represent the
+  /// current top stories published on hackernews.
+  /// Uses Future.wait to fetch all items concurrently.
   /// This will reduce the overall time taken to fetch all the items.
   Future<List<ItemModel>> getTopstories(int amount, {int start = 0}) async {
     final storyIds = await getTopstoriesIds(amount, start: start);
 
-    final futures = storyIds
-      .map(getItem);
+    final futures = storyIds.map(getItem);
 
     return Future.wait(futures);
   }

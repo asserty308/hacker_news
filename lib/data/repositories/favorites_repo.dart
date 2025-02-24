@@ -2,9 +2,7 @@ import 'package:hacker_news/data/datasources/favorites_cache.dart';
 import 'package:hacker_news/data/models/item_model.dart';
 
 class FavoritesRepository {
-  FavoritesRepository({
-    required this.cache, 
-  });
+  FavoritesRepository({required this.cache});
 
   final FavoritesCache cache;
 

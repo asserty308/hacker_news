@@ -21,9 +21,7 @@ class _MyAppState extends ConsumerState<MyApp> {
     super.initState();
 
     // Initialize the AppLifecycleListener class and pass callbacks
-    _listener = AppLifecycleListener(
-      onResume: _onResume,
-    );
+    _listener = AppLifecycleListener(onResume: _onResume);
   }
 
   @override

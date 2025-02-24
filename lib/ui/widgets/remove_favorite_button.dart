@@ -15,7 +15,8 @@ class RemoveFavoriteButton extends StatefulWidget {
   State<RemoveFavoriteButton> createState() => _RemoveFavoriteButtonState();
 }
 
-class _RemoveFavoriteButtonState extends State<RemoveFavoriteButton> with TickerProviderStateMixin {
+class _RemoveFavoriteButtonState extends State<RemoveFavoriteButton>
+    with TickerProviderStateMixin {
   late AnimationController _controller;
 
   @override

@@ -4,20 +4,20 @@ import 'package:hacker_news/l10n/l10n.dart';
 class ItemModel {
   ItemModel({
     required this.id,
-    required this.type, 
-    required this.by, 
-    required this.time, 
-    required this.url, 
-    required this.score, 
-    required this.title, 
-    this.parts, 
+    required this.type,
+    required this.by,
+    required this.time,
+    required this.url,
+    required this.score,
+    required this.title,
+    this.parts,
     this.descendants,
-    this.deleted, 
-    this.text, 
-    this.dead, 
+    this.deleted,
+    this.text,
+    this.dead,
     this.parent,
-    this.poll, 
-    this.kids, 
+    this.poll,
+    this.kids,
   });
 
   factory ItemModel.fromJSON(Map<String, dynamic> json) => ItemModel(
@@ -106,7 +106,7 @@ class ItemModel {
   DateTime get dateTime => DateTime.fromMillisecondsSinceEpoch(time * 1000);
 
   /// Representes the [dateTime] object as a human readable difference until now.
-  /// 
+  ///
   /// Example: "1 hour ago" or "2 days ago"
   String formattedDifference(BuildContext context) {
     final diff = DateTime.now().difference(dateTime);
@@ -118,7 +118,7 @@ class ItemModel {
     } else if (diff.inHours < 24) {
       return context.l10n.nHoursAgo(diff.inHours);
     }
-    
+
     return context.l10n.nDaysAgo(diff.inDays);
   }
 
@@ -126,7 +126,7 @@ class ItemModel {
 
   Uri get realUrl {
     if (url?.isEmpty ?? true) {
-      return Uri.https('news.ycombinator.com', '/item', {'id':'$id'});
+      return Uri.https('news.ycombinator.com', '/item', {'id': '$id'});
     }
 
     return Uri.parse(url!);

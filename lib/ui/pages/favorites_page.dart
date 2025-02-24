@@ -22,17 +22,14 @@ class _FavoritesPageState extends ConsumerState<FavoritesPage> {
 
     _bloc.loadStories();
   }
-  
+
   @override
   Widget build(BuildContext context) => Scaffold(
     body: CustomScrollView(
       physics: const ClampingScrollPhysics(),
       restorationId: 'favorites_list',
       slivers: [
-        SliverAppBar(
-          title: Text(context.l10n.favorites),
-          floating: true,
-        ),
+        SliverAppBar(title: Text(context.l10n.favorites), floating: true),
         _body,
       ],
     ),
@@ -45,25 +42,21 @@ class _FavoritesPageState extends ConsumerState<FavoritesPage> {
         if (state.stories.isEmpty) {
           return _emptyListHint(context);
         }
-        
+
         return SliverStoriesListView(
-          stories: state.stories, 
+          stories: state.stories,
           storageKey: 1,
           onFavoriteRemoved: _bloc.loadStories,
         );
       }
 
       return const SliverFillRemaining(
-        child: Center(
-          child: CircularProgressIndicator(),
-        ),
+        child: Center(child: CircularProgressIndicator()),
       );
     },
   );
 
   Widget _emptyListHint(BuildContext context) => SliverFillRemaining(
-    child: Center(
-      child: Text(context.l10n.emptyFavoritesHint),
-    ),
+    child: Center(child: Text(context.l10n.emptyFavoritesHint)),
   );
 }

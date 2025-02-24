@@ -9,17 +9,15 @@ import 'package:meta/meta.dart';
 part 'top_stories_state.dart';
 
 class TopStoriesCubit extends Cubit<TopStoriesState> {
-  TopStoriesCubit({
-    required this.newsRepo,
-    required this.historyRepo,
-  }) : super(TopStoriesInitial());
+  TopStoriesCubit({required this.newsRepo, required this.historyRepo})
+    : super(TopStoriesInitial());
 
   final HackernewsRepo newsRepo;
   final StoryHistoryRepo historyRepo;
 
   final _stories = <ItemModel>[];
   final _loadAmount = 5;
-  
+
   var _currentIndex = 0;
 
   /// Loads top stories from hacker news and filter out all that the user has already seen
@@ -30,10 +28,11 @@ class TopStoriesCubit extends Cubit<TopStoriesState> {
 
     try {
       await historyRepo.cleanup();
-      
-      final futures = (await newsRepo.getTopstoriesIds(_loadAmount, start: _currentIndex))
-        .where((e) => !historyRepo.allIds.contains(e))
-        .map(newsRepo.getItem);
+
+      final futures = (await newsRepo.getTopstoriesIds(
+        _loadAmount,
+        start: _currentIndex,
+      )).where((e) => !historyRepo.allIds.contains(e)).map(newsRepo.getItem);
 
       _currentIndex += _loadAmount;
 
@@ -57,7 +56,7 @@ class TopStoriesCubit extends Cubit<TopStoriesState> {
     if (clearStories) {
       _stories.clear();
     }
-    
+
     _currentIndex = 0;
     loadStories();
   }

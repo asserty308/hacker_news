@@ -15,24 +15,28 @@ final _favoritesCacheProvider = Provider((ref) => FavoritesCache());
 
 final hackerNewsRepoProvider = Provider((ref) => HackernewsRepo());
 final storyHistoryRepoProvider = Provider((ref) => StoryHistoryRepo());
-final favoritesRepoProvider = Provider((ref) => FavoritesRepository(
-  cache: ref.watch(_favoritesCacheProvider),
-));
+final favoritesRepoProvider = Provider(
+  (ref) => FavoritesRepository(cache: ref.watch(_favoritesCacheProvider)),
+);
 
 // Use cases
 
-final clearHistoryUseCaseProvider = Provider((ref) => ClearHistoryUseCase(
-  storyHistoryRepo: ref.watch(storyHistoryRepoProvider),
-  topStoriesCubit: ref.watch(topStoriesCubitProvider),
-));
+final clearHistoryUseCaseProvider = Provider(
+  (ref) => ClearHistoryUseCase(
+    storyHistoryRepo: ref.watch(storyHistoryRepoProvider),
+    topStoriesCubit: ref.watch(topStoriesCubitProvider),
+  ),
+);
 
 // Blocs
 
-final topStoriesCubitProvider = Provider((ref) => TopStoriesCubit(
-  newsRepo: ref.watch(hackerNewsRepoProvider), 
-  historyRepo: ref.watch(storyHistoryRepoProvider),
-));
+final topStoriesCubitProvider = Provider(
+  (ref) => TopStoriesCubit(
+    newsRepo: ref.watch(hackerNewsRepoProvider),
+    historyRepo: ref.watch(storyHistoryRepoProvider),
+  ),
+);
 
-final favoritesCubitProvider = Provider((ref) => FavoritesCubit(
-  repo: ref.watch(favoritesRepoProvider),
-));
+final favoritesCubitProvider = Provider(
+  (ref) => FavoritesCubit(repo: ref.watch(favoritesRepoProvider)),
+);

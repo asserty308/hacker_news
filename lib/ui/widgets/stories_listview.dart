@@ -4,7 +4,7 @@ import 'package:hacker_news/ui/widgets/story_listtile.dart';
 
 class StoriesListView extends StatelessWidget {
   const StoriesListView({
-    super.key, 
+    super.key,
     required this.stories,
     required this.storageKey,
     this.onFavoriteRemoved,
@@ -19,18 +19,15 @@ class StoriesListView extends StatelessWidget {
     key: PageStorageKey(storageKey),
     itemCount: stories.length,
     itemBuilder: (context, index) {
-      final story = stories[index]; 
-      return StoryListTile(
-        story: story,
-        onFavoriteRemoved: onFavoriteRemoved,
-      );
-    }
+      final story = stories[index];
+      return StoryListTile(story: story, onFavoriteRemoved: onFavoriteRemoved);
+    },
   );
 }
 
 class SliverStoriesListView extends StatelessWidget {
   const SliverStoriesListView({
-    super.key, 
+    super.key,
     required this.stories,
     required this.storageKey,
     this.onFavoriteRemoved,
@@ -45,11 +42,8 @@ class SliverStoriesListView extends StatelessWidget {
     key: PageStorageKey(storageKey),
     itemCount: stories.length,
     itemBuilder: (context, index) {
-      final story = stories[index]; 
-      return StoryListTile(
-        story: story,
-        onFavoriteRemoved: onFavoriteRemoved,
-      );
-    }
+      final story = stories[index];
+      return StoryListTile(story: story, onFavoriteRemoved: onFavoriteRemoved);
+    },
   );
 }

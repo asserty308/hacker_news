@@ -15,7 +15,8 @@ class AddFavoriteButton extends StatefulWidget {
   State<AddFavoriteButton> createState() => _AddFavoriteButtonState();
 }
 
-class _AddFavoriteButtonState extends State<AddFavoriteButton> with TickerProviderStateMixin {
+class _AddFavoriteButtonState extends State<AddFavoriteButton>
+    with TickerProviderStateMixin {
   late AnimationController _controller;
 
   @override
@@ -27,7 +28,7 @@ class _AddFavoriteButtonState extends State<AddFavoriteButton> with TickerProvid
       lowerBound: 0.38,
       upperBound: 0.9,
       duration: const Duration(milliseconds: 750),
-      value: widget.playAnimation ? 0.38 : 0.9
+      value: widget.playAnimation ? 0.38 : 0.9,
     );
 
     if (widget.playAnimation) {

@@ -20,7 +20,7 @@ class LikeButtonCubit extends Cubit<LikeButtonState> {
 
     try {
       final isFav = repository.contains(story.id);
-      
+
       if (isFav) {
         emit(LikeButtonIsFavorite());
       } else {

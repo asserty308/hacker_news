@@ -10,21 +10,15 @@ import 'package:hacker_news/ui/widgets/remove_favorite_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class StoryListTile extends ConsumerWidget {
-  const StoryListTile({
-    super.key,
-    required this.story,
-    this.onFavoriteRemoved,
-  });
+  const StoryListTile({super.key, required this.story, this.onFavoriteRemoved});
 
   final ItemModel story;
   final VoidCallback? onFavoriteRemoved;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) => BlocProvider(
-    create: (context) => LikeButtonCubit(
-      ref.read(favoritesRepoProvider), 
-      story
-    ),
+    create:
+        (context) => LikeButtonCubit(ref.read(favoritesRepoProvider), story),
     child: _tile(context),
   );
 
@@ -35,9 +29,7 @@ class StoryListTile extends ConsumerWidget {
     onTap: () => _showStory(context),
   );
 
-  Widget get _title => Text(
-    story.title,
-  );
+  Widget get _title => Text(story.title);
 
   Widget _subtitle(context) {
     final diff = story.formattedDifference(context);
@@ -49,14 +41,14 @@ class StoryListTile extends ConsumerWidget {
     builder: (context, state) {
       if (state is LikeButtonIsFavorite) {
         return AddFavoriteButton(
-          onTap: () => _removeFromFavorites(context), 
+          onTap: () => _removeFromFavorites(context),
           playAnimation: false,
         );
       }
 
       if (state is LikeButtonIsNotFavorite) {
         return RemoveFavoriteButton(
-          onTap: () => _addToFavorites(context), 
+          onTap: () => _addToFavorites(context),
           playAnimation: false,
         );
       }
@@ -69,7 +61,7 @@ class StoryListTile extends ConsumerWidget {
         return RemoveFavoriteButton(onTap: () => _addToFavorites(context));
       }
 
-      return const SizedBox(width: 0, height: 0,);
+      return const SizedBox(width: 0, height: 0);
     },
   );
 
@@ -85,7 +77,9 @@ class StoryListTile extends ConsumerWidget {
 
   void _showStory(BuildContext context) {
     if (story.url?.isEmpty ?? true) {
-      final url = Uri.https('news.ycombinator.com', '/item', {'id':'${story.id}'});
+      final url = Uri.https('news.ycombinator.com', '/item', {
+        'id': '${story.id}',
+      });
       launchUrl(url);
       return;
     }
@@ -93,13 +87,16 @@ class StoryListTile extends ConsumerWidget {
     launchUrl(Uri.parse(story.url!));
   }
 
-  void _showUndoSnackbar(BuildContext context) => ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      content: Text(context.l10n.setToRemoveFromFavorites), 
-      action: SnackBarAction(
-        label: context.l10n.undo, 
-        onPressed: () => _addToFavorites(context),
-      ),
-    ),
-  ).closed.then((value) => onFavoriteRemoved?.call());
+  void _showUndoSnackbar(BuildContext context) => ScaffoldMessenger.of(context)
+      .showSnackBar(
+        SnackBar(
+          content: Text(context.l10n.setToRemoveFromFavorites),
+          action: SnackBarAction(
+            label: context.l10n.undo,
+            onPressed: () => _addToFavorites(context),
+          ),
+        ),
+      )
+      .closed
+      .then((value) => onFavoriteRemoved?.call());
 }

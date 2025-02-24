@@ -12,12 +12,13 @@ class FavoritesCache {
 
   /// Removes the story with the given [id] from the favorites box.
   Future<void> remove(int id) => _box.delete(id);
-  
+
   /// Check whether the story with the given [id] is inside the favorites box.
   bool contains(int id) => _box.containsKey(id);
 
   /// Returns all entries inside the favorites box.
-  List<ItemModel> getAll() => _box.values
-    .map((e) => ItemModel.fromJSON(Map<String, dynamic>.from(e)))
-    .toList();
+  List<ItemModel> getAll() =>
+      _box.values
+          .map((e) => ItemModel.fromJSON(Map<String, dynamic>.from(e)))
+          .toList();
 }

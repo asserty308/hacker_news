@@ -34,10 +34,7 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
     physics: const AlwaysScrollableScrollPhysics(),
     restorationId: 'settings_list',
     slivers: [
-      SliverAppBar(
-        title: Text(context.l10n.settings),
-        floating: true,
-      ),
+      SliverAppBar(title: Text(context.l10n.settings), floating: true),
       _body(context),
     ],
   );
@@ -58,15 +55,16 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
 
   Widget _licensesTile(BuildContext context) => ListTile(
     title: Text(context.l10n.osl),
-    onTap: () => showLicensePage(
-      context: context,
-      applicationVersion: appPackageInfo?.version,
-    ),
+    onTap:
+        () => showLicensePage(
+          context: context,
+          applicationVersion: appPackageInfo?.version,
+        ),
   );
 
   Widget _showGitHubRepoTile(BuildContext context) => ListTile(
     title: Text(context.l10n.sourceCode),
-    onTap: () => launchUrl(Uri.parse(kGitHubRepoUrl))
+    onTap: () => launchUrl(Uri.parse(kGitHubRepoUrl)),
   );
 
   Widget _clearHistoryCacheTile(BuildContext context) => ListTile(
@@ -80,35 +78,34 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
       padding: const EdgeInsets.only(bottom: 8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          _versionText,
-        ],
+        children: [_versionText],
       ),
     ),
   );
 
   Widget get _versionText => Text(
-    context.l10n.appVersion(appPackageInfo?.version ?? 'n.A.'), 
+    context.l10n.appVersion(appPackageInfo?.version ?? 'n.A.'),
     style: Theme.of(context).textTheme.bodySmall,
   );
 
   Future<void> _onClearCachePressed() async {
     final clearCache = await showDialog<bool?>(
-      context: context, 
-      builder: (context) => AlertDialog(
-        title: Text(context.l10n.clearHistoryCacheDialogTitle),
-        content: Text(context.l10n.clearHistoryCacheDialogBody),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () => context.pop(false), 
-            child: Text(context.l10n.no),
+      context: context,
+      builder:
+          (context) => AlertDialog(
+            title: Text(context.l10n.clearHistoryCacheDialogTitle),
+            content: Text(context.l10n.clearHistoryCacheDialogBody),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => context.pop(false),
+                child: Text(context.l10n.no),
+              ),
+              TextButton(
+                onPressed: () => context.pop(true),
+                child: Text(context.l10n.yes),
+              ),
+            ],
           ),
-          TextButton(
-            onPressed: () => context.pop(true), 
-            child: Text(context.l10n.yes),
-          ),
-        ],
-      )
     );
 
     if (clearCache != true) {
