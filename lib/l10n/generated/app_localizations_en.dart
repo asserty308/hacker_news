@@ -15,6 +15,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String nSecondsAgo(num count) {
     final intl.NumberFormat countNumberFormat = intl.NumberFormat.compact(
       locale: localeName,
+      
     );
     final String countString = countNumberFormat.format(count);
 
@@ -31,6 +32,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String nMinutesAgo(num count) {
     final intl.NumberFormat countNumberFormat = intl.NumberFormat.compact(
       locale: localeName,
+      
     );
     final String countString = countNumberFormat.format(count);
 
@@ -47,6 +49,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String nHoursAgo(num count) {
     final intl.NumberFormat countNumberFormat = intl.NumberFormat.compact(
       locale: localeName,
+      
     );
     final String countString = countNumberFormat.format(count);
 
@@ -63,6 +66,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String nDaysAgo(num count) {
     final intl.NumberFormat countNumberFormat = intl.NumberFormat.compact(
       locale: localeName,
+      
     );
     final String countString = countNumberFormat.format(count);
 
@@ -108,15 +112,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get clearHistoryCacheTileTitle => 'Clear History Cache';
 
   @override
-  String get clearHistoryCacheTileSubtitle =>
-      'This will make already seen stories appear again';
+  String get clearHistoryCacheTileSubtitle => 'This will make already seen stories appear again';
 
   @override
   String get clearHistoryCacheDialogTitle => 'Clear history cache';
 
   @override
-  String get clearHistoryCacheDialogBody =>
-      'Do you really want to clear the history cache? Doing this you will get all stories you\'ve already seen again.';
+  String get clearHistoryCacheDialogBody => 'Do you really want to clear the history cache? Doing this you will get all stories you\'ve already seen again.';
 
   @override
   String get yes => 'Yes';

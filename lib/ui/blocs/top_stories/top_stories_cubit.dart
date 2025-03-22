@@ -29,18 +29,25 @@ class TopStoriesCubit extends Cubit<TopStoriesState> {
     try {
       await historyRepo.cleanup();
 
-      final futures = (await newsRepo.getTopstoriesIds(
+      final ids = await newsRepo.getTopstoriesIds(
         _loadAmount,
         start: _currentIndex,
-      )).where((e) => !historyRepo.allIds.contains(e)).map(newsRepo.getItem);
+      );
 
-      _currentIndex += _loadAmount;
+      final unreadIds =
+          ids.where((e) => !historyRepo.allIds.contains(e)).toList();
 
-      if (futures.isEmpty) {
+      if (unreadIds.isEmpty) {
+        _currentIndex +=
+            _loadAmount; // move index forward since these IDs have been processed
         log('Jump to $_currentIndex as all stories before have been read');
         return loadStories();
       }
 
+      // Only move the index if we have stories to load.
+      _currentIndex += _loadAmount;
+
+      final futures = unreadIds.map(newsRepo.getItem);
       final stories = await Future.wait(futures);
       _stories.addAll(stories);
 
