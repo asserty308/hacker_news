@@ -1,7 +1,7 @@
 name: hacker_news
 description: A hacker news app created with flutter.
 publish_to: 'none'
-version: 0.1.6+11
+version: 0.1.7+12
 
 environment:
   sdk: ^3.7.0
