@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hacker_news/data/datasources/favorites_cache.dart';
+import 'package:hacker_news/data/datasources/hackernews_api.dart';
 import 'package:hacker_news/data/repositories/favorites_repo.dart';
 import 'package:hacker_news/data/repositories/hackernews_repo.dart';
 import 'package:hacker_news/data/repositories/story_history_repo.dart';
@@ -11,9 +12,14 @@ import 'package:hacker_news/ui/blocs/top_stories/top_stories_cubit.dart';
 
 final _favoritesCacheProvider = Provider((ref) => FavoritesCache());
 
+final _hackernewsApiProvider = Provider((ref) => HackernewsApi());
+
 // Repositories
 
-final hackerNewsRepoProvider = Provider((ref) => HackernewsRepo());
+final hackerNewsRepoProvider = Provider(
+  (ref) => HackernewsRepo(api: ref.watch(_hackernewsApiProvider)),
+);
+
 final storyHistoryRepoProvider = Provider((ref) => StoryHistoryRepo());
 final favoritesRepoProvider = Provider(
   (ref) => FavoritesRepository(cache: ref.watch(_favoritesCacheProvider)),

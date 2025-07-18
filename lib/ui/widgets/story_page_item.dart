@@ -114,7 +114,7 @@ class StoryPageItem extends ConsumerWidget {
     showStoryUseCase.execute(story);
   }
 
-  void _shareStory(BuildContext context) {
-    Share.share(story.realUrl.toString());
-  }
+  void _shareStory(BuildContext context) => SharePlus.instance.share(
+    ShareParams(uri: story.realUrl, subject: story.title),
+  );
 }

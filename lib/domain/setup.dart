@@ -1,6 +1,6 @@
 import 'package:hacker_news/data/datasources/favorites_cache.dart';
 import 'package:hacker_news/data/datasources/story_history_cache.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive_ce_flutter/hive_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 PackageInfo? appPackageInfo;

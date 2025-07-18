@@ -31,7 +31,7 @@ class StoryListTile extends ConsumerWidget {
 
   Widget get _title => Text(story.title);
 
-  Widget _subtitle(context) {
+  Widget _subtitle(BuildContext context) {
     final diff = story.formattedDifference(context);
     final authority = story.urlAuthority;
     return Text('$diff ${authority.isEmpty ? '' : ' - $authority'}');

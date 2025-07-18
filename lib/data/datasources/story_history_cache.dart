@@ -1,5 +1,5 @@
 import 'package:hacker_news/data/models/story_history_item.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive_ce_flutter/hive_flutter.dart';
 
 /// Stores seen storys for 30 days.
 ///
