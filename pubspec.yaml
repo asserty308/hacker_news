@@ -4,7 +4,7 @@ publish_to: 'none'
 version: 0.1.7+12
 
 environment:
-  sdk: ^3.7.0
+  sdk: ^3.9.0
 
 dependencies:
   cupertino_icons: ^1.0.8
@@ -14,14 +14,13 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_riverpod: ^2.6.1
-  go_router: ^16.0.0
+  go_router: ^16.1.0
   hive_ce_flutter: ^2.3.1
-  http: ^1.4.0
+  http: ^1.5.0
   intl: ^0.20.2
   lottie: ^3.3.1
-  meta: ^1.16.0
-  package_info_plus: ^8.3.0
-  share_plus: ^11.0.0
+  package_info_plus: ^8.3.1
+  share_plus: ^11.1.0
   url_launcher: ^6.3.2
 
 dev_dependencies:
@@ -29,7 +28,7 @@ dev_dependencies:
   flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
-  mockito: ^5.4.6
+  mockito: ^5.5.0
 
 flutter:
   uses-material-design: true
