@@ -4,10 +4,11 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_core/flutter_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hacker_news/config/router.dart';
 import 'package:hacker_news/data/providers/providers.dart';
 import 'package:hacker_news/ui/blocs/top_stories/top_stories_cubit.dart';
-import 'package:hacker_news/config/router.dart';
 import 'package:hacker_news/ui/widgets/story_page_item.dart';
 
 class TopStoriesPage extends ConsumerStatefulWidget {
@@ -17,7 +18,7 @@ class TopStoriesPage extends ConsumerStatefulWidget {
   ConsumerState<TopStoriesPage> createState() => _TopStoriesPageState();
 }
 
-class _TopStoriesPageState extends ConsumerState<TopStoriesPage> {
+class _TopStoriesPageState extends AppConsumerState<TopStoriesPage> {
   final _pageController = PageController();
   final _animationDuration = const Duration(milliseconds: 250);
 
@@ -27,6 +28,11 @@ class _TopStoriesPageState extends ConsumerState<TopStoriesPage> {
   void initState() {
     super.initState();
     _pageController.addListener(_pageListener);
+  }
+
+  @override
+  void onUIReady() {
+    super.onUIReady();
     _bloc.loadStories();
   }
 
@@ -35,10 +41,10 @@ class _TopStoriesPageState extends ConsumerState<TopStoriesPage> {
 
   Widget get _keyboardListener => CallbackShortcuts(
     bindings: {
-      const SingleActivator(LogicalKeyboardKey.arrowUp):
-          () => _handleArrowEvents(true),
-      const SingleActivator(LogicalKeyboardKey.arrowDown):
-          () => _handleArrowEvents(false),
+      const SingleActivator(LogicalKeyboardKey.arrowUp): () =>
+          _handleArrowEvents(true),
+      const SingleActivator(LogicalKeyboardKey.arrowDown): () =>
+          _handleArrowEvents(false),
     },
     child: Focus(autofocus: true, child: _body),
   );

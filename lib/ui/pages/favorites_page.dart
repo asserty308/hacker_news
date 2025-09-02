@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_core/flutter_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hacker_news/data/providers/providers.dart';
 import 'package:hacker_news/ui/blocs/favorites/favorites_cubit.dart';
@@ -13,12 +14,12 @@ class FavoritesPage extends ConsumerStatefulWidget {
   ConsumerState<FavoritesPage> createState() => _FavoritesPageState();
 }
 
-class _FavoritesPageState extends ConsumerState<FavoritesPage> {
+class _FavoritesPageState extends AppConsumerState<FavoritesPage> {
   late final _bloc = ref.read(favoritesCubitProvider);
 
   @override
-  void initState() {
-    super.initState();
+  void onUIReady() {
+    super.onUIReady();
 
     _bloc.loadStories();
   }
