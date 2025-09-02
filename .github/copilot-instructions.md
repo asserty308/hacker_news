@@ -1,0 +1,21 @@
+- Use cubit from `flutter_bloc` for state management.
+- Use `riverpod` for dependency injection.
+- Use `go_router` for navigation.
+- Use gaps (vGap16, hGap16, etc.) from `flutter_core` for spacing.
+- Use `AppConsumerState` from `flutter_core` for stateful widgets.
+- Use clean architecture principles.
+- Create use cases for business logic.
+- Always consider maintainability.
+- Prefer `const` constructions when possible.
+- Use descriptive names for all classes, methods, and variables.
+- Avoid using magic numbers and strings.
+- Keep widget build methods clean and concise.
+- Write unit tests for all features.
+- Use `flutter_test` for widget testing.
+- Use `mocktail` for mocking dependencies in tests.
+- Follow Dart and Flutter best practices.
+- Use dart formatting tools like `dart format` to maintain code style.
+- Avoid unnecessary complexity in your code.
+- Keep your widget tree shallow.
+- Use `flutter_localizations` for localization support.
+- Put localization files into the lib/l10n directory.
