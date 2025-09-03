@@ -62,5 +62,22 @@
     "no": "No",
     "myFavoritesTileTitle": "My favorites",
     "loginButton": "Login",
-    "logoutButton": "Logout"
+    "logoutButton": "Logout",
+    "loading": "Loading...",
+    "errorLoadingStories": "Error loading stories",
+    "errorLoadingFavorites": "Error loading favorites",
+    "tryAgain": "Try Again",
+    "retry": "Retry",
+    "networkError": "Network error. Please check your connection.",
+    "unexpectedError": "An unexpected error occurred",
+    "storiesLoading": "Loading stories...",
+    "favoritesLoading": "Loading favorites...",
+    "refreshing": "Refreshing...",
+    "noInternetConnection": "No internet connection",
+    "accessibilityOpenStory": "Open story",
+    "accessibilityAddToFavorites": "Add to favorites",
+    "accessibilityRemoveFromFavorites": "Remove from favorites",
+    "accessibilityShareStory": "Share story",
+    "accessibilitySettings": "Settings",
+    "accessibilityBackButton": "Back"
 }

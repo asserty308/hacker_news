@@ -15,7 +15,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String nSecondsAgo(num count) {
     final intl.NumberFormat countNumberFormat = intl.NumberFormat.compact(
       locale: localeName,
-      
     );
     final String countString = countNumberFormat.format(count);
 
@@ -32,7 +31,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String nMinutesAgo(num count) {
     final intl.NumberFormat countNumberFormat = intl.NumberFormat.compact(
       locale: localeName,
-      
     );
     final String countString = countNumberFormat.format(count);
 
@@ -49,7 +47,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String nHoursAgo(num count) {
     final intl.NumberFormat countNumberFormat = intl.NumberFormat.compact(
       locale: localeName,
-      
     );
     final String countString = countNumberFormat.format(count);
 
@@ -66,7 +63,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String nDaysAgo(num count) {
     final intl.NumberFormat countNumberFormat = intl.NumberFormat.compact(
       locale: localeName,
-      
     );
     final String countString = countNumberFormat.format(count);
 
@@ -112,13 +108,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get clearHistoryCacheTileTitle => 'Clear History Cache';
 
   @override
-  String get clearHistoryCacheTileSubtitle => 'This will make already seen stories appear again';
+  String get clearHistoryCacheTileSubtitle =>
+      'This will make already seen stories appear again';
 
   @override
   String get clearHistoryCacheDialogTitle => 'Clear history cache';
 
   @override
-  String get clearHistoryCacheDialogBody => 'Do you really want to clear the history cache? Doing this you will get all stories you\'ve already seen again.';
+  String get clearHistoryCacheDialogBody =>
+      'Do you really want to clear the history cache? Doing this you will get all stories you\'ve already seen again.';
 
   @override
   String get yes => 'Yes';
@@ -134,4 +132,55 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get logoutButton => 'Logout';
+
+  @override
+  String get loading => 'Loading...';
+
+  @override
+  String get errorLoadingStories => 'Error loading stories';
+
+  @override
+  String get errorLoadingFavorites => 'Error loading favorites';
+
+  @override
+  String get tryAgain => 'Try Again';
+
+  @override
+  String get retry => 'Retry';
+
+  @override
+  String get networkError => 'Network error. Please check your connection.';
+
+  @override
+  String get unexpectedError => 'An unexpected error occurred';
+
+  @override
+  String get storiesLoading => 'Loading stories...';
+
+  @override
+  String get favoritesLoading => 'Loading favorites...';
+
+  @override
+  String get refreshing => 'Refreshing...';
+
+  @override
+  String get noInternetConnection => 'No internet connection';
+
+  @override
+  String get accessibilityOpenStory => 'Open story';
+
+  @override
+  String get accessibilityAddToFavorites => 'Add to favorites';
+
+  @override
+  String get accessibilityRemoveFromFavorites => 'Remove from favorites';
+
+  @override
+  String get accessibilityShareStory => 'Share story';
+
+  @override
+  String get accessibilitySettings => 'Settings';
+
+  @override
+  String get accessibilityBackButton => 'Back';
 }

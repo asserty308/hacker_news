@@ -2,10 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hacker_news/data/models/item_model.dart';
 import 'package:hacker_news/data/providers/providers.dart';
 import 'package:hacker_news/domain/use_cases/show_story_use_case.dart';
+import 'package:hacker_news/l10n/l10n.dart';
 import 'package:hacker_news/ui/blocs/like_button/like_button_cubit.dart';
-import 'package:hacker_news/data/models/item_model.dart';
 import 'package:hacker_news/ui/widgets/add_favorite_button.dart';
 import 'package:hacker_news/ui/widgets/remove_favorite_button.dart';
 import 'package:share_plus/share_plus.dart';
@@ -18,8 +19,8 @@ class StoryPageItem extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) => BlocProvider(
-    create:
-        (context) => LikeButtonCubit(ref.read(favoritesRepoProvider), story),
+    create: (context) =>
+        LikeButtonCubit(ref.read(favoritesRepoProvider), story),
     child: _tile(context),
   );
 
@@ -40,20 +41,24 @@ class StoryPageItem extends ConsumerWidget {
     ],
   );
 
-  Widget _title(BuildContext context) => TextButton(
-    onPressed: () => _showStory(context),
-    style: TextButton.styleFrom(
-      splashFactory: NoSplash.splashFactory,
-      overlayColor: Colors.transparent,
-    ),
-    child: Text(
-      story.title,
-      maxLines: 5,
-      style: Theme.of(
-        context,
-      ).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w900),
-      textAlign: TextAlign.center,
-      overflow: TextOverflow.ellipsis,
+  Widget _title(BuildContext context) => Semantics(
+    label: context.l10n.accessibilityOpenStory,
+    button: true,
+    child: TextButton(
+      onPressed: () => _showStory(context),
+      style: TextButton.styleFrom(
+        splashFactory: NoSplash.splashFactory,
+        overlayColor: Colors.transparent,
+      ),
+      child: Text(
+        story.title,
+        maxLines: 5,
+        style: Theme.of(
+          context,
+        ).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w900),
+        textAlign: TextAlign.center,
+        overflow: TextOverflow.ellipsis,
+      ),
     ),
   );
 
@@ -96,9 +101,13 @@ class StoryPageItem extends ConsumerWidget {
     },
   );
 
-  Widget _shareButton(BuildContext context) => InkWell(
-    onTap: () => _shareStory(context),
-    child: const Icon(CupertinoIcons.share, size: 36),
+  Widget _shareButton(BuildContext context) => Semantics(
+    label: context.l10n.accessibilityShareStory,
+    button: true,
+    child: InkWell(
+      onTap: () => _shareStory(context),
+      child: const Icon(CupertinoIcons.share, size: 36),
+    ),
   );
 
   void _addToFavorites(BuildContext context) {

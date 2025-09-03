@@ -8,6 +8,7 @@ import 'package:flutter_core/flutter_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hacker_news/config/router.dart';
 import 'package:hacker_news/data/providers/providers.dart';
+import 'package:hacker_news/l10n/l10n.dart';
 import 'package:hacker_news/ui/blocs/top_stories/top_stories_cubit.dart';
 import 'package:hacker_news/ui/widgets/story_page_item.dart';
 
@@ -81,7 +82,11 @@ class _TopStoriesPageState extends AppConsumerState<TopStoriesPage> {
         );
       }
 
-      return const Center(child: CircularProgressIndicator.adaptive());
+      if (state is TopStoriesError) {
+        return _errorWidget;
+      }
+
+      return _loadingWidget;
     },
   );
 
@@ -89,9 +94,54 @@ class _TopStoriesPageState extends AppConsumerState<TopStoriesPage> {
     padding: const EdgeInsets.all(16),
     child: Align(
       alignment: Alignment.bottomRight,
-      child: InkWell(
-        onTap: () => appRouter.push('/settings'),
-        child: Icon(Icons.info_outline, size: 32),
+      child: Semantics(
+        label: context.l10n.accessibilitySettings,
+        button: true,
+        child: InkWell(
+          onTap: () => appRouter.push('/settings'),
+          child: Icon(Icons.info_outline, size: 32),
+        ),
+      ),
+    ),
+  );
+
+  Widget get _loadingWidget => Center(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const CircularProgressIndicator.adaptive(),
+        const SizedBox(height: 16),
+        Text(
+          context.l10n.storiesLoading,
+          style: Theme.of(context).textTheme.bodyMedium,
+        ),
+      ],
+    ),
+  );
+
+  Widget get _errorWidget => Center(
+    child: Padding(
+      padding: const EdgeInsets.all(32),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.error_outline,
+            size: 48,
+            color: Theme.of(context).colorScheme.error,
+          ),
+          const SizedBox(height: 16),
+          Text(
+            context.l10n.errorLoadingStories,
+            style: Theme.of(context).textTheme.titleMedium,
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 16),
+          ElevatedButton(
+            onPressed: _bloc.loadStories,
+            child: Text(context.l10n.tryAgain),
+          ),
+        ],
       ),
     ),
   );

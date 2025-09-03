@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hacker_news/l10n/l10n.dart';
 import 'package:lottie/lottie.dart';
 
 class RemoveFavoriteButton extends StatefulWidget {
@@ -42,16 +43,20 @@ class _RemoveFavoriteButtonState extends State<RemoveFavoriteButton>
   }
 
   @override
-  Widget build(BuildContext context) => InkWell(
-    onTap: () => widget.onTap(),
-    child: SizedBox.fromSize(
-      size: const Size(40, 40),
-      child: Transform.scale(
-        scale: 5,
-        child: Lottie.asset(
-          'assets/favorite${Theme.of(context).colorScheme.brightness == Brightness.dark ? '_white' : ''}.json',
-          controller: _controller,
-          renderCache: RenderCache.raster,
+  Widget build(BuildContext context) => Semantics(
+    label: context.l10n.accessibilityAddToFavorites,
+    button: true,
+    child: InkWell(
+      onTap: () => widget.onTap(),
+      child: SizedBox.fromSize(
+        size: const Size(40, 40),
+        child: Transform.scale(
+          scale: 5,
+          child: Lottie.asset(
+            'assets/favorite${Theme.of(context).colorScheme.brightness == Brightness.dark ? '_white' : ''}.json',
+            controller: _controller,
+            renderCache: RenderCache.raster,
+          ),
         ),
       ),
     ),

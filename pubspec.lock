@@ -258,8 +258,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
+      ref: HEAD
       resolved-ref: d0d8e31811baed5ea23169bd457d59e3d9a58bf9
-      tag-pattern: "v{{version}}"
       url: "git@github.com:asserty308/flutter_core.git"
     source: git
     version: "1.0.3"
