@@ -1,4 +1,4 @@
-# Copilot Instructions
+# Copilot Instructions v2
 
 ## Packages to use
 
@@ -9,6 +9,9 @@
 - Use `mocktail` for mocking dependencies in tests.
 - Use `flutter_localizations` for localization support.
 - Use `intl` for internationalization and localization.
+- Use `hive_ce_flutter` for local storage.
+- Use `shared_preferences` for key-value storage.
+- Use `http` for making network requests.
 
 ## Coding Guidelines
 
