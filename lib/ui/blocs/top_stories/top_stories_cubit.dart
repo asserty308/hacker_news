@@ -47,6 +47,7 @@ class TopStoriesCubit extends Cubit<TopStoriesState> {
       emit(TopStoriesLoaded(_stories));
     } catch (e, stackTrace) {
       logger.e('Error fetching topstories', error: e, stackTrace: stackTrace);
+      emit(TopStoriesError());
     }
   }
 

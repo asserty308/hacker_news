@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,6 +17,8 @@ class TopStoriesPage extends ConsumerStatefulWidget {
 }
 
 class _TopStoriesPageState extends AppConsumerState<TopStoriesPage> {
+  late final _bloc = ref.read(topStoriesCubitProvider);
+
   final _pageController = PageController();
   final _animationDuration = const Duration(milliseconds: 250);
 
@@ -34,6 +34,13 @@ class _TopStoriesPageState extends AppConsumerState<TopStoriesPage> {
   void onUIReady() {
     super.onUIReady();
     _bloc.loadStories();
+  }
+
+  @override
+  void dispose() {
+    _pageController.removeListener(_pageListener);
+    _pageController.dispose();
+    super.dispose();
   }
 
   @override
@@ -98,7 +105,7 @@ class _TopStoriesPageState extends AppConsumerState<TopStoriesPage> {
         button: true,
         child: InkWell(
           onTap: () => appRouter.push('/settings'),
-          child: Icon(Icons.info_outline, size: 32),
+          child: const Icon(Icons.info_outline, size: 32),
         ),
       ),
     ),
@@ -166,31 +173,30 @@ class _TopStoriesPageState extends AppConsumerState<TopStoriesPage> {
 
   /// Called multiple times during an page animation.
   void _pageListener() {
-    setState(() {
-      _isAnimating = true;
-    });
+    final currentPage = _pageController.page ?? 0.0;
+    final wasAnimating = _isAnimating;
+    final isAnimating = currentPage % 1.0 != 0.0;
 
-    if ((_pageController.page ?? 0.0) % 1.0 == 0.0) {
-      final page = _pageController.page?.toInt() ?? 0;
-      _onPageChanged(page);
+    if (wasAnimating != isAnimating) {
+      setState(() {
+        _isAnimating = isAnimating;
+      });
+    }
+
+    if (!isAnimating) {
+      _onPageChanged(currentPage.toInt());
     }
   }
 
   /// Triggered on page changes and adds the stories the user has already seen to the history cache
   void _onPageChanged(int page) {
-    setState(() {
-      _isAnimating = false;
-    });
-
     if (_bloc.state is TopStoriesLoaded) {
       _bloc.addToHistory((_bloc.state as TopStoriesLoaded).stories[page].id);
     }
 
     if (page == _bloc.storyCount - 1) {
       logger.i('Loading next bunch of stories');
-      Timer.run(_bloc.loadStories);
+      _bloc.loadStories();
     }
   }
-
-  TopStoriesCubit get _bloc => ref.read(topStoriesCubitProvider);
 }
