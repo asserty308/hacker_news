@@ -1,7 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_core/flutter_core.dart';
 import 'package:hacker_news/data/models/item_model.dart';
 import 'package:hacker_news/data/repositories/favorites_repo.dart';
 
@@ -27,7 +26,7 @@ class LikeButtonCubit extends Cubit<LikeButtonState> {
         emit(LikeButtonIsNotFavorite());
       }
     } catch (e) {
-      log('FavoritesButtonCubit::init ERROR $e');
+      logger.e('Error initializing LikeButtonCubit', error: e);
       emit(LikeButtonError());
     }
   }

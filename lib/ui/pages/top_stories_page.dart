@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -148,7 +147,7 @@ class _TopStoriesPageState extends AppConsumerState<TopStoriesPage> {
 
   void _handleArrowEvents(bool isArrowUp) {
     if (_isAnimating) {
-      log('Do not scroll when animating');
+      logger.i('Do not scroll when animating');
       return;
     }
 
@@ -188,7 +187,7 @@ class _TopStoriesPageState extends AppConsumerState<TopStoriesPage> {
     }
 
     if (page == _bloc.storyCount - 1) {
-      log('Loading next bunch of stories');
+      logger.i('Loading next bunch of stories');
       Timer.run(_bloc.loadStories);
     }
   }

@@ -4,7 +4,9 @@ import 'package:hacker_news/data/datasources/hackernews_api.dart';
 import 'package:hacker_news/data/repositories/favorites_repo.dart';
 import 'package:hacker_news/data/repositories/hackernews_repo.dart';
 import 'package:hacker_news/data/repositories/story_history_repo.dart';
+import 'package:hacker_news/domain/use_cases/add_story_to_history_use_case.dart';
 import 'package:hacker_news/domain/use_cases/clear_history_use_case.dart';
+import 'package:hacker_news/domain/use_cases/load_top_stories_use_case.dart';
 import 'package:hacker_news/ui/blocs/favorites/favorites_cubit.dart';
 import 'package:hacker_news/ui/blocs/top_stories/top_stories_cubit.dart';
 
@@ -27,6 +29,19 @@ final favoritesRepoProvider = Provider(
 
 // Use cases
 
+final loadTopStoriesUseCaseProvider = Provider(
+  (ref) => LoadTopStoriesUseCase(
+    newsRepo: ref.watch(hackerNewsRepoProvider),
+    historyRepo: ref.watch(storyHistoryRepoProvider),
+  ),
+);
+
+final addStoryToHistoryUseCaseProvider = Provider(
+  (ref) => AddStoryToHistoryUseCase(
+    historyRepo: ref.watch(storyHistoryRepoProvider),
+  ),
+);
+
 final clearHistoryUseCaseProvider = Provider(
   (ref) => ClearHistoryUseCase(
     storyHistoryRepo: ref.watch(storyHistoryRepoProvider),
@@ -38,8 +53,8 @@ final clearHistoryUseCaseProvider = Provider(
 
 final topStoriesCubitProvider = Provider(
   (ref) => TopStoriesCubit(
-    newsRepo: ref.watch(hackerNewsRepoProvider),
-    historyRepo: ref.watch(storyHistoryRepoProvider),
+    loadTopStoriesUseCase: ref.watch(loadTopStoriesUseCaseProvider),
+    addStoryToHistoryUseCase: ref.watch(addStoryToHistoryUseCaseProvider),
   ),
 );
 

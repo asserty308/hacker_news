@@ -1,19 +1,20 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_core/flutter_core.dart';
 import 'package:hacker_news/data/models/item_model.dart';
-import 'package:hacker_news/data/repositories/hackernews_repo.dart';
-import 'package:hacker_news/data/repositories/story_history_repo.dart';
+import 'package:hacker_news/domain/use_cases/add_story_to_history_use_case.dart';
+import 'package:hacker_news/domain/use_cases/load_top_stories_use_case.dart';
 
 part 'top_stories_state.dart';
 
 class TopStoriesCubit extends Cubit<TopStoriesState> {
-  TopStoriesCubit({required this.newsRepo, required this.historyRepo})
-    : super(TopStoriesInitial());
+  TopStoriesCubit({
+    required this.loadTopStoriesUseCase,
+    required this.addStoryToHistoryUseCase,
+  }) : super(TopStoriesInitial());
 
-  final HackernewsRepo newsRepo;
-  final StoryHistoryRepo historyRepo;
+  final LoadTopStoriesUseCase loadTopStoriesUseCase;
+  final AddStoryToHistoryUseCase addStoryToHistoryUseCase;
 
   final _stories = <ItemModel>[];
   final _loadAmount = 5;
@@ -27,33 +28,25 @@ class TopStoriesCubit extends Cubit<TopStoriesState> {
     }
 
     try {
-      await historyRepo.cleanup();
-
-      final ids = await newsRepo.getTopstoriesIds(
-        _loadAmount,
-        start: _currentIndex,
+      final stories = await loadTopStoriesUseCase.execute(
+        loadAmount: _loadAmount,
+        currentIndex: _currentIndex,
       );
 
-      final unreadIds =
-          ids.where((e) => !historyRepo.allIds.contains(e)).toList();
-
-      if (unreadIds.isEmpty) {
+      if (stories.isEmpty) {
         _currentIndex +=
             _loadAmount; // move index forward since these IDs have been processed
-        log('Jump to $_currentIndex as all stories before have been read');
+        logger.i('Jump to $_currentIndex as all stories before have been read');
         return loadStories();
       }
 
       // Only move the index if we have stories to load.
       _currentIndex += _loadAmount;
-
-      final futures = unreadIds.map(newsRepo.getItem);
-      final stories = await Future.wait(futures);
       _stories.addAll(stories);
 
       emit(TopStoriesLoaded(_stories));
     } catch (e, stackTrace) {
-      log('Error fetching topstories', error: e, stackTrace: stackTrace);
+      logger.e('Error fetching topstories', error: e, stackTrace: stackTrace);
     }
   }
 
@@ -68,7 +61,7 @@ class TopStoriesCubit extends Cubit<TopStoriesState> {
     loadStories();
   }
 
-  void addToHistory(int storyId) => historyRepo.add(storyId);
+  void addToHistory(int storyId) => addStoryToHistoryUseCase.execute(storyId);
 
   int get storyCount => _stories.length;
 }
