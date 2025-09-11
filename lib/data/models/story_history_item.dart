@@ -1,4 +1,4 @@
-import 'package:hacker_news/domain/extensions/date_format.dart';
+import 'package:flutter_core/flutter_core.dart';
 
 class StoryHistoryItem {
   StoryHistoryItem({required this.storyId, required this.dateAdded});
@@ -14,6 +14,6 @@ class StoryHistoryItem {
 
   Map<String, dynamic> toJSON() => {
     'story_id': storyId,
-    'date_added': dateAdded.format('yyyy-MM-dd HH:mm'),
+    'date_added': dateAdded.formatDate('yyyy-MM-dd HH:mm'),
   };
 }
