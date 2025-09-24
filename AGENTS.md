@@ -1,4 +1,4 @@
-# Copilot Instructions v2
+# AGENTS.md for Flutter
 
 ## Packages to use
 
@@ -6,16 +6,22 @@
 - Use `flutter_riverpod` for dependency injection.
 - Use `go_router` for navigation.
 - Use `flutter_test` for widget testing.
-- Use `mocktail` for mocking dependencies in tests.
+- Use `mockito` for mocking dependencies in tests.
 - Use `flutter_localizations` for localization support.
 - Use `intl` for internationalization and localization.
 - Use `hive_ce_flutter` for local storage.
 - Use `shared_preferences` for key-value storage.
 - Use `http` for making network requests.
+- Use `logger` for logging.
 
 ## Coding Guidelines
 
 - Use clean architecture principles.
+- Follow Test-Driven Development (TDD) principles.
+- Write clean, readable, and maintainable code.
+- Follow the SOLID principles.
+- Write meaningful comments and documentation.
+- Ensure proper error handling and logging.
 - Always separate business logic from UI code.
 - Always consider maintainability. 
 - Use descriptive names for all classes, methods, and variables.
