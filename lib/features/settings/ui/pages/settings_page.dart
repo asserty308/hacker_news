@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_core/flutter_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hacker_news/features/top_stories/data/providers/providers.dart';
 import 'package:hacker_news/core/config/constants.dart';
-import 'package:hacker_news/core/config/setup.dart';
+import 'package:hacker_news/core/di/providers.dart';
+import 'package:hacker_news/features/top_stories/data/providers/providers.dart';
 import 'package:hacker_news/l10n/l10n.dart';
-import 'package:hacker_news/core/config/router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingsPage extends ConsumerStatefulWidget {
@@ -51,16 +50,17 @@ class _SettingsPageState extends AppConsumerState<SettingsPage> {
 
   Widget _favoritesTile(BuildContext context) => ListTile(
     title: Text(context.l10n.myFavoritesTileTitle),
-    onTap: () => appRouter.push('/favorites'),
+    onTap: () => context.push('/favorites'),
   );
 
   Widget _licensesTile(BuildContext context) => ListTile(
     title: Text(context.l10n.osl),
-    onTap:
-        () => showLicensePage(
-          context: context,
-          applicationVersion: appPackageInfo?.version,
-        ),
+    onTap: () async {
+      final appVersion = await ref.read(appInfoServiceProvider).getAppVersion();
+      if (context.mounted) {
+        showLicensePage(context: context, applicationVersion: appVersion);
+      }
+    },
   );
 
   Widget _showGitHubRepoTile(BuildContext context) => ListTile(
@@ -84,29 +84,34 @@ class _SettingsPageState extends AppConsumerState<SettingsPage> {
     ),
   );
 
-  Widget get _versionText => Text(
-    context.l10n.appVersion(appPackageInfo?.version ?? 'n.A.'),
-    style: context.textTheme.bodySmall,
+  Widget get _versionText => FutureBuilder<String>(
+    future: ref.read(appInfoServiceProvider).getAppVersion(),
+    builder: (context, snapshot) {
+      final version = snapshot.data ?? 'n.A.';
+      return Text(
+        context.l10n.appVersion(version),
+        style: context.textTheme.bodySmall,
+      );
+    },
   );
 
   Future<void> _onClearCachePressed() async {
     final clearCache = await showDialog<bool?>(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            title: Text(context.l10n.clearHistoryCacheDialogTitle),
-            content: Text(context.l10n.clearHistoryCacheDialogBody),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () => context.pop(false),
-                child: Text(context.l10n.no),
-              ),
-              TextButton(
-                onPressed: () => context.pop(true),
-                child: Text(context.l10n.yes),
-              ),
-            ],
+      builder: (context) => AlertDialog(
+        title: Text(context.l10n.clearHistoryCacheDialogTitle),
+        content: Text(context.l10n.clearHistoryCacheDialogBody),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => context.pop(false),
+            child: Text(context.l10n.no),
           ),
+          TextButton(
+            onPressed: () => context.pop(true),
+            child: Text(context.l10n.yes),
+          ),
+        ],
+      ),
     );
 
     if (clearCache != true) {

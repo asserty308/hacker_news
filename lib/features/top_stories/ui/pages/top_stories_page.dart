@@ -3,11 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_core/flutter_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hacker_news/core/config/router.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hacker_news/features/top_stories/data/providers/providers.dart';
-import 'package:hacker_news/l10n/l10n.dart';
 import 'package:hacker_news/features/top_stories/ui/blocs/top_stories/top_stories_cubit.dart';
 import 'package:hacker_news/features/top_stories/ui/widgets/story_page_item.dart';
+import 'package:hacker_news/l10n/l10n.dart';
 
 class TopStoriesPage extends ConsumerStatefulWidget {
   const TopStoriesPage({super.key});
@@ -104,7 +104,7 @@ class _TopStoriesPageState extends AppConsumerState<TopStoriesPage> {
         label: context.l10n.accessibilitySettings,
         button: true,
         child: InkWell(
-          onTap: () => appRouter.push('/settings'),
+          onTap: () => context.push('/settings'),
           child: const Icon(Icons.info_outline, size: 32),
         ),
       ),
@@ -117,10 +117,7 @@ class _TopStoriesPageState extends AppConsumerState<TopStoriesPage> {
       children: [
         const CircularProgressIndicator.adaptive(),
         const SizedBox(height: 16),
-        Text(
-          context.l10n.storiesLoading,
-          style: context.textTheme.bodyMedium,
-        ),
+        Text(context.l10n.storiesLoading, style: context.textTheme.bodyMedium),
       ],
     ),
   );
@@ -131,11 +128,7 @@ class _TopStoriesPageState extends AppConsumerState<TopStoriesPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            Icons.error_outline,
-            size: 48,
-            color: context.colorScheme.error,
-          ),
+          Icon(Icons.error_outline, size: 48, color: context.colorScheme.error),
           const SizedBox(height: 16),
           Text(
             context.l10n.errorLoadingStories,

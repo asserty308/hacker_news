@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_core/flutter_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hacker_news/core/config/theme.dart';
+import 'package:hacker_news/core/di/providers.dart';
 import 'package:hacker_news/features/top_stories/data/providers/providers.dart';
 import 'package:hacker_news/l10n/generated/app_localizations.dart';
 import 'package:hacker_news/l10n/l10n.dart';
-import 'package:hacker_news/core/config/router.dart';
-import 'package:hacker_news/core/config/theme.dart';
 
 class MyApp extends ConsumerStatefulWidget {
   const MyApp({super.key});
@@ -13,37 +14,22 @@ class MyApp extends ConsumerStatefulWidget {
   ConsumerState<MyApp> createState() => _MyAppState();
 }
 
-class _MyAppState extends ConsumerState<MyApp> {
-  late final AppLifecycleListener _listener;
-
+class _MyAppState extends AppConsumerState<MyApp> {
   @override
-  void initState() {
-    super.initState();
-
-    // Initialize the AppLifecycleListener class and pass callbacks
-    _listener = AppLifecycleListener(onResume: _onResume);
-  }
-
-  @override
-  void dispose() {
-    _listener.dispose();
-
-    super.dispose();
+  void onResume() {
+    super.onResume();
+    ref.read(topStoriesCubitProvider).refresh();
   }
 
   @override
   Widget build(BuildContext context) => MaterialApp.router(
     restorationScopeId: 'app',
     onGenerateTitle: (context) => context.l10n.appTitle,
-    theme: appTheme(false),
-    darkTheme: appTheme(true),
+    theme: lightTheme,
+    darkTheme: darkTheme,
     debugShowCheckedModeBanner: false,
-    routerConfig: appRouter,
+    routerConfig: ref.read(appRouterProvider),
     localizationsDelegates: AppLocalizations.localizationsDelegates,
     supportedLocales: AppLocalizations.supportedLocales,
   );
-
-  void _onResume() {
-    ref.read(topStoriesCubitProvider).refresh();
-  }
 }

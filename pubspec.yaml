@@ -15,11 +15,11 @@ dependencies:
     git:
       url: https://github.com/asserty308/flutter_core.git
       tag_pattern: v{{version}}
-    version: ^1.0.4
+    version: ^1.0.7
   flutter_localizations:
     sdk: flutter
   flutter_riverpod: ^3.0.0
-  go_router: ^16.2.1
+  go_router: ^16.2.4
   hive_ce_flutter: ^2.3.2
   http: ^1.5.0
   intl: ^0.20.2

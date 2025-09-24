@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
-ThemeData appTheme(bool isDark) => ThemeData(
+final lightTheme = ThemeData(
   useMaterial3: true,
-  colorScheme: isDark ? _darkColorScheme : _lightColorScheme,
+  colorScheme: _lightColorScheme,
 );
+
+final darkTheme = ThemeData(useMaterial3: true, colorScheme: _darkColorScheme);
 
 final _lightColorScheme = ColorScheme.fromSeed(
   seedColor: Colors.blue,
