@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_core/flutter_core.dart';
 import 'package:hacker_news/l10n/l10n.dart';
 import 'package:lottie/lottie.dart';
 
@@ -54,7 +55,7 @@ class _AddFavoriteButtonState extends State<AddFavoriteButton>
         child: Transform.scale(
           scale: 5,
           child: Lottie.asset(
-            'assets/favorite${Theme.of(context).colorScheme.brightness == Brightness.dark ? '_white' : ''}.json',
+            'assets/favorite${context.colorScheme.brightness == Brightness.dark ? '_white' : ''}.json',
             controller: _controller,
             renderCache: RenderCache.raster,
           ),

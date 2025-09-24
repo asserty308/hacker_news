@@ -86,7 +86,7 @@ class _SettingsPageState extends AppConsumerState<SettingsPage> {
 
   Widget get _versionText => Text(
     context.l10n.appVersion(appPackageInfo?.version ?? 'n.A.'),
-    style: Theme.of(context).textTheme.bodySmall,
+    style: context.textTheme.bodySmall,
   );
 
   Future<void> _onClearCachePressed() async {

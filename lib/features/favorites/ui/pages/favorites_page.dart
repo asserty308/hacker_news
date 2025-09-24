@@ -64,7 +64,7 @@ class _FavoritesPageState extends AppConsumerState<FavoritesPage> {
               const SizedBox(height: 16),
               Text(
                 context.l10n.favoritesLoading,
-                style: Theme.of(context).textTheme.bodyMedium,
+                style: context.textTheme.bodyMedium,
               ),
             ],
           ),
@@ -85,12 +85,12 @@ class _FavoritesPageState extends AppConsumerState<FavoritesPage> {
           Icon(
             Icons.error_outline,
             size: 48,
-            color: Theme.of(context).colorScheme.error,
+            color: context.colorScheme.error,
           ),
           const SizedBox(height: 16),
           Text(
             context.l10n.errorLoadingFavorites,
-            style: Theme.of(context).textTheme.titleMedium,
+            style: context.textTheme.titleMedium,
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 16),

@@ -119,7 +119,7 @@ class _TopStoriesPageState extends AppConsumerState<TopStoriesPage> {
         const SizedBox(height: 16),
         Text(
           context.l10n.storiesLoading,
-          style: Theme.of(context).textTheme.bodyMedium,
+          style: context.textTheme.bodyMedium,
         ),
       ],
     ),
@@ -134,12 +134,12 @@ class _TopStoriesPageState extends AppConsumerState<TopStoriesPage> {
           Icon(
             Icons.error_outline,
             size: 48,
-            color: Theme.of(context).colorScheme.error,
+            color: context.colorScheme.error,
           ),
           const SizedBox(height: 16),
           Text(
             context.l10n.errorLoadingStories,
-            style: Theme.of(context).textTheme.titleMedium,
+            style: context.textTheme.titleMedium,
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 16),
