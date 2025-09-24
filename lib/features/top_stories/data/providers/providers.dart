@@ -1,13 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hacker_news/features/favorites/data/datasources/favorites_cache.dart';
-import 'package:hacker_news/features/top_stories/data/datasources/hackernews_api.dart';
 import 'package:hacker_news/features/favorites/data/repositories/favorites_repo.dart';
+import 'package:hacker_news/features/favorites/ui/blocs/favorites/favorites_cubit.dart';
+import 'package:hacker_news/features/top_stories/data/datasources/hackernews_api.dart';
 import 'package:hacker_news/features/top_stories/data/repositories/hackernews_repo.dart';
 import 'package:hacker_news/features/top_stories/data/repositories/story_history_repo.dart';
 import 'package:hacker_news/features/top_stories/domain/use_cases/add_story_to_history_use_case.dart';
 import 'package:hacker_news/features/top_stories/domain/use_cases/clear_history_use_case.dart';
 import 'package:hacker_news/features/top_stories/domain/use_cases/load_top_stories_use_case.dart';
-import 'package:hacker_news/features/favorites/ui/blocs/favorites/favorites_cubit.dart';
 import 'package:hacker_news/features/top_stories/ui/blocs/top_stories/top_stories_cubit.dart';
 
 // Datasources
