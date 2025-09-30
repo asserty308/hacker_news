@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_core/flutter_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+import 'package:hacker_news/core/navigation/navigation_service.dart';
 import 'package:hacker_news/features/top_stories/data/providers/providers.dart';
 import 'package:hacker_news/features/top_stories/ui/blocs/top_stories/top_stories_cubit.dart';
 import 'package:hacker_news/features/top_stories/ui/widgets/story_page_item.dart';
@@ -104,7 +104,7 @@ class _TopStoriesPageState extends AppConsumerState<TopStoriesPage> {
         label: context.l10n.accessibilitySettings,
         button: true,
         child: InkWell(
-          onTap: () => context.push('/settings'),
+          onTap: () => context.pushToSettings(),
           child: const Icon(Icons.info_outline, size: 32),
         ),
       ),
