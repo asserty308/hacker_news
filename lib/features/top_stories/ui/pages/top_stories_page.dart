@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_core/flutter_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hacker_news/core/navigation/navigation_service.dart';
+import 'package:hacker_news/core/navigation/navigation.dart';
 import 'package:hacker_news/features/top_stories/data/providers/providers.dart';
 import 'package:hacker_news/features/top_stories/ui/blocs/top_stories/top_stories_cubit.dart';
 import 'package:hacker_news/features/top_stories/ui/widgets/story_page_item.dart';
