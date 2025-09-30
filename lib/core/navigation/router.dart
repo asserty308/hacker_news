@@ -60,6 +60,18 @@ class AppRouter {
     GoRoute(
       name: AppRoutes.settings,
       path: AppRoutes.settingsPath,
+      routes: [
+        GoRoute(
+          name: AppRoutes.licenses,
+          path: AppRoutes.licenses,
+          pageBuilder: (context, state) {
+            final appVersion = state.uri.queryParameters['version'] ?? 'n.A.';
+            return NoTransitionPage(
+              child: LicensePage(applicationVersion: appVersion),
+            );
+          },
+        ),
+      ],
       pageBuilder: (context, state) =>
           const NoTransitionPage(child: SettingsPage()),
     ),

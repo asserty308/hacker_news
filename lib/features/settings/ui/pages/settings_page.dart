@@ -59,7 +59,7 @@ class _SettingsPageState extends AppConsumerState<SettingsPage> {
     onTap: () async {
       final appVersion = await ref.read(appInfoServiceProvider).getAppVersion();
       if (context.mounted) {
-        showLicensePage(context: context, applicationVersion: appVersion);
+        context.pushToLicenses(appVersion);
       }
     },
   );

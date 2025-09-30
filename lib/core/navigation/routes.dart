@@ -4,6 +4,7 @@ class AppRoutes {
   static const String home = 'home';
   static const String favorites = 'favorites';
   static const String settings = 'settings';
+  static const String licenses = 'licenses';
 
   // Route paths
   static const String homePath = '/';

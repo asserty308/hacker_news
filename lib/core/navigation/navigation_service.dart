@@ -21,10 +21,15 @@ extension NavigationExtension on BuildContext {
       _NavigationService.popWithResult(this, result);
 
   /// Push to favorites page
-  void pushToFavorites() => _NavigationService.pushToFavorites(this);
+  Future<T?> pushToFavorites<T>() =>
+      _NavigationService.pushToFavorites<T>(this);
 
   /// Push to settings page
-  void pushToSettings() => _NavigationService.pushToSettings(this);
+  Future<T?> pushToSettings<T>() => _NavigationService.pushToSettings<T>(this);
+
+  /// Push to licenses page
+  Future<T?> pushToLicenses<T>(String appVersion) =>
+      _NavigationService.pushToLicenses<T>(this, appVersion);
 
   /// Get current route name
   String? get currentRouteName => _NavigationService.getCurrentRouteName(this);
@@ -75,14 +80,21 @@ class _NavigationService {
   }
 
   /// Push a route (for modals, dialogs, etc.)
-  static void pushToFavorites(BuildContext context) {
-    context.pushNamed(AppRoutes.favorites);
-  }
+  static Future<T?> pushToFavorites<T>(BuildContext context) =>
+      context.pushNamed<T>(AppRoutes.favorites);
 
   /// Push a route (for modals, dialogs, etc.)
-  static void pushToSettings(BuildContext context) {
-    context.pushNamed(AppRoutes.settings);
-  }
+  static Future<T?> pushToSettings<T>(BuildContext context) =>
+      context.pushNamed<T>(AppRoutes.settings);
+
+  /// Navigate to licenses page
+  static Future<T?> pushToLicenses<T>(
+    BuildContext context,
+    String appVersion,
+  ) => context.pushNamed<T>(
+    AppRoutes.licenses,
+    queryParameters: {'version': appVersion},
+  );
 
   /// Get current route name
   static String? getCurrentRouteName(BuildContext context) {
