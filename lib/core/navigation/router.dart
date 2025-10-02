@@ -12,9 +12,9 @@ class AppRouter {
   AppRouter._();
 
   /// Creates the main router configuration
-  static GoRouter createRouter() => GoRouter(
+  static final instance = GoRouter(
     restorationScopeId: 'app-router',
-    initialLocation: AppRoutes.homePath,
+    initialLocation: kRouteHome,
     routes: _routes,
     errorPageBuilder: _errorPageBuilder,
   );
@@ -51,24 +51,24 @@ class AppRouter {
   /// App route definitions
   static final List<GoRoute> _routes = [
     GoRoute(
-      name: AppRoutes.home,
-      path: AppRoutes.homePath,
+      path: '/',
+      name: kRouteHome,
       pageBuilder: (context, state) =>
           const NoTransitionPage(child: TopStoriesPage()),
     ),
     GoRoute(
-      name: AppRoutes.favorites,
-      path: AppRoutes.favoritesPath,
+      path: '/favorites',
+      name: kRouteFavorites,
       pageBuilder: (context, state) =>
           const NoTransitionPage(child: FavoritesPage()),
     ),
     GoRoute(
-      name: AppRoutes.settings,
-      path: AppRoutes.settingsPath,
+      path: '/settings',
+      name: kRouteSettings,
       routes: [
         GoRoute(
-          name: AppRoutes.licenses,
-          path: AppRoutes.licenses,
+          path: kRouteLicenses,
+          name: kRouteLicenses,
           pageBuilder: (context, state) {
             final appVersion = state.uri.queryParameters['version'] ?? 'n.A.';
             return NoTransitionPage(

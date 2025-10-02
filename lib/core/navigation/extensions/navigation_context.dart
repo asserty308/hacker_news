@@ -17,7 +17,7 @@ extension NavigationExtension on BuildContext {
 
   /// Pop with result (for dialogs)
   void popWithResult<T>([T? result]) =>
-      NavigationService.popWithResult(this, result);
+      NavigationService.popWithResult<T>(this, result);
 
   /// Push to favorites page
   Future<T?> pushToFavorites<T>() => NavigationService.pushToFavorites<T>(this);

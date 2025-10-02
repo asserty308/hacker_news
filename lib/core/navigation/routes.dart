@@ -1,13 +1,4 @@
-/// Route names constants for type-safe navigation
-class AppRoutes {
-  // Route names
-  static const String home = 'home';
-  static const String favorites = 'favorites';
-  static const String settings = 'settings';
-  static const String licenses = 'licenses';
-
-  // Route paths
-  static const String homePath = '/';
-  static const String favoritesPath = '/favorites';
-  static const String settingsPath = '/settings';
-}
+const String kRouteHome = 'home';
+const String kRouteFavorites = 'favorites';
+const String kRouteSettings = 'settings';
+const String kRouteLicenses = 'licenses';

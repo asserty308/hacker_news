@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_core/flutter_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hacker_news/core/config/constants.dart';
 import 'package:hacker_news/core/di/providers.dart';
 import 'package:hacker_news/core/navigation/extensions/navigation_context.dart';
@@ -104,11 +103,11 @@ class _SettingsPageState extends AppConsumerState<SettingsPage> {
         content: Text(context.l10n.clearHistoryCacheDialogBody),
         actions: <Widget>[
           TextButton(
-            onPressed: () => context.pop(false),
+            onPressed: () => context.popWithResult(false),
             child: Text(context.l10n.no),
           ),
           TextButton(
-            onPressed: () => context.pop(true),
+            onPressed: () => context.popWithResult(true),
             child: Text(context.l10n.yes),
           ),
         ],

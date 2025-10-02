@@ -6,17 +6,17 @@ import 'package:hacker_news/core/navigation/routes.dart';
 class NavigationService {
   /// Navigate to home page
   static void goToHome(BuildContext context) {
-    context.goNamed(AppRoutes.home);
+    context.goNamed(kRouteHome);
   }
 
   /// Navigate to favorites page
   static void goToFavorites(BuildContext context) {
-    context.goNamed(AppRoutes.favorites);
+    context.goNamed(kRouteFavorites);
   }
 
   /// Navigate to settings page
   static void goToSettings(BuildContext context) {
-    context.goNamed(AppRoutes.settings);
+    context.goNamed(kRouteSettings);
   }
 
   /// Navigate back
@@ -31,23 +31,23 @@ class NavigationService {
 
   /// Pop with result (for dialogs)
   static void popWithResult<T>(BuildContext context, [T? result]) {
-    context.pop(result);
+    context.pop<T>(result);
   }
 
   /// Push a route (for modals, dialogs, etc.)
   static Future<T?> pushToFavorites<T>(BuildContext context) =>
-      context.pushNamed<T>(AppRoutes.favorites);
+      context.pushNamed<T>(kRouteFavorites);
 
   /// Push a route (for modals, dialogs, etc.)
   static Future<T?> pushToSettings<T>(BuildContext context) =>
-      context.pushNamed<T>(AppRoutes.settings);
+      context.pushNamed<T>(kRouteSettings);
 
   /// Navigate to licenses page
   static Future<T?> pushToLicenses<T>(
     BuildContext context,
     String appVersion,
   ) => context.pushNamed<T>(
-    AppRoutes.licenses,
+    kRouteLicenses,
     queryParameters: {'version': appVersion},
   );
 
