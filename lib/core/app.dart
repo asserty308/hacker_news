@@ -21,7 +21,7 @@ class _MyAppState extends AppConsumerState<MyApp> {
     theme: lightTheme,
     darkTheme: darkTheme,
     debugShowCheckedModeBanner: false,
-    routerConfig: ref.read(goRouterProvider),
+    routerConfig: ref.read(appRouterProvider),
     localizationsDelegates: AppLocalizations.localizationsDelegates,
     supportedLocales: AppLocalizations.supportedLocales,
   );
