@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_core/flutter_core.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hacker_news/core/navigation/extensions/navigation_context.dart';
 import 'package:hacker_news/core/navigation/routes.dart';
 import 'package:hacker_news/features/favorites/ui/pages/favorites_page.dart';
 import 'package:hacker_news/features/settings/ui/pages/settings_page.dart';
@@ -22,20 +23,25 @@ class AppRouter {
   static Page<void> _errorPageBuilder(
     BuildContext context,
     GoRouterState state,
-  ) => const NoTransitionPage(
+  ) => NoTransitionPage(
     child: Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.error_outline, size: 64, color: Colors.grey),
+            const Icon(Icons.error_outline, size: 64, color: Colors.grey),
             vGap16,
-            Text(
+            const Text(
               'Page Not Found',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             vGap8,
-            Text('The requested page could not be found.'),
+            const Text('The requested page could not be found.'),
+            vGap16,
+            TextButton(
+              onPressed: () => context.goToHome(),
+              child: const Text('Go to Home'),
+            ),
           ],
         ),
       ),
