@@ -39,7 +39,7 @@ class AppRouter {
             vGap16,
             TextButton(
               onPressed: () => context.goToHome(),
-              child: const Text('Go to Home'),
+              child: const Text('Show top stories'),
             ),
           ],
         ),
