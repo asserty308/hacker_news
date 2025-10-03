@@ -33,7 +33,7 @@ class _TopStoriesPageState extends AppConsumerState<TopStoriesPage> {
   @override
   void onUIReady() {
     super.onUIReady();
-    _bloc.loadStories();
+    _bloc.loadNextStories();
   }
 
   @override
@@ -63,11 +63,8 @@ class _TopStoriesPageState extends AppConsumerState<TopStoriesPage> {
     bloc: _bloc,
     listener: (context, state) {
       if (state is TopStoriesLoaded && state.stories.isNotEmpty) {
-        // add first story to history cache
-        _bloc.addToHistory(state.stories.first.id);
-
         if (state.stories.length == 1) {
-          _bloc.loadStories();
+          _bloc.loadNextStories();
         }
       }
     },
@@ -137,7 +134,7 @@ class _TopStoriesPageState extends AppConsumerState<TopStoriesPage> {
           ),
           const SizedBox(height: 16),
           ElevatedButton(
-            onPressed: _bloc.loadStories,
+            onPressed: _bloc.loadNextStories,
             child: Text(context.l10n.tryAgain),
           ),
         ],
@@ -183,13 +180,9 @@ class _TopStoriesPageState extends AppConsumerState<TopStoriesPage> {
 
   /// Triggered on page changes and adds the stories the user has already seen to the history cache
   void _onPageChanged(int page) {
-    if (_bloc.state is TopStoriesLoaded) {
-      _bloc.addToHistory((_bloc.state as TopStoriesLoaded).stories[page].id);
-    }
-
     if (page == _bloc.storyCount - 1) {
       logger.i('Loading next bunch of stories');
-      _bloc.loadStories();
+      _bloc.loadNextStories();
     }
   }
 }

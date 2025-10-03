@@ -1,3 +1,4 @@
+import 'package:hacker_news/core/utils/web_util.dart';
 import 'package:hacker_news/features/top_stories/data/datasources/hackernews_api.dart';
 import 'package:hacker_news/features/top_stories/data/models/item_model.dart';
 
@@ -6,14 +7,18 @@ class HackernewsRepo {
 
   final HackernewsApi api;
 
-  Future<List<int>> getTopstoriesIds(int amount, {int start = 0}) =>
-      api.getTopstoriesIds(amount, start: start);
+  Future<List<int>> getTopstories() async {
+    final response = await api.getTopstories();
+    return response.cast<int>();
+  }
 
-  Future<ItemModel> getItem(int id) => api.getItem(id);
+  Future<ItemModel> getItem(int id) async {
+    final response = await api.getItem(id);
+    return _parseItem(response);
+  }
 
-  Future<List<ItemModel>> getLatestStories(int amount) =>
-      api.getLatestStories(amount);
+  ItemModel _parseItem(JSONObject json) => ItemModel.fromJSON(json);
 
-  Future<List<ItemModel>> getTopstories(int amount, {int start = 0}) =>
-      api.getTopstories(amount, start: start);
+  List<ItemModel> parseItems(List<JSONObject> jsonList) =>
+      jsonList.map(_parseItem).toList();
 }

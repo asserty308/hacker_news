@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hacker_news/core/config/constants.dart';
 import 'package:hacker_news/core/di/providers.dart';
 import 'package:hacker_news/core/navigation/extensions/navigation_context.dart';
-import 'package:hacker_news/features/top_stories/data/providers/providers.dart';
 import 'package:hacker_news/l10n/l10n.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -42,7 +41,6 @@ class _SettingsPageState extends AppConsumerState<SettingsPage> {
   Widget _body(BuildContext context) => SliverList.list(
     children: [
       _favoritesTile(context),
-      _clearHistoryCacheTile(context),
       _licensesTile(context),
       _showGitHubRepoTile(context),
     ],
@@ -68,12 +66,6 @@ class _SettingsPageState extends AppConsumerState<SettingsPage> {
     onTap: () => launchUrl(Uri.parse(kGitHubRepoUrl)),
   );
 
-  Widget _clearHistoryCacheTile(BuildContext context) => ListTile(
-    title: Text(context.l10n.clearHistoryCacheTileTitle),
-    subtitle: Text(context.l10n.clearHistoryCacheTileSubtitle),
-    onTap: _onClearCachePressed,
-  );
-
   Widget _footer(BuildContext context) => SafeArea(
     child: Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
@@ -94,30 +86,4 @@ class _SettingsPageState extends AppConsumerState<SettingsPage> {
       );
     },
   );
-
-  Future<void> _onClearCachePressed() async {
-    final clearCache = await showDialog<bool?>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(context.l10n.clearHistoryCacheDialogTitle),
-        content: Text(context.l10n.clearHistoryCacheDialogBody),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () => context.popWithResult(false),
-            child: Text(context.l10n.no),
-          ),
-          TextButton(
-            onPressed: () => context.popWithResult(true),
-            child: Text(context.l10n.yes),
-          ),
-        ],
-      ),
-    );
-
-    if (clearCache != true) {
-      return;
-    }
-
-    await ref.read(clearHistoryUseCaseProvider).execute();
-  }
 }

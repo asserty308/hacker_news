@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:hacker_news/core/utils/web_util.dart';
 import 'package:hacker_news/features/top_stories/data/models/item_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -7,47 +8,18 @@ class HackernewsApi {
   final _baseUrl = 'https://hacker-news.firebaseio.com/v0/';
 
   /// Calls [endpoint] on the hackernews api
-  Future<dynamic> _getEndpoint(String endpoint) async {
+  Future<T> _getEndpoint<T>(String endpoint) async {
     final response = await http.get(Uri.parse('$_baseUrl$endpoint.json'));
-    return jsonDecode(response.body);
+    return jsonDecode(response.body) as T;
   }
 
-  /// The endpoint [topstories] returns an array of ids.
-  Future<List<int>> getTopstoriesIds(int amount, {int start = 0}) async {
-    final response = await _getEndpoint('topstories') as List;
-
-    return response.map((id) => id as int).skip(start).take(amount).toList();
-  }
+  /// The endpoint [topstories] returns the current 500 top stories ids.
+  Future<List> getTopstories() => _getEndpoint<List>('topstories');
 
   /// The maxitem endpoint contains the latest news id.
   /// It can be used to iterate through proevious news.
-  Future<int> getLatestStoryId() async {
-    return await _getEndpoint('maxitem');
-  }
+  Future<int> getMaxItem() => _getEndpoint<int>('maxitem');
 
   /// The endpoint [item/id] returns a representation of [ItemModel].
-  Future<ItemModel> getItem(int id) async {
-    final response = await _getEndpoint('item/$id');
-    return ItemModel.fromJSON(response);
-  }
-
-  /// Builds a list of [amount] [ItemModel] which represent the
-  /// latest stories published on hackernews.
-  Future<List<ItemModel>> getLatestStories(int amount) async {
-    final latestId = await getLatestStoryId();
-    final futures = List.generate(amount, (index) => getItem(latestId - index));
-    return Future.wait(futures);
-  }
-
-  /// Builds a list of [amount] [ItemModel] which represent the
-  /// current top stories published on hackernews.
-  /// Uses Future.wait to fetch all items concurrently.
-  /// This will reduce the overall time taken to fetch all the items.
-  Future<List<ItemModel>> getTopstories(int amount, {int start = 0}) async {
-    final storyIds = await getTopstoriesIds(amount, start: start);
-
-    final futures = storyIds.map(getItem);
-
-    return Future.wait(futures);
-  }
+  Future<JSONObject> getItem(int id) => _getEndpoint<JSONObject>('item/$id');
 }
