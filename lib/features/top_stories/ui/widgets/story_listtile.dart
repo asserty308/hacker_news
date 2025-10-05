@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_core/flutter_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hacker_news/features/top_stories/data/models/item_model.dart';
 import 'package:hacker_news/features/top_stories/data/providers/providers.dart';
 import 'package:hacker_news/features/top_stories/ui/blocs/like_button/like_button_cubit.dart';
-import 'package:hacker_news/features/top_stories/data/models/item_model.dart';
-import 'package:hacker_news/l10n/l10n.dart';
 import 'package:hacker_news/features/top_stories/ui/widgets/add_favorite_button.dart';
 import 'package:hacker_news/features/top_stories/ui/widgets/remove_favorite_button.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:hacker_news/l10n/l10n.dart';
 
 class StoryListTile extends ConsumerWidget {
   const StoryListTile({super.key, required this.story, this.onFavoriteRemoved});
@@ -17,16 +17,16 @@ class StoryListTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) => BlocProvider(
-    create:
-        (context) => LikeButtonCubit(ref.read(favoritesRepoProvider), story),
-    child: _tile(context),
+    create: (context) =>
+        LikeButtonCubit(ref.read(favoritesRepoProvider), story),
+    child: _tile(context, ref),
   );
 
-  Widget _tile(BuildContext context) => ListTile(
+  Widget _tile(BuildContext context, WidgetRef ref) => ListTile(
     title: _title,
     subtitle: _subtitle(context),
     trailing: _favButton,
-    onTap: () => _showStory(context),
+    onTap: () => _showStory(ref),
   );
 
   Widget get _title => Text(story.title);
@@ -61,7 +61,7 @@ class StoryListTile extends ConsumerWidget {
         return RemoveFavoriteButton(onTap: () => _addToFavorites(context));
       }
 
-      return const SizedBox(width: 0, height: 0);
+      return gap0;
     },
   );
 
@@ -75,16 +75,9 @@ class StoryListTile extends ConsumerWidget {
     _showUndoSnackbar(context);
   }
 
-  void _showStory(BuildContext context) {
-    if (story.url?.isEmpty ?? true) {
-      final url = Uri.https('news.ycombinator.com', '/item', {
-        'id': '${story.id}',
-      });
-      launchUrl(url);
-      return;
-    }
-
-    launchUrl(Uri.parse(story.url!));
+  void _showStory(WidgetRef ref) {
+    final showStoryUseCase = ref.read(showStoryUseCaseProvider);
+    showStoryUseCase.execute(story);
   }
 
   void _showUndoSnackbar(BuildContext context) => ScaffoldMessenger.of(context)

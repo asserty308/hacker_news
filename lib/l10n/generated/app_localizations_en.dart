@@ -183,4 +183,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get accessibilityBackButton => 'Back';
+
+  @override
+  String get pageNotFoundTitle => 'Page Not Found';
+
+  @override
+  String get pageNotFoundMessage => 'The requested page could not be found.';
+
+  @override
+  String get showTopStories => 'Show top stories';
 }

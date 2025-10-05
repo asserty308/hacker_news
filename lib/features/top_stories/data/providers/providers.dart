@@ -6,6 +6,7 @@ import 'package:hacker_news/features/top_stories/data/datasources/hackernews_api
 import 'package:hacker_news/features/top_stories/data/repositories/hackernews_repo.dart';
 import 'package:hacker_news/features/top_stories/domain/use_cases/get_top_storiy_ids_use_case.dart';
 import 'package:hacker_news/features/top_stories/domain/use_cases/load_story_use_case.dart';
+import 'package:hacker_news/features/top_stories/domain/use_cases/show_story_use_case.dart';
 import 'package:hacker_news/features/top_stories/ui/blocs/top_stories/top_stories_cubit.dart';
 
 // Datasources
@@ -33,6 +34,8 @@ final loadTopStoriesUseCaseProvider = Provider(
 final getTopStoryIdsUseCaseProvider = Provider(
   (ref) => GetTopStoriyIdsUseCase(newsRepo: ref.watch(hackerNewsRepoProvider)),
 );
+
+final showStoryUseCaseProvider = Provider((ref) => ShowStoryUseCase());
 
 // Blocs
 

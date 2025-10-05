@@ -79,5 +79,8 @@
     "accessibilityRemoveFromFavorites": "Remove from favorites",
     "accessibilityShareStory": "Share story",
     "accessibilitySettings": "Settings",
-    "accessibilityBackButton": "Back"
+    "accessibilityBackButton": "Back",
+    "pageNotFoundTitle": "Page Not Found",
+    "pageNotFoundMessage": "The requested page could not be found.",
+    "showTopStories": "Show top stories"
 }

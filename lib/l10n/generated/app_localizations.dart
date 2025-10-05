@@ -333,6 +333,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Back'**
   String get accessibilityBackButton;
+
+  /// No description provided for @pageNotFoundTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Page Not Found'**
+  String get pageNotFoundTitle;
+
+  /// No description provided for @pageNotFoundMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'The requested page could not be found.'**
+  String get pageNotFoundMessage;
+
+  /// No description provided for @showTopStories.
+  ///
+  /// In en, this message translates to:
+  /// **'Show top stories'**
+  String get showTopStories;
 }
 
 class _AppLocalizationsDelegate
