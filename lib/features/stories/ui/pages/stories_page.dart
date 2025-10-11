@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_core/flutter_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hacker_news/core/navigation/extensions/navigation_context.dart';
-import 'package:hacker_news/features/top_stories/data/providers/providers.dart';
-import 'package:hacker_news/features/top_stories/ui/blocs/top_stories/top_stories_cubit.dart';
-import 'package:hacker_news/features/top_stories/ui/widgets/story_page_item.dart';
+import 'package:hacker_news/features/stories/constants.dart';
+import 'package:hacker_news/features/stories/di/providers.dart';
+import 'package:hacker_news/features/stories/ui/widgets/topstories_listview.dart';
 import 'package:hacker_news/l10n/l10n.dart';
 
 class TopStoriesPage extends ConsumerStatefulWidget {
@@ -20,7 +19,6 @@ class _TopStoriesPageState extends AppConsumerState<TopStoriesPage> {
   late final _bloc = ref.read(topStoriesCubitProvider);
 
   final _pageController = PageController();
-  final _animationDuration = const Duration(milliseconds: 250);
 
   var _isAnimating = false;
 
@@ -31,12 +29,6 @@ class _TopStoriesPageState extends AppConsumerState<TopStoriesPage> {
   }
 
   @override
-  void onUIReady() {
-    super.onUIReady();
-    _bloc.loadNextStories();
-  }
-
-  @override
   void dispose() {
     _pageController.removeListener(_pageListener);
     _pageController.dispose();
@@ -44,7 +36,8 @@ class _TopStoriesPageState extends AppConsumerState<TopStoriesPage> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(body: _keyboardListener);
+  Widget build(BuildContext context) =>
+      Scaffold(body: _keyboardListener, floatingActionButton: _infoButton);
 
   Widget get _keyboardListener => CallbackShortcuts(
     bindings: {
@@ -56,41 +49,9 @@ class _TopStoriesPageState extends AppConsumerState<TopStoriesPage> {
     child: Focus(autofocus: true, child: _body),
   );
 
-  Widget get _body =>
-      SafeArea(child: Stack(children: [_pageView, _infoButton]));
-
-  Widget get _pageView => BlocConsumer<TopStoriesCubit, TopStoriesState>(
-    bloc: _bloc,
-    listener: (context, state) {
-      if (state is TopStoriesLoaded && state.stories.isNotEmpty) {
-        if (state.stories.length == 1) {
-          _bloc.loadNextStories();
-        }
-      }
-    },
-    builder: (context, state) {
-      if (state is TopStoriesLoaded) {
-        return PageView.builder(
-          itemCount: state.stories.length,
-          controller: _pageController,
-          scrollDirection: Axis.vertical,
-          physics: const ClampingScrollPhysics(),
-          itemBuilder: (context, index) {
-            final story = state.stories[index];
-            return Padding(
-              padding: const EdgeInsets.all(64),
-              child: StoryPageItem(story: story),
-            );
-          },
-        );
-      }
-
-      if (state is TopStoriesError) {
-        return _errorWidget;
-      }
-
-      return _loadingWidget;
-    },
+  Widget get _body => TopstoriesListview(
+    pageController: _pageController,
+    topStoriesCubit: _bloc,
   );
 
   Widget get _infoButton => Padding(
@@ -108,40 +69,6 @@ class _TopStoriesPageState extends AppConsumerState<TopStoriesPage> {
     ),
   );
 
-  Widget get _loadingWidget => Center(
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const CircularProgressIndicator.adaptive(),
-        const SizedBox(height: 16),
-        Text(context.l10n.storiesLoading, style: context.textTheme.bodyMedium),
-      ],
-    ),
-  );
-
-  Widget get _errorWidget => Center(
-    child: Padding(
-      padding: const EdgeInsets.all(32),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(Icons.error_outline, size: 48, color: context.colorScheme.error),
-          const SizedBox(height: 16),
-          Text(
-            context.l10n.errorLoadingStories,
-            style: context.textTheme.titleMedium,
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 16),
-          ElevatedButton(
-            onPressed: _bloc.loadNextStories,
-            child: Text(context.l10n.tryAgain),
-          ),
-        ],
-      ),
-    ),
-  );
-
   void _handleArrowEvents(bool isArrowUp) {
     if (_isAnimating) {
       logger.i('Do not scroll when animating');
@@ -150,12 +77,12 @@ class _TopStoriesPageState extends AppConsumerState<TopStoriesPage> {
 
     if (isArrowUp) {
       _pageController.previousPage(
-        duration: _animationDuration,
+        duration: kPageAnimationDuration,
         curve: Curves.decelerate,
       );
     } else {
       _pageController.nextPage(
-        duration: _animationDuration,
+        duration: kPageAnimationDuration,
         curve: Curves.decelerate,
       );
     }

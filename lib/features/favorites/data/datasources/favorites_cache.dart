@@ -1,4 +1,4 @@
-import 'package:hacker_news/features/top_stories/data/models/item_model.dart';
+import 'package:hacker_news/features/stories/data/models/item_model.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
 
 /// The local datasource for stories marked as favorites

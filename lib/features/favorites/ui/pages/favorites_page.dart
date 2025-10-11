@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_core/flutter_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hacker_news/features/top_stories/data/providers/providers.dart';
+import 'package:hacker_news/features/stories/di/providers.dart';
 import 'package:hacker_news/l10n/l10n.dart';
 import 'package:hacker_news/features/favorites/ui/blocs/favorites/favorites_cubit.dart';
-import 'package:hacker_news/features/top_stories/ui/widgets/stories_listview.dart';
+import 'package:hacker_news/features/stories/ui/widgets/stories_listview.dart';
 
 class FavoritesPage extends ConsumerStatefulWidget {
   const FavoritesPage({super.key});

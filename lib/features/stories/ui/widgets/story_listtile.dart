@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_core/flutter_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hacker_news/features/top_stories/data/models/item_model.dart';
-import 'package:hacker_news/features/top_stories/data/providers/providers.dart';
-import 'package:hacker_news/features/top_stories/ui/blocs/like_button/like_button_cubit.dart';
-import 'package:hacker_news/features/top_stories/ui/widgets/add_favorite_button.dart';
-import 'package:hacker_news/features/top_stories/ui/widgets/remove_favorite_button.dart';
+import 'package:hacker_news/features/stories/data/models/item_model.dart';
+import 'package:hacker_news/features/stories/di/providers.dart';
+import 'package:hacker_news/features/stories/ui/blocs/like_button/like_button_cubit.dart';
+import 'package:hacker_news/features/stories/ui/widgets/add_favorite_button.dart';
+import 'package:hacker_news/features/stories/ui/widgets/remove_favorite_button.dart';
 import 'package:hacker_news/l10n/l10n.dart';
 
 class StoryListTile extends ConsumerWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hacker_news/features/top_stories/data/models/item_model.dart';
-import 'package:hacker_news/features/top_stories/ui/widgets/story_listtile.dart';
+import 'package:hacker_news/features/stories/data/models/item_model.dart';
+import 'package:hacker_news/features/stories/ui/widgets/story_listtile.dart';
 
 class StoriesListView extends StatelessWidget {
   const StoriesListView({

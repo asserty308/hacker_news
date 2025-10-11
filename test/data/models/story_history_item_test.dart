@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hacker_news/features/top_stories/data/models/story_history_item.dart';
+import 'package:hacker_news/features/stories/data/models/story_history_item.dart';
 
 void main() {
   group('StoryHistoryItem', () {
