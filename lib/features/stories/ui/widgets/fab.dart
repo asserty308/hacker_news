@@ -83,7 +83,7 @@ class _FABMenuState extends State<FABMenu> with SingleTickerProviderStateMixin {
     final double animatedTranslation = translation * (1 - _animation.value);
 
     return Transform.translate(
-      offset: Offset(0, animatedTranslation),
+      offset: Offset(animatedTranslation, 0),
       child: Opacity(
         opacity: _animation.value,
         child: Padding(
@@ -114,6 +114,9 @@ class _FABMenuState extends State<FABMenu> with SingleTickerProviderStateMixin {
 
   Widget get _infoButton => InkWell(
     onTap: _toggleMenu,
+    focusColor: Colors.transparent,
+    splashColor: Colors.transparent,
+    hoverColor: Colors.transparent,
     child: AnimatedRotation(
       turns: _isExpanded ? 0 : -0.125, // 45 degrees when expanded
       duration: const Duration(milliseconds: 300),
