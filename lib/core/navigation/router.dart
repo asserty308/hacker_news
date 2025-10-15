@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hacker_news/core/navigation/routes.dart';
-import 'package:hacker_news/features/error/ui/pages/not_found_page.dart';
+import 'package:hacker_news/core/ui/pages/not_found_page.dart';
 import 'package:hacker_news/features/favorites/ui/pages/favorites_page.dart';
 import 'package:hacker_news/features/settings/ui/pages/settings_page.dart';
 import 'package:hacker_news/features/stories/ui/pages/stories_page.dart';

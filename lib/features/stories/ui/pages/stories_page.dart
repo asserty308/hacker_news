@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_core/flutter_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hacker_news/core/navigation/extensions/navigation_context.dart';
 import 'package:hacker_news/features/stories/constants.dart';
 import 'package:hacker_news/features/stories/di/providers.dart';
+import 'package:hacker_news/features/stories/ui/widgets/fab.dart';
 import 'package:hacker_news/features/stories/ui/widgets/topstories_listview.dart';
-import 'package:hacker_news/l10n/l10n.dart';
 
 class TopStoriesPage extends ConsumerStatefulWidget {
   const TopStoriesPage({super.key});
@@ -37,7 +36,7 @@ class _TopStoriesPageState extends AppConsumerState<TopStoriesPage> {
 
   @override
   Widget build(BuildContext context) =>
-      Scaffold(body: _keyboardListener, floatingActionButton: _infoButton);
+      Scaffold(body: _keyboardListener, floatingActionButton: _fab);
 
   Widget get _keyboardListener => CallbackShortcuts(
     bindings: {
@@ -54,20 +53,7 @@ class _TopStoriesPageState extends AppConsumerState<TopStoriesPage> {
     topStoriesCubit: _bloc,
   );
 
-  Widget get _infoButton => Padding(
-    padding: const EdgeInsets.all(16),
-    child: Align(
-      alignment: Alignment.bottomRight,
-      child: Semantics(
-        label: context.l10n.accessibilitySettings,
-        button: true,
-        child: InkWell(
-          onTap: () => context.pushToSettings(),
-          child: const Icon(Icons.info_outline, size: 32),
-        ),
-      ),
-    ),
-  );
+  Widget get _fab => const FABMenu();
 
   void _handleArrowEvents(bool isArrowUp) {
     if (_isAnimating) {
