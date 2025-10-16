@@ -12,7 +12,7 @@ class AppRouter {
 
   /// Creates the main router configuration
   static final instance = GoRouter(
-    restorationScopeId: 'app-router',
+    restorationScopeId: 'router',
     routes: _routes,
     errorPageBuilder: _errorPageBuilder,
   );
