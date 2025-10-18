@@ -123,10 +123,14 @@ class _FABMenuState extends State<FABMenu> with SingleTickerProviderStateMixin {
     focusColor: Colors.transparent,
     splashColor: Colors.transparent,
     hoverColor: Colors.transparent,
-    child: AnimatedRotation(
-      turns: _isExpanded ? 0 : -0.125, // 45 degrees when expanded
+    child: AnimatedSwitcher(
       duration: const Duration(milliseconds: 300),
-      child: Icon(Icons.close),
+      transitionBuilder: (child, animation) =>
+          FadeTransition(opacity: animation, child: child),
+      child: Icon(
+        _isExpanded ? Icons.close : Icons.menu,
+        key: ValueKey<bool>(_isExpanded),
+      ),
     ),
   );
 }
