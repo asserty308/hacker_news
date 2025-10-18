@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hacker_news/core/navigation/routes.dart';
@@ -7,9 +8,7 @@ import 'package:hacker_news/features/settings/ui/pages/settings_page.dart';
 import 'package:hacker_news/features/stories/ui/pages/stories_page.dart';
 
 /// App router configuration class
-class AppRouter {
-  AppRouter._();
-
+abstract final class AppRouter {
   /// Creates the main router configuration
   static final instance = GoRouter(
     restorationScopeId: 'router',
@@ -21,21 +20,25 @@ class AppRouter {
   static Page<void> _errorPageBuilder(
     BuildContext context,
     GoRouterState state,
-  ) => NoTransitionPage(child: NotFoundPage());
+  ) => NoTransitionPage(restorationId: 'not_found', child: NotFoundPage());
 
   /// App route definitions
   static final List<GoRoute> _routes = [
     GoRoute(
       path: '/',
       name: kRouteHome,
-      pageBuilder: (context, state) =>
-          const NoTransitionPage(child: TopStoriesPage()),
+      pageBuilder: (context, state) => const NoTransitionPage(
+        restorationId: kRouteHome,
+        child: StoriesPage(),
+      ),
     ),
     GoRoute(
       path: '/favorites',
       name: kRouteFavorites,
-      pageBuilder: (context, state) =>
-          const NoTransitionPage(child: FavoritesPage()),
+      pageBuilder: (context, state) => const CupertinoPage(
+        restorationId: kRouteFavorites,
+        child: FavoritesPage(),
+      ),
     ),
     GoRoute(
       path: '/settings',
@@ -47,13 +50,16 @@ class AppRouter {
           pageBuilder: (context, state) {
             final appVersion = state.uri.queryParameters['version'] ?? 'n.A.';
             return NoTransitionPage(
+              restorationId: kRouteLicenses,
               child: LicensePage(applicationVersion: appVersion),
             );
           },
         ),
       ],
-      pageBuilder: (context, state) =>
-          const NoTransitionPage(child: SettingsPage()),
+      pageBuilder: (context, state) => const CupertinoPage(
+        restorationId: kRouteSettings,
+        child: SettingsPage(),
+      ),
     ),
   ];
 }

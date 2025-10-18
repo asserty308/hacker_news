@@ -1,10 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_core/flutter_core.dart';
 import 'package:hacker_news/core/navigation/extensions/navigation_context.dart';
+import 'package:hacker_news/features/stories/constants.dart';
 import 'package:hacker_news/l10n/l10n.dart';
-
-const double kFabSize = 56.0;
-const double kMenuItemSpacing = 72.0;
 
 class FABMenu extends StatefulWidget {
   const FABMenu({super.key});
@@ -53,9 +53,12 @@ class _FABMenuState extends State<FABMenu> with SingleTickerProviderStateMixin {
         _buildMenuItem(
           icon: Icons.favorite,
           label: context.l10n.favorites,
-          onTap: () {
-            context.pushToFavorites();
+          onTap: () async {
             _toggleMenu();
+            Timer(
+              const Duration(milliseconds: 300),
+              () => context.pushToFavorites(),
+            );
           },
           offset: 2,
         ),
@@ -63,8 +66,11 @@ class _FABMenuState extends State<FABMenu> with SingleTickerProviderStateMixin {
           icon: Icons.settings,
           label: context.l10n.settings,
           onTap: () {
-            context.pushToSettings();
             _toggleMenu();
+            Timer(
+              const Duration(milliseconds: 300),
+              () => context.pushToSettings(),
+            );
           },
           offset: 1,
         ),

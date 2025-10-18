@@ -7,14 +7,14 @@ import 'package:hacker_news/features/stories/di/providers.dart';
 import 'package:hacker_news/features/stories/ui/widgets/fab.dart';
 import 'package:hacker_news/features/stories/ui/widgets/topstories_listview.dart';
 
-class TopStoriesPage extends ConsumerStatefulWidget {
-  const TopStoriesPage({super.key});
+class StoriesPage extends ConsumerStatefulWidget {
+  const StoriesPage({super.key});
 
   @override
-  ConsumerState<TopStoriesPage> createState() => _TopStoriesPageState();
+  ConsumerState<StoriesPage> createState() => _TopStoriesPageState();
 }
 
-class _TopStoriesPageState extends AppConsumerState<TopStoriesPage> {
+class _TopStoriesPageState extends AppConsumerState<StoriesPage> {
   late final _bloc = ref.read(topStoriesCubitProvider);
 
   final _pageController = PageController();
