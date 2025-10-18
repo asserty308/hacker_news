@@ -35,7 +35,7 @@ jobs:
       run: flutter test
       
     - name: Build web (production)
-      run: flutter build web --base-href "/hacker_news/"
+      run: flutter build web --wasm --base-href "/hacker_news/"
       
     - name: Setup Pages
       uses: actions/configure-pages@v4
