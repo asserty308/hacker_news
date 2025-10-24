@@ -1,23 +1,24 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_core/flutter_core.dart';
+import 'package:hacker_news/features/favorites/domain/use_case/get_favorites_use_case.dart';
 import 'package:hacker_news/features/stories/data/models/item_model.dart';
-import 'package:hacker_news/features/favorites/data/repositories/favorites_repo.dart';
 
 part 'favorites_state.dart';
 
 class FavoritesCubit extends Cubit<FavoritesState> {
-  FavoritesCubit({required this.repo}) : super(FavoritesInitial()) {
+  FavoritesCubit({required this.getFavoritesUseCase})
+    : super(FavoritesInitial()) {
     loadStories();
   }
 
-  final FavoritesRepository repo;
+  final GetFavoritesUseCase getFavoritesUseCase;
 
   void loadStories() {
     emit(FavoritesLoading());
 
     try {
-      final stories = repo.getAll();
+      final stories = getFavoritesUseCase.execute();
       emit(FavoritesLoaded(stories));
     } catch (e) {
       logger.e('FavoritesCubit::loadStories ERROR $e');
