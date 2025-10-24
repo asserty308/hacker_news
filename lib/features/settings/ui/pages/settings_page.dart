@@ -39,16 +39,7 @@ class _SettingsPageState extends AppConsumerState<SettingsPage> {
   );
 
   Widget _body(BuildContext context) => SliverList.list(
-    children: [
-      _favoritesTile(context),
-      _licensesTile(context),
-      _showGitHubRepoTile(context),
-    ],
-  );
-
-  Widget _favoritesTile(BuildContext context) => ListTile(
-    title: Text(context.l10n.myFavoritesTileTitle),
-    onTap: () => context.pushToFavorites(),
+    children: [_licensesTile(context), _showGitHubRepoTile(context)],
   );
 
   Widget _licensesTile(BuildContext context) => ListTile(
