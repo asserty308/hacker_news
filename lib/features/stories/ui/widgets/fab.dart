@@ -94,41 +94,31 @@ class _FABMenuState extends State<FABMenu> with SingleTickerProviderStateMixin {
         opacity: _animation.value,
         child: Padding(
           padding: const EdgeInsets.only(bottom: 8),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Material(
-                color: context.colorScheme.surface,
-                elevation: 2,
-                borderRadius: BorderRadius.circular(8),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 6,
-                  ),
-                  child: Text(label, style: context.textTheme.labelLarge),
-                ),
-              ),
-              hGap8,
-              InkWell(onTap: onTap, child: Icon(icon)),
-            ],
+          child: GestureDetector(
+            onTap: onTap,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(label, style: context.textTheme.bodyLarge),
+                hGap8,
+                Icon(icon, size: kMenuIconSize),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  Widget get _infoButton => InkWell(
+  Widget get _infoButton => GestureDetector(
     onTap: _toggleMenu,
-    focusColor: Colors.transparent,
-    splashColor: Colors.transparent,
-    hoverColor: Colors.transparent,
     child: AnimatedSwitcher(
       duration: const Duration(milliseconds: 300),
       transitionBuilder: (child, animation) =>
           FadeTransition(opacity: animation, child: child),
       child: Icon(
         _isExpanded ? Icons.close : Icons.menu,
+        size: kMenuIconSize,
         key: ValueKey<bool>(_isExpanded),
       ),
     ),
