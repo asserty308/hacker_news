@@ -14,5 +14,20 @@ class FavoritesRepository {
 
   bool contains(int id) => cache.contains(id);
 
-  List<ItemModel> getAll() => cache.getAll();
+  List<ItemModel> getAll() => cache.allItems
+      .map((e) => ItemModel.fromJSON(Map<String, dynamic>.from(e)))
+      .toList();
+
+  Future<void> importStories(List<ItemModel> items) async {
+    for (final item in items) {
+      await cache.add(item);
+    }
+  }
+
+  Future<void> clearAll() async {
+    final allItems = getAll();
+    for (final item in allItems) {
+      await cache.remove(item.id);
+    }
+  }
 }

@@ -17,8 +17,5 @@ class FavoritesCache {
   bool contains(int id) => _box.containsKey(id);
 
   /// Returns all entries inside the favorites box.
-  List<ItemModel> getAll() =>
-      _box.values
-          .map((e) => ItemModel.fromJSON(Map<String, dynamic>.from(e)))
-          .toList();
+  Iterable get allItems => _box.values;
 }

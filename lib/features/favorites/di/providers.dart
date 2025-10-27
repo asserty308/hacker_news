@@ -1,7 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hacker_news/features/favorites/data/datasources/favorites_cache.dart';
 import 'package:hacker_news/features/favorites/data/repositories/favorites_repo.dart';
+import 'package:hacker_news/features/favorites/domain/use_case/export_favorites_use_case.dart';
 import 'package:hacker_news/features/favorites/domain/use_case/get_favorites_use_case.dart';
+import 'package:hacker_news/features/favorites/domain/use_case/import_favorites_use_case.dart';
 import 'package:hacker_news/features/favorites/ui/blocs/favorites/favorites_cubit.dart';
 
 final _favoritesCacheProvider = Provider((ref) => FavoritesCache());
@@ -16,8 +18,18 @@ final getFavoritesUseCaseProvider = Provider(
   ),
 );
 
+final exportFavoritesUseCaseProvider = Provider(
+  (ref) => ExportFavoritesUseCase(repository: ref.watch(favoritesRepoProvider)),
+);
+
+final importFavoritesUseCaseProvider = Provider(
+  (ref) => ImportFavoritesUseCase(repository: ref.watch(favoritesRepoProvider)),
+);
+
 final favoritesCubitProvider = Provider(
   (ref) => FavoritesCubit(
     getFavoritesUseCase: ref.watch(getFavoritesUseCaseProvider),
+    exportFavoritesUseCase: ref.watch(exportFavoritesUseCaseProvider),
+    importFavoritesUseCase: ref.watch(importFavoritesUseCaseProvider),
   ),
 );

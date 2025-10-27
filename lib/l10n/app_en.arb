@@ -53,6 +53,21 @@
     "emptyFavoritesHint": "No favorites saved",
     "setToRemoveFromFavorites": "Story will be removed in 4 seconds",
     "undo": "Undo",
+    "exportFavorites": "Export favorites",
+    "importFavorites": "Import favorites",
+    "exportSuccess": "Favorites exported successfully",
+    "importSuccess": "{count, plural, =0{No favorites imported} =1{1 favorite imported} other{{count} favorites imported}}",
+    "@importSuccess": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "exportError": "Error exporting favorites",
+    "importError": "Error importing favorites",
+    "noFavoritesToExport": "No favorites to export",
+    "invalidImportFile": "Invalid import file",
     "sourceCode": "Source Code",
     "clearHistoryCacheTileTitle": "Clear History Cache",
     "clearHistoryCacheTileSubtitle": "This will make already seen stories appear again",

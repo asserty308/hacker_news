@@ -102,6 +102,39 @@ class AppLocalizationsEn extends AppLocalizations {
   String get undo => 'Undo';
 
   @override
+  String get exportFavorites => 'Export favorites';
+
+  @override
+  String get importFavorites => 'Import favorites';
+
+  @override
+  String get exportSuccess => 'Favorites exported successfully';
+
+  @override
+  String importSuccess(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count favorites imported',
+      one: '1 favorite imported',
+      zero: 'No favorites imported',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get exportError => 'Error exporting favorites';
+
+  @override
+  String get importError => 'Error importing favorites';
+
+  @override
+  String get noFavoritesToExport => 'No favorites to export';
+
+  @override
+  String get invalidImportFile => 'Invalid import file';
+
+  @override
   String get sourceCode => 'Source Code';
 
   @override

@@ -172,6 +172,54 @@ abstract class AppLocalizations {
   /// **'Undo'**
   String get undo;
 
+  /// No description provided for @exportFavorites.
+  ///
+  /// In en, this message translates to:
+  /// **'Export favorites'**
+  String get exportFavorites;
+
+  /// No description provided for @importFavorites.
+  ///
+  /// In en, this message translates to:
+  /// **'Import favorites'**
+  String get importFavorites;
+
+  /// No description provided for @exportSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorites exported successfully'**
+  String get exportSuccess;
+
+  /// No description provided for @importSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{No favorites imported} =1{1 favorite imported} other{{count} favorites imported}}'**
+  String importSuccess(int count);
+
+  /// No description provided for @exportError.
+  ///
+  /// In en, this message translates to:
+  /// **'Error exporting favorites'**
+  String get exportError;
+
+  /// No description provided for @importError.
+  ///
+  /// In en, this message translates to:
+  /// **'Error importing favorites'**
+  String get importError;
+
+  /// No description provided for @noFavoritesToExport.
+  ///
+  /// In en, this message translates to:
+  /// **'No favorites to export'**
+  String get noFavoritesToExport;
+
+  /// No description provided for @invalidImportFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid import file'**
+  String get invalidImportFile;
+
   /// No description provided for @sourceCode.
   ///
   /// In en, this message translates to:
