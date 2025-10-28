@@ -53,4 +53,4 @@ flutter_launcher_icons:
   macos:
     generate: true
   remove_alpha_ios: true
-  image_path: 'assets/app_icon.jpg'
+  image_path: 'assets/app_icon.png'
