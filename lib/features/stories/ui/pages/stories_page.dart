@@ -48,7 +48,64 @@ class _TopStoriesPageState extends AppConsumerState<StoriesPage> {
     child: Focus(autofocus: true, child: _body),
   );
 
-  Widget get _body => TopstoriesListview(
+  Widget get _body => Stack(
+    children: [
+      _listView,
+      Align(
+        alignment: Alignment.topCenter,
+        child: IgnorePointer(
+          child: Container(
+            height: context.mediaSize.height * 0.3,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Theme.of(context).scaffoldBackgroundColor,
+                  Theme.of(context).scaffoldBackgroundColor,
+                  Theme.of(context).scaffoldBackgroundColor,
+                  Theme.of(
+                    context,
+                  ).scaffoldBackgroundColor.withValues(alpha: 0.5),
+                  Theme.of(
+                    context,
+                  ).scaffoldBackgroundColor.withValues(alpha: 0.0),
+                ],
+              ),
+            ),
+            child: Text('Tabs').centered,
+          ),
+        ),
+      ),
+      Align(
+        alignment: Alignment.bottomCenter,
+        child: IgnorePointer(
+          child: Container(
+            height: context.mediaSize.height * 0.3,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.bottomCenter,
+                end: Alignment.topCenter,
+                colors: [
+                  Theme.of(context).scaffoldBackgroundColor,
+                  Theme.of(context).scaffoldBackgroundColor,
+                  Theme.of(context).scaffoldBackgroundColor,
+                  Theme.of(
+                    context,
+                  ).scaffoldBackgroundColor.withValues(alpha: 0.5),
+                  Theme.of(
+                    context,
+                  ).scaffoldBackgroundColor.withValues(alpha: 0.0),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    ],
+  );
+
+  Widget get _listView => TopstoriesListview(
     pageController: _pageController,
     topStoriesCubit: _bloc,
   );
