@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -23,16 +24,28 @@
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- Define overall theme color for Safari and the status bar -->
+  <meta name="theme-color" content="#121212">
+
+  <!-- Background for splash screen & initial paint -->
+  <meta name="background-color" content="#121212">
+
   <meta name="apple-mobile-web-app-title" content="Hacker News">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
+  <!-- Pinned tab color (for Safari bookmarks) -->
+  <meta name="mask-icon" content="icons/Icon-192.png" color="#121212">
+
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="icon" type="image/png" href="favicon.png" />
 
   <title>Hacker News</title>
   <link rel="manifest" href="manifest.json">
 </head>
+
 <body>
   <script src="flutter_bootstrap.js" async></script>
 </body>
+
 </html>
