@@ -73,7 +73,6 @@ class _TopStoriesPageState extends AppConsumerState<StoriesPage> {
                 ],
               ),
             ),
-            child: Text('Tabs').centered,
           ),
         ),
       ),
