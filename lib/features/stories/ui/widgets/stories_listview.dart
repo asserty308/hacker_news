@@ -17,6 +17,7 @@ class StoriesListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ListView.builder(
     key: PageStorageKey(storageKey),
+    padding: const EdgeInsets.only(top: 72),
     itemCount: stories.length,
     itemBuilder: (context, index) {
       final story = stories[index];

@@ -8,11 +8,11 @@ final lightTheme = ThemeData(
 final darkTheme = ThemeData(useMaterial3: true, colorScheme: _darkColorScheme);
 
 final _lightColorScheme = ColorScheme.fromSeed(
-  seedColor: Colors.blue,
+  seedColor: Colors.blueGrey,
   brightness: Brightness.light,
 );
 
 final _darkColorScheme = ColorScheme.fromSeed(
-  seedColor: Colors.blue,
+  seedColor: Colors.blueGrey,
   brightness: Brightness.dark,
 );

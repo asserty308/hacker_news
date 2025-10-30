@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_core/flutter_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hacker_news/features/favorites/ui/widgets/favorites_listview.dart';
 import 'package:hacker_news/features/stories/constants.dart';
 import 'package:hacker_news/features/stories/di/providers.dart';
-import 'package:hacker_news/features/stories/ui/widgets/fab.dart';
+import 'package:hacker_news/features/stories/ui/widgets/animated_segmented_button.dart';
 import 'package:hacker_news/features/stories/ui/widgets/topstories_listview.dart';
 
 class StoriesPage extends ConsumerStatefulWidget {
@@ -17,26 +18,30 @@ class StoriesPage extends ConsumerStatefulWidget {
 class _TopStoriesPageState extends AppConsumerState<StoriesPage> {
   late final _bloc = ref.read(topStoriesCubitProvider);
 
-  final _pageController = PageController();
+  final _verticalPageController = PageController();
+  final _horizontalPageController = PageController();
 
   var _isAnimating = false;
+  var _currentHorizontalPage = 0.0;
 
   @override
   void initState() {
     super.initState();
-    _pageController.addListener(_pageListener);
+    _verticalPageController.addListener(_verticalPageListener);
+    _horizontalPageController.addListener(_horizontalPageListener);
   }
 
   @override
   void dispose() {
-    _pageController.removeListener(_pageListener);
-    _pageController.dispose();
+    _verticalPageController.removeListener(_verticalPageListener);
+    _verticalPageController.dispose();
+    _horizontalPageController.removeListener(_horizontalPageListener);
+    _horizontalPageController.dispose();
     super.dispose();
   }
 
   @override
-  Widget build(BuildContext context) =>
-      Scaffold(body: _keyboardListener, floatingActionButton: _fab);
+  Widget build(BuildContext context) => Scaffold(body: _keyboardListener);
 
   Widget get _keyboardListener => CallbackShortcuts(
     bindings: {
@@ -44,13 +49,17 @@ class _TopStoriesPageState extends AppConsumerState<StoriesPage> {
           _handleArrowEvents(true),
       const SingleActivator(LogicalKeyboardKey.arrowDown): () =>
           _handleArrowEvents(false),
+      const SingleActivator(LogicalKeyboardKey.arrowLeft): () =>
+          _handleHorizontalSwipe(true),
+      const SingleActivator(LogicalKeyboardKey.arrowRight): () =>
+          _handleHorizontalSwipe(false),
     },
     child: Focus(autofocus: true, child: _body),
   );
 
   Widget get _body => Stack(
     children: [
-      _listView,
+      _horizontalPageView,
       Align(
         alignment: Alignment.topCenter,
         child: IgnorePointer(
@@ -101,15 +110,32 @@ class _TopStoriesPageState extends AppConsumerState<StoriesPage> {
           ),
         ),
       ),
+      Align(
+        alignment: Alignment.topCenter,
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 16),
+            child: AnimatedSegmentedButton(
+              currentPage: _currentHorizontalPage,
+              onPageSelected: _handlePageSelected,
+            ),
+          ),
+        ),
+      ),
     ],
   );
 
-  Widget get _listView => TopstoriesListview(
-    pageController: _pageController,
+  Widget get _horizontalPageView => PageView(
+    controller: _horizontalPageController,
+    children: [_topStoriesView, _favoritesView],
+  );
+
+  Widget get _topStoriesView => TopstoriesListview(
+    pageController: _verticalPageController,
     topStoriesCubit: _bloc,
   );
 
-  Widget get _fab => const FABMenu();
+  Widget get _favoritesView => const FavoritesListView();
 
   void _handleArrowEvents(bool isArrowUp) {
     if (_isAnimating) {
@@ -118,21 +144,43 @@ class _TopStoriesPageState extends AppConsumerState<StoriesPage> {
     }
 
     if (isArrowUp) {
-      _pageController.previousPage(
+      _verticalPageController.previousPage(
         duration: kPageAnimationDuration,
         curve: Curves.decelerate,
       );
     } else {
-      _pageController.nextPage(
+      _verticalPageController.nextPage(
         duration: kPageAnimationDuration,
         curve: Curves.decelerate,
       );
     }
   }
 
-  /// Called multiple times during an page animation.
-  void _pageListener() {
-    final currentPage = _pageController.page ?? 0.0;
+  void _handleHorizontalSwipe(bool isLeft) {
+    if (isLeft) {
+      _horizontalPageController.previousPage(
+        duration: kPageAnimationDuration,
+        curve: Curves.easeInOut,
+      );
+    } else {
+      _horizontalPageController.nextPage(
+        duration: kPageAnimationDuration,
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
+  void _handlePageSelected(int page) {
+    _horizontalPageController.animateToPage(
+      page,
+      duration: kPageAnimationDuration,
+      curve: Curves.easeInOut,
+    );
+  }
+
+  /// Called multiple times during a vertical page animation.
+  void _verticalPageListener() {
+    final currentPage = _verticalPageController.page ?? 0.0;
     final wasAnimating = _isAnimating;
     final isAnimating = currentPage % 1.0 != 0.0;
 
@@ -143,12 +191,23 @@ class _TopStoriesPageState extends AppConsumerState<StoriesPage> {
     }
 
     if (!isAnimating) {
-      _onPageChanged(currentPage.toInt());
+      _onVerticalPageChanged(currentPage.toInt());
+    }
+  }
+
+  /// Called multiple times during a horizontal page animation.
+  void _horizontalPageListener() {
+    final currentPage = _horizontalPageController.page ?? 0.0;
+
+    if (_currentHorizontalPage != currentPage) {
+      setState(() {
+        _currentHorizontalPage = currentPage;
+      });
     }
   }
 
   /// Triggered on page changes and adds the stories the user has already seen to the history cache
-  void _onPageChanged(int page) {
+  void _onVerticalPageChanged(int page) {
     if (page == _bloc.storyCount - 1) {
       logger.i('Loading next bunch of stories');
       _bloc.loadNextStories();

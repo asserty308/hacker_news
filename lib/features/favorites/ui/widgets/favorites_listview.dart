@@ -1,0 +1,85 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_core/flutter_core.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hacker_news/features/favorites/di/providers.dart';
+import 'package:hacker_news/features/favorites/ui/blocs/favorites/favorites_cubit.dart';
+import 'package:hacker_news/features/stories/ui/widgets/stories_listview.dart';
+import 'package:hacker_news/l10n/l10n.dart';
+
+class FavoritesListView extends ConsumerStatefulWidget {
+  const FavoritesListView({super.key});
+
+  @override
+  ConsumerState<FavoritesListView> createState() => _FavoritesListViewState();
+}
+
+class _FavoritesListViewState extends AppConsumerState<FavoritesListView> {
+  late final _bloc = ref.read(favoritesCubitProvider);
+
+  @override
+  void onUIReady() {
+    super.onUIReady();
+    _bloc.loadStories();
+  }
+
+  @override
+  Widget build(BuildContext context) =>
+      BlocBuilder<FavoritesCubit, FavoritesState>(
+        bloc: _bloc,
+        builder: (context, state) {
+          if (state is FavoritesLoaded) {
+            if (state.stories.isEmpty) {
+              return _emptyListHint(context);
+            }
+
+            return StoriesListView(
+              stories: state.stories,
+              storageKey: 1,
+              onFavoriteRemoved: _bloc.loadStories,
+            );
+          }
+
+          if (state is FavoritesError) {
+            return _errorWidget(context);
+          }
+
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const CircularProgressIndicator(),
+                vGap16,
+                Text(
+                  context.l10n.favoritesLoading,
+                  style: context.textTheme.bodyMedium,
+                ),
+              ],
+            ),
+          );
+        },
+      );
+
+  Widget _emptyListHint(BuildContext context) =>
+      Center(child: Text(context.l10n.emptyFavoritesHint));
+
+  Widget _errorWidget(BuildContext context) => Center(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(Icons.error_outline, size: 48, color: context.colorScheme.error),
+        vGap16,
+        Text(
+          context.l10n.errorLoadingFavorites,
+          style: context.textTheme.titleMedium,
+          textAlign: TextAlign.center,
+        ),
+        vGap16,
+        ElevatedButton(
+          onPressed: _bloc.loadStories,
+          child: Text(context.l10n.tryAgain),
+        ),
+      ],
+    ),
+  );
+}
