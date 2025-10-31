@@ -4,7 +4,7 @@ import 'package:flutter_core/flutter_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hacker_news/features/favorites/di/providers.dart';
 import 'package:hacker_news/features/favorites/ui/blocs/favorites/favorites_cubit.dart';
-import 'package:hacker_news/features/stories/ui/widgets/stories_listview.dart';
+import 'package:hacker_news/features/stories/ui/widgets/story_page_item.dart';
 import 'package:hacker_news/l10n/l10n.dart';
 
 class FavoritesListView extends ConsumerStatefulWidget {
@@ -16,6 +16,8 @@ class FavoritesListView extends ConsumerStatefulWidget {
 
 class _FavoritesListViewState extends AppConsumerState<FavoritesListView> {
   late final _bloc = ref.read(favoritesCubitProvider);
+
+  final _pageController = PageController();
 
   @override
   void onUIReady() {
@@ -33,10 +35,18 @@ class _FavoritesListViewState extends AppConsumerState<FavoritesListView> {
               return _emptyListHint(context);
             }
 
-            return StoriesListView(
-              stories: state.stories,
-              storageKey: 1,
-              onFavoriteRemoved: _bloc.loadStories,
+            return PageView.builder(
+              itemCount: state.stories.length,
+              controller: _pageController,
+              scrollDirection: Axis.vertical,
+              physics: const ClampingScrollPhysics(),
+              itemBuilder: (context, index) {
+                final story = state.stories[index];
+                return Padding(
+                  padding: const EdgeInsets.all(64),
+                  child: StoryPageItem(story: story),
+                );
+              },
             );
           }
 

@@ -130,7 +130,7 @@ class _TopStoriesPageState extends AppConsumerState<StoriesPage> {
     children: [_topStoriesView, _favoritesView],
   );
 
-  Widget get _topStoriesView => TopstoriesListview(
+  Widget get _topStoriesView => TopstoriesListView(
     pageController: _verticalPageController,
     topStoriesCubit: _bloc,
   );

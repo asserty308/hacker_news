@@ -6,8 +6,8 @@ import 'package:hacker_news/features/stories/ui/blocs/top_stories/top_stories_cu
 import 'package:hacker_news/features/stories/ui/widgets/story_page_item.dart';
 import 'package:hacker_news/l10n/l10n.dart';
 
-class TopstoriesListview extends ConsumerStatefulWidget {
-  const TopstoriesListview({
+class TopstoriesListView extends ConsumerStatefulWidget {
+  const TopstoriesListView({
     super.key,
     required this.pageController,
     required this.topStoriesCubit,
@@ -17,10 +17,10 @@ class TopstoriesListview extends ConsumerStatefulWidget {
   final TopStoriesCubit topStoriesCubit;
 
   @override
-  ConsumerState<TopstoriesListview> createState() => _TopstoriesListviewState();
+  ConsumerState<TopstoriesListView> createState() => _TopstoriesListviewState();
 }
 
-class _TopstoriesListviewState extends AppConsumerState<TopstoriesListview> {
+class _TopstoriesListviewState extends AppConsumerState<TopstoriesListView> {
   @override
   void onUIReady() {
     super.onUIReady();
