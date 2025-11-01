@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_core/flutter_core.dart';
-import 'package:hacker_news/features/home/data/models/item_model.dart';
 import 'package:hacker_news/features/favorites/data/repositories/favorites_repo.dart';
+import 'package:hacker_news/features/home/data/models/item_model.dart';
 
 part 'like_button_state.dart';
 
@@ -31,18 +31,18 @@ class LikeButtonCubit extends Cubit<LikeButtonState> {
     }
   }
 
-  void add() {
+  Future<void> add() async {
     try {
-      repository.addStory(story);
+      await repository.addStory(story);
       emit(LikeButtonAdded());
     } catch (e) {
       emit(LikeButtonError());
     }
   }
 
-  void remove() {
+  Future<void> remove() async {
     try {
-      repository.removeStory(story.id);
+      await repository.removeStory(story.id);
       emit(LikeButtonRemoved());
     } catch (e) {
       emit(LikeButtonError());

@@ -14,52 +14,58 @@ class FavoritesListView extends ConsumerStatefulWidget {
   ConsumerState<FavoritesListView> createState() => _FavoritesListViewState();
 }
 
-class _FavoritesListViewState extends AppConsumerState<FavoritesListView> {
-  late final _bloc = ref.read(favoritesCubitProvider);
+class _FavoritesListViewState extends AppConsumerState<FavoritesListView>
+    with AutomaticKeepAliveClientMixin {
+  late final _favoritesBloc = ref.read(favoritesCubitProvider);
 
   final _pageController = PageController();
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   void onUIReady() {
     super.onUIReady();
-    _bloc.loadStories();
+    _favoritesBloc.loadStories();
   }
 
   @override
-  Widget build(BuildContext context) =>
-      BlocBuilder<FavoritesCubit, FavoritesState>(
-        bloc: _bloc,
-        builder: (context, state) {
-          if (state is FavoritesLoaded) {
-            if (state.stories.isEmpty) {
-              return _emptyListHint(context);
-            }
-
-            return StoriesPageView(
-              stories: state.stories,
-              pageController: _pageController,
-            );
+  Widget build(BuildContext context) {
+    super.build(context); // Required for AutomaticKeepAliveClientMixin
+    return BlocBuilder<FavoritesCubit, FavoritesState>(
+      bloc: _favoritesBloc,
+      builder: (context, state) {
+        if (state is FavoritesLoaded) {
+          if (state.stories.isEmpty) {
+            return _emptyListHint(context);
           }
 
-          if (state is FavoritesError) {
-            return _errorWidget(context);
-          }
-
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const CircularProgressIndicator(),
-                vGap16,
-                Text(
-                  context.l10n.favoritesLoading,
-                  style: context.textTheme.bodyMedium,
-                ),
-              ],
-            ),
+          return StoriesPageView(
+            stories: state.stories,
+            pageController: _pageController,
           );
-        },
-      );
+        }
+
+        if (state is FavoritesError) {
+          return _errorWidget(context);
+        }
+
+        return Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const CircularProgressIndicator(),
+              vGap16,
+              Text(
+                context.l10n.favoritesLoading,
+                style: context.textTheme.bodyMedium,
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
 
   Widget _emptyListHint(BuildContext context) =>
       Center(child: Text(context.l10n.emptyFavoritesHint));
@@ -77,7 +83,7 @@ class _FavoritesListViewState extends AppConsumerState<FavoritesListView> {
         ),
         vGap16,
         ElevatedButton(
-          onPressed: _bloc.loadStories,
+          onPressed: _favoritesBloc.loadStories,
           child: Text(context.l10n.tryAgain),
         ),
       ],

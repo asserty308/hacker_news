@@ -12,20 +12,24 @@ import 'package:hacker_news/features/home/ui/widgets/remove_favorite_button.dart
 import 'package:hacker_news/l10n/l10n.dart';
 import 'package:share_plus/share_plus.dart';
 
-class StoryPageItem extends ConsumerWidget {
+class StoryPageItem extends ConsumerStatefulWidget {
   const StoryPageItem({super.key, required this.story, this.onFavoriteRemoved});
 
   final ItemModel story;
   final VoidCallback? onFavoriteRemoved;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) => BlocProvider(
-    create: (context) =>
-        LikeButtonCubit(ref.read(favoritesRepoProvider), story),
-    child: _tile(context),
+  ConsumerState<StoryPageItem> createState() => _StoryPageItemState();
+}
+
+class _StoryPageItemState extends AppConsumerState<StoryPageItem> {
+  late final _likeButtonCubit = LikeButtonCubit(
+    ref.read(favoritesRepoProvider),
+    widget.story,
   );
 
-  Widget _tile(BuildContext context) => Column(
+  @override
+  Widget build(BuildContext context) => Column(
     mainAxisAlignment: MainAxisAlignment.center,
     mainAxisSize: MainAxisSize.max,
     children: [
@@ -46,13 +50,13 @@ class StoryPageItem extends ConsumerWidget {
     label: context.l10n.accessibilityOpenStory,
     button: true,
     child: TextButton(
-      onPressed: () => _showStory(context),
+      onPressed: _showStory,
       style: TextButton.styleFrom(
         splashFactory: NoSplash.splashFactory,
         overlayColor: Colors.transparent,
       ),
       child: Text(
-        story.title,
+        widget.story.title,
         maxLines: 5,
         style: context.textTheme.headlineMedium?.copyWith(
           fontWeight: FontWeight.w900,
@@ -64,8 +68,8 @@ class StoryPageItem extends ConsumerWidget {
   );
 
   Widget _subtitle(BuildContext context) {
-    final diff = story.formattedDifference(context);
-    final authority = story.urlAuthority;
+    final diff = widget.story.formattedDifference(context);
+    final authority = widget.story.urlAuthority;
     return Text(
       '$diff ${authority.isEmpty ? '' : ' - $authority'}',
       maxLines: 3,
@@ -74,28 +78,29 @@ class StoryPageItem extends ConsumerWidget {
     );
   }
 
-  Widget get _favButton => BlocBuilder<LikeButtonCubit, LikeButtonState>(
+  Widget get _favButton => BlocBuilder(
+    bloc: _likeButtonCubit,
     builder: (context, state) {
       if (state is LikeButtonIsFavorite) {
         return AddFavoriteButton(
-          onTap: () => _removeFromFavorites(context),
+          onTap: _removeFromFavorites,
           playAnimation: false,
         );
       }
 
       if (state is LikeButtonIsNotFavorite) {
         return RemoveFavoriteButton(
-          onTap: () => _addToFavorites(context),
+          onTap: _addToFavorites,
           playAnimation: false,
         );
       }
 
       if (state is LikeButtonAdded) {
-        return AddFavoriteButton(onTap: () => _removeFromFavorites(context));
+        return AddFavoriteButton(onTap: _removeFromFavorites);
       }
 
       if (state is LikeButtonRemoved) {
-        return RemoveFavoriteButton(onTap: () => _addToFavorites(context));
+        return RemoveFavoriteButton(onTap: _addToFavorites);
       }
 
       return const SizedBox(width: 0, height: 0);
@@ -106,25 +111,27 @@ class StoryPageItem extends ConsumerWidget {
     label: context.l10n.accessibilityShareStory,
     button: true,
     child: InkWell(
-      onTap: () => _shareStory(context),
+      onTap: _shareStory,
       child: const Icon(CupertinoIcons.share, size: 36),
     ),
   );
 
-  void _addToFavorites(BuildContext context) {
-    context.read<LikeButtonCubit>().add();
+  Future<void> _addToFavorites() async {
+    await _likeButtonCubit.add();
+    ref.read(favoritesCubitProvider).loadStories();
   }
 
-  void _removeFromFavorites(BuildContext context) {
-    context.read<LikeButtonCubit>().remove();
+  Future<void> _removeFromFavorites() async {
+    await _likeButtonCubit.remove();
+    ref.read(favoritesCubitProvider).loadStories();
   }
 
-  void _showStory(BuildContext context) {
+  void _showStory() {
     final showStoryUseCase = ShowStoryUseCase();
-    showStoryUseCase.execute(story);
+    showStoryUseCase.execute(widget.story);
   }
 
-  void _shareStory(BuildContext context) => SharePlus.instance.share(
-    ShareParams(uri: story.realUrl, subject: story.title),
+  void _shareStory() => SharePlus.instance.share(
+    ShareParams(uri: widget.story.realUrl, subject: widget.story.title),
   );
 }

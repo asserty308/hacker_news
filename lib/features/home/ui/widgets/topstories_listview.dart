@@ -20,7 +20,11 @@ class TopstoriesListView extends ConsumerStatefulWidget {
   ConsumerState<TopstoriesListView> createState() => _TopstoriesListviewState();
 }
 
-class _TopstoriesListviewState extends AppConsumerState<TopstoriesListView> {
+class _TopstoriesListviewState extends AppConsumerState<TopstoriesListView>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   void onUIReady() {
     super.onUIReady();
@@ -28,31 +32,33 @@ class _TopstoriesListviewState extends AppConsumerState<TopstoriesListView> {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      BlocConsumer<TopStoriesCubit, TopStoriesState>(
-        bloc: widget.topStoriesCubit,
-        listener: (context, state) {
-          if (state is TopStoriesLoaded && state.stories.isNotEmpty) {
-            if (state.stories.length == 1) {
-              widget.topStoriesCubit.loadNextStories();
-            }
+  Widget build(BuildContext context) {
+    super.build(context); // Required for AutomaticKeepAliveClientMixin
+    return BlocConsumer<TopStoriesCubit, TopStoriesState>(
+      bloc: widget.topStoriesCubit,
+      listener: (context, state) {
+        if (state is TopStoriesLoaded && state.stories.isNotEmpty) {
+          if (state.stories.length == 1) {
+            widget.topStoriesCubit.loadNextStories();
           }
-        },
-        builder: (context, state) {
-          if (state is TopStoriesLoaded) {
-            return StoriesPageView(
-              stories: state.stories,
-              pageController: widget.pageController,
-            );
-          }
+        }
+      },
+      builder: (context, state) {
+        if (state is TopStoriesLoaded) {
+          return StoriesPageView(
+            stories: state.stories,
+            pageController: widget.pageController,
+          );
+        }
 
-          if (state is TopStoriesError) {
-            return _errorWidget;
-          }
+        if (state is TopStoriesError) {
+          return _errorWidget;
+        }
 
-          return _loadingWidget;
-        },
-      );
+        return _loadingWidget;
+      },
+    );
+  }
 
   Widget get _loadingWidget => Center(
     child: Column(
