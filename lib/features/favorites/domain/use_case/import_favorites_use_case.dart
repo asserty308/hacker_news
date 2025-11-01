@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_core/flutter_core.dart';
 import 'package:hacker_news/features/favorites/data/repositories/favorites_repo.dart';
-import 'package:hacker_news/features/stories/data/models/item_model.dart';
+import 'package:hacker_news/features/home/data/models/item_model.dart';
 
 class ImportFavoritesUseCase {
   ImportFavoritesUseCase({required this.repository});

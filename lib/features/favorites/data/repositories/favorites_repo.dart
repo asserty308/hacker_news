@@ -1,5 +1,5 @@
 import 'package:hacker_news/features/favorites/data/datasources/favorites_cache.dart';
-import 'package:hacker_news/features/stories/data/models/item_model.dart';
+import 'package:hacker_news/features/home/data/models/item_model.dart';
 
 class FavoritesRepository {
   FavoritesRepository({required this.cache});

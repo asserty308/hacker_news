@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hacker_news/core/navigation/routes.dart';
 import 'package:hacker_news/core/ui/pages/not_found_page.dart';
-import 'package:hacker_news/features/favorites/ui/pages/favorites_page.dart';
+import 'package:hacker_news/features/home/ui/pages/stories_page.dart';
 import 'package:hacker_news/features/settings/ui/pages/settings_page.dart';
-import 'package:hacker_news/features/stories/ui/pages/stories_page.dart';
 
 /// App router configuration class
 abstract final class AppRouter {
@@ -30,14 +29,6 @@ abstract final class AppRouter {
       pageBuilder: (context, state) => const NoTransitionPage(
         restorationId: kRouteHome,
         child: StoriesPage(),
-      ),
-    ),
-    GoRoute(
-      path: '/favorites',
-      name: kRouteFavorites,
-      pageBuilder: (context, state) => const CupertinoPage(
-        restorationId: kRouteFavorites,
-        child: FavoritesPage(),
       ),
     ),
     GoRoute(

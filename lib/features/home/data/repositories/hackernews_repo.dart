@@ -1,6 +1,6 @@
 import 'package:hacker_news/core/utils/web_util.dart';
-import 'package:hacker_news/features/stories/data/datasources/hackernews_api.dart';
-import 'package:hacker_news/features/stories/data/models/item_model.dart';
+import 'package:hacker_news/features/home/data/datasources/hackernews_api.dart';
+import 'package:hacker_news/features/home/data/models/item_model.dart';
 
 class HackernewsRepo {
   HackernewsRepo({required this.api});

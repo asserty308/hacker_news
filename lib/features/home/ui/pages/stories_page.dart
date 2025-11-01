@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_core/flutter_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hacker_news/features/favorites/ui/widgets/favorites_listview.dart';
-import 'package:hacker_news/features/stories/constants.dart';
-import 'package:hacker_news/features/stories/di/providers.dart';
-import 'package:hacker_news/features/stories/ui/widgets/animated_segmented_button.dart';
-import 'package:hacker_news/features/stories/ui/widgets/topstories_listview.dart';
+import 'package:hacker_news/features/home/ui/widgets/favorites_listview.dart';
+import 'package:hacker_news/features/home/constants.dart';
+import 'package:hacker_news/features/home/di/providers.dart';
+import 'package:hacker_news/features/home/ui/widgets/animated_segmented_button.dart';
+import 'package:hacker_news/features/home/ui/widgets/topstories_listview.dart';
 
 class StoriesPage extends ConsumerStatefulWidget {
   const StoriesPage({super.key});

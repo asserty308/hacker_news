@@ -1,6 +1,6 @@
 import 'package:flutter_core/flutter_core.dart';
-import 'package:hacker_news/features/stories/data/models/item_model.dart';
-import 'package:hacker_news/features/stories/data/repositories/hackernews_repo.dart';
+import 'package:hacker_news/features/home/data/models/item_model.dart';
+import 'package:hacker_news/features/home/data/repositories/hackernews_repo.dart';
 
 class LoadStoryUseCase {
   LoadStoryUseCase({required this.newsRepo});

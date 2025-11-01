@@ -4,7 +4,7 @@ import 'package:hacker_news/features/favorites/data/repositories/favorites_repo.
 import 'package:hacker_news/features/favorites/domain/use_case/export_favorites_use_case.dart';
 import 'package:hacker_news/features/favorites/domain/use_case/get_favorites_use_case.dart';
 import 'package:hacker_news/features/favorites/domain/use_case/import_favorites_use_case.dart';
-import 'package:hacker_news/features/favorites/ui/blocs/favorites/favorites_cubit.dart';
+import 'package:hacker_news/features/home/ui/blocs/favorites/favorites_cubit.dart';
 
 final _favoritesCacheProvider = Provider((ref) => FavoritesCache());
 

@@ -4,7 +4,7 @@ import 'package:flutter_core/flutter_core.dart';
 import 'package:hacker_news/features/favorites/domain/use_case/export_favorites_use_case.dart';
 import 'package:hacker_news/features/favorites/domain/use_case/get_favorites_use_case.dart';
 import 'package:hacker_news/features/favorites/domain/use_case/import_favorites_use_case.dart';
-import 'package:hacker_news/features/stories/data/models/item_model.dart';
+import 'package:hacker_news/features/home/data/models/item_model.dart';
 
 part 'favorites_state.dart';
 

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_core/flutter_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hacker_news/features/stories/ui/blocs/top_stories/top_stories_cubit.dart';
-import 'package:hacker_news/features/stories/ui/widgets/story_page_item.dart';
+import 'package:hacker_news/features/home/ui/blocs/top_stories/top_stories_cubit.dart';
+import 'package:hacker_news/features/home/ui/widgets/page_view.dart';
 import 'package:hacker_news/l10n/l10n.dart';
 
 class TopstoriesListView extends ConsumerStatefulWidget {
@@ -40,18 +40,9 @@ class _TopstoriesListviewState extends AppConsumerState<TopstoriesListView> {
         },
         builder: (context, state) {
           if (state is TopStoriesLoaded) {
-            return PageView.builder(
-              itemCount: state.stories.length,
-              controller: widget.pageController,
-              scrollDirection: Axis.vertical,
-              physics: const ClampingScrollPhysics(),
-              itemBuilder: (context, index) {
-                final story = state.stories[index];
-                return Padding(
-                  padding: const EdgeInsets.all(64),
-                  child: StoryPageItem(story: story),
-                );
-              },
+            return StoriesPageView(
+              stories: state.stories,
+              pageController: widget.pageController,
             );
           }
 

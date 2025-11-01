@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_core/flutter_core.dart';
-import 'package:hacker_news/features/stories/data/models/item_model.dart';
-import 'package:hacker_news/features/stories/domain/use_cases/get_top_storiy_ids_use_case.dart';
-import 'package:hacker_news/features/stories/domain/use_cases/load_story_use_case.dart';
+import 'package:hacker_news/features/home/data/models/item_model.dart';
+import 'package:hacker_news/features/home/domain/use_cases/get_top_storiy_ids_use_case.dart';
+import 'package:hacker_news/features/home/domain/use_cases/load_story_use_case.dart';
 
 part 'top_stories_state.dart';
 
