@@ -18,11 +18,11 @@ class _SettingsPageState extends AppConsumerState<SettingsPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
     body: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: .start,
       children: [
         Expanded(child: _scrollView),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0),
+          padding: .symmetric(horizontal: 16.0),
           child: _footer(context),
         ),
       ],
@@ -59,9 +59,9 @@ class _SettingsPageState extends AppConsumerState<SettingsPage> {
 
   Widget _footer(BuildContext context) => SafeArea(
     child: Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
+      padding: const .only(bottom: 8.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: .start,
         children: [_versionText],
       ),
     ),

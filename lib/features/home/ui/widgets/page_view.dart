@@ -21,7 +21,7 @@ class StoriesPageView extends StatelessWidget {
     itemBuilder: (context, index) {
       final story = stories[index];
       return Padding(
-        padding: const EdgeInsets.all(64),
+        padding: const .all(64),
         child: StoryPageItem(story: story),
       );
     },

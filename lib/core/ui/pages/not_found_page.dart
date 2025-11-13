@@ -10,7 +10,7 @@ class NotFoundPage extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
     body: Center(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: .center,
         children: [
           const Icon(Icons.error_outline, size: 64, color: Colors.grey),
           vGap16,

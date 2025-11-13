@@ -24,7 +24,7 @@ class AnimatedSegmentedButton extends StatelessWidget {
         border: Border.all(color: Colors.white),
         borderRadius: BorderRadius.circular(kButtonRadius),
       ),
-      padding: const EdgeInsets.all(kPadding),
+      padding: const .all(kPadding),
       child: Stack(
         children: [
           // Animated selection indicator

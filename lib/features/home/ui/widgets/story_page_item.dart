@@ -30,12 +30,12 @@ class _StoryPageItemState extends AppConsumerState<StoryPageItem> {
 
   @override
   Widget build(BuildContext context) => Column(
-    mainAxisAlignment: MainAxisAlignment.center,
+    mainAxisAlignment: .center,
     mainAxisSize: MainAxisSize.max,
     children: [
       _title(context),
       Padding(
-        padding: const EdgeInsets.symmetric(vertical: 32),
+        padding: const .symmetric(vertical: 32),
         child: _subtitle(context),
       ),
       Wrap(

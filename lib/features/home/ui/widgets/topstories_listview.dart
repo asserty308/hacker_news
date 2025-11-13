@@ -62,7 +62,7 @@ class _TopstoriesListviewState extends AppConsumerState<TopstoriesListView>
 
   Widget get _loadingWidget => Center(
     child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: .center,
       children: [
         const CircularProgressIndicator.adaptive(),
         const SizedBox(height: 16),
@@ -73,9 +73,9 @@ class _TopstoriesListviewState extends AppConsumerState<TopstoriesListView>
 
   Widget get _errorWidget => Center(
     child: Padding(
-      padding: const EdgeInsets.all(32),
+      padding: const .all(32),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: .center,
         children: [
           Icon(Icons.error_outline, size: 48, color: context.colorScheme.error),
           const SizedBox(height: 16),

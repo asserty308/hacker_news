@@ -52,7 +52,7 @@ class _FavoritesListViewState extends AppConsumerState<FavoritesListView>
 
         return Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: .center,
             children: [
               const CircularProgressIndicator(),
               vGap16,
@@ -72,7 +72,7 @@ class _FavoritesListViewState extends AppConsumerState<FavoritesListView>
 
   Widget _errorWidget(BuildContext context) => Center(
     child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: .center,
       children: [
         Icon(Icons.error_outline, size: 48, color: context.colorScheme.error),
         vGap16,

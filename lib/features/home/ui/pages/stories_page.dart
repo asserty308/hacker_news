@@ -114,7 +114,7 @@ class _TopStoriesPageState extends AppConsumerState<StoriesPage> {
         alignment: Alignment.topCenter,
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.only(top: 16),
+            padding: const .only(top: 16),
             child: AnimatedSegmentedButton(
               currentPage: _currentHorizontalPage,
               onPageSelected: _handlePageSelected,
