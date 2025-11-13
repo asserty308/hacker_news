@@ -31,7 +31,7 @@ class _StoryPageItemState extends AppConsumerState<StoryPageItem> {
   @override
   Widget build(BuildContext context) => Column(
     mainAxisAlignment: .center,
-    mainAxisSize: MainAxisSize.max,
+    mainAxisSize: .max,
     children: [
       _title(context),
       Padding(

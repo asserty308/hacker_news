@@ -21,8 +21,8 @@ class AnimatedSegmentedButton extends StatelessWidget {
     return Container(
       height: kButtonHeight,
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.white),
-        borderRadius: BorderRadius.circular(kButtonRadius),
+        border: .all(color: Colors.white),
+        borderRadius: .circular(kButtonRadius),
       ),
       padding: const .all(kPadding),
       child: Stack(
@@ -37,14 +37,14 @@ class AnimatedSegmentedButton extends StatelessWidget {
             child: Container(
               width: _calculateButtonWidth(context),
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.white),
-                borderRadius: BorderRadius.circular(kButtonRadius - kPadding),
+                border: .all(color: Colors.white),
+                borderRadius: .circular(kButtonRadius - kPadding),
               ),
             ),
           ),
           // Buttons row
           Row(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisSize: .min,
             children: [
               _buildButton(context, context.l10n.topStories, 0, currentPage),
               _buildButton(context, context.l10n.favorites, 1, currentPage),
@@ -67,7 +67,7 @@ class AnimatedSegmentedButton extends StatelessWidget {
       onTap: () => onPageSelected(index),
       child: Container(
         width: _calculateButtonWidth(context),
-        alignment: Alignment.center,
+        alignment: .center,
         child: AnimatedDefaultTextStyle(
           duration: const Duration(milliseconds: 200),
           style: context.textTheme.labelLarge!.copyWith(
@@ -87,9 +87,7 @@ class AnimatedSegmentedButton extends StatelessWidget {
     const kTotalPadding = 8.0; // 4.0 padding on each side
 
     final availableWidth =
-        MediaQuery.of(context).size.width -
-        kTotalPadding -
-        32; // 32 for margins
+        context.mediaSize.width - kTotalPadding - 32; // 32 for margins
     final buttonWidth = (availableWidth / 2).clamp(
       kMinButtonWidth,
       kMaxButtonWidth,

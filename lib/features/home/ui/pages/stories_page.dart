@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_core/flutter_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hacker_news/features/home/ui/widgets/favorites_listview.dart';
 import 'package:hacker_news/features/home/constants.dart';
 import 'package:hacker_news/features/home/di/providers.dart';
 import 'package:hacker_news/features/home/ui/widgets/animated_segmented_button.dart';
+import 'package:hacker_news/features/home/ui/widgets/favorites_listview.dart';
 import 'package:hacker_news/features/home/ui/widgets/topstories_listview.dart';
 
 class StoriesPage extends ConsumerStatefulWidget {
@@ -61,24 +61,20 @@ class _TopStoriesPageState extends AppConsumerState<StoriesPage> {
     children: [
       _horizontalPageView,
       Align(
-        alignment: Alignment.topCenter,
+        alignment: .topCenter,
         child: IgnorePointer(
           child: Container(
             height: context.mediaSize.height * 0.3,
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
+                begin: .topCenter,
+                end: .bottomCenter,
                 colors: [
-                  Theme.of(context).scaffoldBackgroundColor,
-                  Theme.of(context).scaffoldBackgroundColor,
-                  Theme.of(context).scaffoldBackgroundColor,
-                  Theme.of(
-                    context,
-                  ).scaffoldBackgroundColor.withValues(alpha: 0.5),
-                  Theme.of(
-                    context,
-                  ).scaffoldBackgroundColor.withValues(alpha: 0.0),
+                  context.theme.scaffoldBackgroundColor,
+                  context.theme.scaffoldBackgroundColor,
+                  context.theme.scaffoldBackgroundColor,
+                  context.theme.scaffoldBackgroundColor.withValues(alpha: 0.5),
+                  context.theme.scaffoldBackgroundColor.withValues(alpha: 0.0),
                 ],
               ),
             ),
@@ -86,24 +82,20 @@ class _TopStoriesPageState extends AppConsumerState<StoriesPage> {
         ),
       ),
       Align(
-        alignment: Alignment.bottomCenter,
+        alignment: .bottomCenter,
         child: IgnorePointer(
           child: Container(
             height: context.mediaSize.height * 0.3,
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                begin: Alignment.bottomCenter,
-                end: Alignment.topCenter,
+                begin: .bottomCenter,
+                end: .topCenter,
                 colors: [
-                  Theme.of(context).scaffoldBackgroundColor,
-                  Theme.of(context).scaffoldBackgroundColor,
-                  Theme.of(context).scaffoldBackgroundColor,
-                  Theme.of(
-                    context,
-                  ).scaffoldBackgroundColor.withValues(alpha: 0.5),
-                  Theme.of(
-                    context,
-                  ).scaffoldBackgroundColor.withValues(alpha: 0.0),
+                  context.theme.scaffoldBackgroundColor,
+                  context.theme.scaffoldBackgroundColor,
+                  context.theme.scaffoldBackgroundColor,
+                  context.theme.scaffoldBackgroundColor.withValues(alpha: 0.5),
+                  context.theme.scaffoldBackgroundColor.withValues(alpha: 0.0),
                 ],
               ),
             ),
@@ -111,7 +103,7 @@ class _TopStoriesPageState extends AppConsumerState<StoriesPage> {
         ),
       ),
       Align(
-        alignment: Alignment.topCenter,
+        alignment: .topCenter,
         child: SafeArea(
           child: Padding(
             padding: const .only(top: 16),
