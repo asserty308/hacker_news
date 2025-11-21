@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_core/flutter_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hacker_news/core/config/constants.dart';
+import 'package:hacker_news/core/common/constants.dart';
 import 'package:hacker_news/core/di/providers.dart';
-import 'package:hacker_news/core/navigation/extensions/navigation_context.dart';
+import 'package:hacker_news/core/ui/navigation/extensions/navigation_context.dart';
 import 'package:hacker_news/l10n/l10n.dart';
 import 'package:url_launcher/url_launcher.dart';
 

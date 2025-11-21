@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:hacker_news/core/navigation/navigation_service.dart';
+import 'package:hacker_news/core/ui/navigation/navigation_service.dart';
 
 /// Extension on BuildContext for convenient navigation
 extension NavigationExtension on BuildContext {

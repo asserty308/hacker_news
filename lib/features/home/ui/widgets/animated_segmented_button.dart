@@ -17,11 +17,12 @@ class AnimatedSegmentedButton extends StatelessWidget {
     const kButtonHeight = 40.0;
     const kButtonRadius = 20.0;
     const kPadding = 4.0;
+    final color = context.theme.colorScheme.onSurface;
 
     return Container(
       height: kButtonHeight,
       decoration: BoxDecoration(
-        border: .all(color: Colors.white),
+        border: .all(color: color),
         borderRadius: .circular(kButtonRadius),
       ),
       padding: const .all(kPadding),
@@ -37,7 +38,7 @@ class AnimatedSegmentedButton extends StatelessWidget {
             child: Container(
               width: _calculateButtonWidth(context),
               decoration: BoxDecoration(
-                border: .all(color: Colors.white),
+                border: .all(color: color),
                 borderRadius: .circular(kButtonRadius - kPadding),
               ),
             ),
@@ -71,7 +72,7 @@ class AnimatedSegmentedButton extends StatelessWidget {
         child: AnimatedDefaultTextStyle(
           duration: const Duration(milliseconds: 200),
           style: context.textTheme.labelLarge!.copyWith(
-            color: Colors.white,
+            color: context.theme.colorScheme.onSurface,
             fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
           ),
           child: Text(label),

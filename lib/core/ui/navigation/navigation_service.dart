@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hacker_news/core/navigation/routes.dart';
+import 'package:hacker_news/core/ui/navigation/routes.dart';
 
 /// Navigation service for type-safe navigation throughout the app
 class NavigationService {

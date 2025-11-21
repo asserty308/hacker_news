@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_core/flutter_core.dart';
-import 'package:hacker_news/core/navigation/extensions/navigation_context.dart';
+import 'package:hacker_news/core/ui/navigation/extensions/navigation_context.dart';
 import 'package:hacker_news/l10n/l10n.dart';
 
 class NotFoundPage extends StatelessWidget {

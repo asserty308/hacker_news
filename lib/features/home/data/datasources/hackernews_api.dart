@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:hacker_news/core/utils/web_util.dart';
+import 'package:hacker_news/core/common/utils/web_util.dart';
 import 'package:hacker_news/features/home/data/models/item_model.dart';
 import 'package:http/http.dart' as http;
 
