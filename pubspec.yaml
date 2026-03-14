@@ -4,7 +4,7 @@ publish_to: 'none'
 version: 1.3.5+24
 
 environment:
-  sdk: ^3.10.0
+  sdk: ^3.11.0
 
 dependencies:
   cupertino_icons: ^1.0.8
@@ -16,7 +16,7 @@ dependencies:
     git:
       url: https://github.com/asserty308/flutter_core.git
       tag_pattern: v{{version}}
-    version: ^1.0.7
+    version: ^1.0.8
   flutter_localizations:
     sdk: flutter
   flutter_riverpod: ^3.0.1
