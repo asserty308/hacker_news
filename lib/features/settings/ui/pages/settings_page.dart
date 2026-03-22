@@ -21,10 +21,7 @@ class _SettingsPageState extends AppConsumerState<SettingsPage> {
       crossAxisAlignment: .start,
       children: [
         Expanded(child: _scrollView),
-        Padding(
-          padding: .symmetric(horizontal: 16.0),
-          child: _footer(context),
-        ),
+        Padding(padding: .symmetric(horizontal: 16.0), child: _footer(context)),
       ],
     ),
   );
@@ -60,10 +57,7 @@ class _SettingsPageState extends AppConsumerState<SettingsPage> {
   Widget _footer(BuildContext context) => SafeArea(
     child: Padding(
       padding: const .only(bottom: 8.0),
-      child: Row(
-        mainAxisAlignment: .start,
-        children: [_versionText],
-      ),
+      child: Row(mainAxisAlignment: .start, children: [_versionText]),
     ),
   );
 
