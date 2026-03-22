@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_core/flutter_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hacker_news/core/ui/navigation/router.dart';
 import 'package:hacker_news/core/ui/theme/theme.dart';
-import 'package:hacker_news/core/di/providers.dart';
 import 'package:hacker_news/l10n/generated/app_localizations.dart';
 import 'package:hacker_news/l10n/l10n.dart';
 
@@ -21,7 +21,7 @@ class _MyAppState extends AppConsumerState<MyApp> {
     theme: AppTheme.light,
     darkTheme: AppTheme.dark,
     debugShowCheckedModeBanner: false,
-    routerConfig: ref.watch(appRouterProvider),
+    routerConfig: ref.watch(goRouterProvider),
     localizationsDelegates: AppLocalizations.localizationsDelegates,
     supportedLocales: AppLocalizations.supportedLocales,
   );
